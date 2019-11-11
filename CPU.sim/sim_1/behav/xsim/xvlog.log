@@ -1,0 +1,25 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/block_ram/block_ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dual_port_ram_sync
+INFO: [VRFC 10-311] analyzing module single_port_ram_sync
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/cpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/fifo/fifo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/hci.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hci
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/ram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/riscv_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module riscv_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/uart/uart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/uart/uart_baud_clk.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart_baud_clk
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/uart/uart_rx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart_rx
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sources_1/imports/src/common/uart/uart_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module uart_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.srcs/sim_1/imports/sim/testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testbench
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
