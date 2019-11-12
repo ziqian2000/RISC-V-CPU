@@ -31,6 +31,8 @@
 
 `define InstAddrBus			31:0 
 `define InstBus 			31:0
+`define InstMemNum			131071 // 128 KiB
+`define InstMemNumLog2		17
 
 // **************************** regfile **************************** 
 

@@ -42,7 +42,7 @@ module ex(
 				wdata_o <= logicout;
 			end
 			default: begin
-				wdata_o <= ZeroWord;
+				wdata_o <= `ZeroWord;
 			end
 		endcase
 	end

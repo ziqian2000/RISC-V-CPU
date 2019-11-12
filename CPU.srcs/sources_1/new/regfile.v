@@ -42,7 +42,7 @@ always @(*) begin
 	end else if(re1 == `ReadEnable) begin
 		rdata1 <= regs[raddr1];
 	end else begin
-		rdata1 <= ZeroWord;
+		rdata1 <= `ZeroWord;
 	end
 end
 // read 2
