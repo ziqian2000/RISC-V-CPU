@@ -59,6 +59,7 @@ always @(*) begin
 
 		case (op)
 			`EXE_ORI :		begin
+				$display("ORI !");
 				wreg_o		<= `WriteEnable;
 				aluop_o		<= `EXE_OR_OP;
 				alusel_o	<= `EXE_RES_LOGIC;

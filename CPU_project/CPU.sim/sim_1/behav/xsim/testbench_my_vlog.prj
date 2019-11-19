@@ -1,0 +1,30 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU_code" \
+"../../../../../CPU_code/block_ram.v" \
+"../../../../../CPU_code/cpu.v" \
+"../../../../../CPU_code/ex.v" \
+"../../../../../CPU_code/ex_mem.v" \
+"../../../../../CPU_code/common/fifo.v" \
+"../../../../../CPU_code/common/hci.v" \
+"../../../../../CPU_code/id.v" \
+"../../../../../CPU_code/id_ex.v" \
+"../../../../../CPU_code/if.v" \
+"../../../../../CPU_code/if_id.v" \
+"../../../../../CPU_code/mem.v" \
+"../../../../../CPU_code/mem_ctrl.v" \
+"../../../../../CPU_code/mem_wb.v" \
+"../../../../../CPU_code/pc_reg.v" \
+"../../../../../CPU_code/common/ram.v" \
+"../../../../../CPU_code/regfile.v" \
+"../../../../../CPU_code/riscv_top.v" \
+"../../../../../CPU_code/common/uart.v" \
+"../../../../../CPU_code/common/uart_baud_clk.v" \
+"../../../../../CPU_code/common/uart_rx.v" \
+"../../../../../CPU_code/common/uart_tx.v" \
+"../../../../../CPU_code/testbench_my.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

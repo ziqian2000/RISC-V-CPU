@@ -1,0 +1,215 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Wed Nov 13 20:02:08 2019
+# Process ID: 13276
+# Current directory: D:/CPU/CPU_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent13640 D:\CPU\CPU_project\CPU.xpr
+# Log file: D:/CPU/CPU_project/vivado.log
+# Journal file: D:/CPU/CPU_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/CPU/CPU_project/CPU.xpr
+update_compile_order -fileset sources_1
+synth_design -rtl -name rtl_1
+close_design
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse D:/CPU/CPU_code/testbench_my.v
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top testbench_my [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sim_1
+launch_simulation
+source testbench_my.tcl
+restart
+run all
+close_sim
+launch_simulation
+source testbench_my.tcl
+restart
+run 1 us
+restart
+run 1 us
+close_sim
+launch_simulation
+source testbench_my.tcl
+restart
+run all
+current_wave_config {Untitled 3}
+add_wave {{/testbench_my/top/ram0/ram_bram/ram}} 
+set_property display_limit 1048577
+set_property display_limit 1048577
+set property -help
+set--property -help
+set_-property -help
+set_property -help
+set_property display_limit 1048577
+current_wave_config {Untitled 3}
+add_wave {{/testbench_my/top/ram0/ram_bram/ram}} 
+set_property display_limit 1048577 [current_sim ]
+set_property trace_limit 2000000 [current_sim]
+current_wave_config {Untitled 3}
+add_wave {{/testbench_my/top/ram0/ram_bram/ram}} 
+set_property display_limit 1048577 [current_sim]
+list_property
+set_property display_limit 1048577 [current_sim]
+current_wave_config {Untitled 3}
+log_wave {/testbench_my/top/ram0/ram_bram/ram} 
+current_wave_config {Untitled 3}
+add_wave {{/testbench_my/top/ram0/ram_bram/ram}} 
+set_property display_limit 1000000 [current_wave_config]
+set_property display_limit 1048577 [current_sim]
+set_property display_limit 2000000 [current_wave_config]
+restart
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run 1 us
+run all
+close_sim
+launch_simulation
+source testbench_my.tcl
+current_wave_config {Untitled 4}
+add_wave {{/testbench_my/top/ram0/ram_bram/ram}} 
+set_property display_limit 2000000 [current_wave_config]
+restart
+run 1 us
+restart
+run 1 us
+run 1 us
+run all
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+add_files -fileset sim_1 -norecurse D:/CPU/CPU_project/testbench_my_behav.wcfg
+set_property xsim.view D:/CPU/CPU_project/testbench_my_behav.wcfg [get_filesets sim_1]
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+synth_design -rtl -name rtl_1
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+close_design
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+close_project
+open_project D:/CPU/CPU_project/CPU.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+run 1 us
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+restart
+run 1 us
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim

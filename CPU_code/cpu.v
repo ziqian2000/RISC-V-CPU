@@ -14,10 +14,18 @@ module cpu(
 	output wire [31:0]			dbgreg_dout		// cpu register output (debugging demo)
 );
 
+// if --- pc_reg
+
+wire[`InstAddrBus] 	pc;
+wire[`InstAddrBus] 	pc_back_pc_reg;
+
+// if --- if/id
+
+wire[`InstAddrBus]	if_pc;
+wire[`InstBus]		if_inst;
 
 // if/id --- id
 
-wire[`InstAddrBus] 	pc;
 wire[`InstAddrBus] 	id_pc_i;
 wire[`InstBus]		id_inst_i;
 
@@ -72,21 +80,45 @@ wire[`RegBus]		reg2_data;
 wire[`RegAddrBus]	reg1_addr;
 wire[`RegAddrBus]	reg2_addr;
 
+// if, mem --- mem_ctrl
+
+wire 				if_request;
+wire[31:0]			if_addr;
+wire[31:0]			cpu_data_o;
+wire[1:0]			if_or_mem_o;
+wire 				busy_mem_ctrl;
+wire[`InstAddrBus]	pc_back_mem_ctrl;
+/////// TODO : mem part
+
+
 // **************************** instantiation **************************** 
 
 // pc_reg
 
 pc_reg pc_reg0(
-	.clk(clk_in),	.rst(rst_in),	.pc(pc)
+	.clk(clk_in),	.rst(rst_in),	
+	.pc(pc), 		.pc_back(pc_back_pc_reg)
 );
 
-assign mem_a = pc;
+// if
+
+if_ if0(
+	.clk(clk_in),		.rst(rst_in),	
+	// from pc_reg
+	.pc(pc),			.pc_back_to_pc_reg(pc_back_pc_reg),
+	// mem_ctrl
+	.if_request(if_request), 	.if_addr(if_addr),
+	.mcl_instr(cpu_data_o),		.busy_mem_ctrl(busy_mem_ctrl),
+	.if_or_mem_i(if_or_mem_o), 	.pc_back_from_mem_ctrl(pc_back_mem_ctrl),
+	// to if/id
+	.if_pc(if_pc),		.if_inst(if_inst)
+);
 
 // if/id
 
 if_id if_id0(
 	.clk(clk_in),		.rst(rst_in),	
-	.if_pc(pc),			.if_inst(mem_din),
+	.if_pc(if_pc),		.if_inst(if_inst),
 	.id_pc(id_pc_i),	.id_inst(id_inst_i)
 );
 
@@ -102,14 +134,14 @@ regfile regfile0(
 // id
 
 id id0(
-	.rst(rst_in),				.pc_i(id_pc_i),				.inst_i(id_inst_i),
+	.rst(rst_in),				.pc_i(id_pc_i),		.inst_i(id_inst_i),
 	// from regfile
 	.reg1_data_i(reg1_data),	.reg2_data_i(reg2_data),
 	// to regfile
 	.reg1_read_o(reg1_read),	.reg2_read_o(reg2_read),
 	.reg1_addr_o(reg1_addr),	.reg2_addr_o(reg2_addr),
 	// to id/ex
-	.aluop_o(id_alusel_o),		.alusel_o(id_alusel_o),
+	.aluop_o(id_aluop_o),		.alusel_o(id_alusel_o),
 	.reg1_o(id_reg1_o),			.reg2_o(id_reg2_o),
 	.wd_o(id_wd_o),				.wreg_o(id_wreg_o)
 );
@@ -133,7 +165,7 @@ id_ex id_ex0(
 ex ex0(
 	.rst(rst_in),
 	// from id/ex
-	.aluop_i(ex_aluop_i),		.alusel_i(ex_aluop_i),
+	.aluop_i(ex_aluop_i),		.alusel_i(ex_alusel_i),
 	.reg1_i(ex_reg1_i),			.reg2_i(ex_reg2_i),
 	.wd_i(ex_wd_i),				.wreg_i(ex_wreg_i),
 	// to ex/mem
@@ -173,6 +205,22 @@ mem_wb mem_wb0(
 	.wb_wd(wb_wd_i),		.wb_wreg(wb_wreg_i),		.wb_wdata(wb_wdata_i)
 );
 
+mem_ctrl mem_ctrl0(
+	.clk(clk_in),				.rst(rst_in),
+	// IF
+	.if_request(if_request),	.if_addr(if_addr),
+	.pc_back(pc_back_mem_ctrl),
+	// MEM
+	.mem_request(),				.mem_addr(),
+	// common
+	.cpu_data_i(),				.cpu_data_o(cpu_data_o),
+	.if_or_mem_o(if_or_mem_o),	.busy_o(busy_mem_ctrl),
+	//RAM
+	.ram_data_i(mem_din),		.ram_data_o(mem_dout),
+	.ram_addr_o(mem_a),			.ram_rw(mem_wr)
+);
+
+endmodule
 
 // implementation goes here
 
@@ -203,5 +251,3 @@ mem_wb mem_wb0(
 			
 	// 		end
 	// end
-
-endmodule

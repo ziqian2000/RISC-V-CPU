@@ -27,12 +27,12 @@
 `define EXE_RES_LOGIC		3'b001
 `define EXE_RES_NOP 		3'b000
 
-// **************************** ROM **************************** 
+// **************************** RAM **************************** 
 
 `define InstAddrBus			31:0 
 `define InstBus 			31:0
-`define InstMemNum			131071 // 128 KiB
-`define InstMemNumLog2		17
+`define MemNum				131071 // 128 KiB
+`define MemNumLog2			17
 
 // **************************** regfile **************************** 
 
