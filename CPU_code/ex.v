@@ -2,8 +2,7 @@ module ex(
 	input	wire 				rst,
 
 	// from id_ex
-	input	wire[`AluOpBus]		aluop_i,
-	input	wire[`AluSelBus]	alusel_i,
+	input	wire[`OpcodeBus]	opcode_i,
 	input	wire[`RegBus]		reg1_i,
 	input	wire[`RegBus]		reg2_i,
 	input	wire[`RegAddrBus]	wd_i,
@@ -14,37 +13,63 @@ module ex(
 	output	reg 				wreg_o,
 	output	reg[`RegBus]		wdata_o
 );
-
-	reg[`RegBus] logicout;
-
 	// execute
 	always @ (*) begin
 		if(rst == `RstEnable) begin
-			logicout <= `ZeroWord;
+			wdata_o <= 0;
 		end else begin
-			case(aluop_i)
-				`EXE_OR_OP : begin
-					logicout <= reg1_i | reg2_i;
+			case(opcode_i[6:0])
+
+
+				7'b0110011, 7'b0010011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
+												//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI
+					$display("=== %b", opcode_i[10:0]);
+					case(opcode_i[10:7])
+						4'b0000: wdata_o <= (reg1_i + reg2_i); 								// ADD(I)
+						4'b1000: wdata_o <= (reg1_i - reg2_i); 								// SUB(I)
+						4'b0001: wdata_o <= (reg1_i << reg2_i[4:0]); 						// SLL(I)
+						4'b0010: wdata_o <= ($signed(reg1_i) < $signed(reg2_i));			// SLT(I)
+						4'b0011: wdata_o <= (reg1_i < reg2_i); 								// SLT(I)U
+						4'b0100: wdata_o <= (reg1_i ^ reg2_i); 								// XOR(I)
+						4'b0101: wdata_o <= (reg1_i >> reg2_i[4:0]); 						// SRL(I)
+						4'b1101: wdata_o <= 
+							({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0])); // SRA(I)
+						4'b0110: wdata_o <= (reg1_i | reg2_i); 								// OR(I)
+						4'b0111: wdata_o <= (reg1_i & reg2_i); 								// AND(I)
+					endcase
+					$display("wdata_o = %b = %b %b",wdata_o,reg1_i,reg2_i);
 				end
-				default : begin
-					logicout <= `ZeroWord;
+
+				7'b0110111: begin 		//LUI
 				end
+				7'b0010111: begin 		//AUIPC
+				end
+				7'b1101111: begin 		//JAL
+				end
+				7'b1100111: begin 		//JALR
+				end
+				7'b1100011: begin	 	//B
+				end
+				7'b0000011: begin  		//LOAD
+				end
+				7'b0100011: begin  		//STORE
+				end
+				default: begin 			// something strange
+				end
+
 			endcase
 		end
 	end
 
-	// choose the result
 	always @ (*) begin
-		wd_o <= wd_i;
-		wreg_o <= wreg_i;
-		case(alusel_i)
-			`EXE_RES_LOGIC: begin
-				wdata_o <= logicout;
-			end
-			default: begin
-				wdata_o <= `ZeroWord;
-			end
-		endcase
+		if(rst == `RstEnable) begin
+			wd_o <= 0;
+			wreg_o <= 0;
+		end else begin
+			wd_o <= wd_i;
+			wreg_o <= wreg_i;
+			$display("--- %d %d", wd_i, wreg_i);
+		end
 	end
 
 endmodule 

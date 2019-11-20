@@ -31,8 +31,7 @@ wire[`InstBus]		id_inst_i;
 
 // id --- id/ex
 
-wire[`AluOpBus]		id_aluop_o;
-wire[`AluSelBus]	id_alusel_o;
+wire[`OpcodeBus]	id_opcode;
 wire[`RegBus]		id_reg1_o;
 wire[`RegBus]		id_reg2_o;
 wire 				id_wreg_o;
@@ -40,8 +39,7 @@ wire[`RegAddrBus]	id_wd_o;
 
 // id/ex --- ex
 
-wire[`AluOpBus]		ex_aluop_i;
-wire[`AluSelBus]	ex_alusel_i;
+wire[`OpcodeBus]	ex_opcode;
 wire[`RegBus]		ex_reg1_i;
 wire[`RegBus]		ex_reg2_i;
 wire 				ex_wreg_i;
@@ -141,7 +139,7 @@ id id0(
 	.reg1_read_o(reg1_read),	.reg2_read_o(reg2_read),
 	.reg1_addr_o(reg1_addr),	.reg2_addr_o(reg2_addr),
 	// to id/ex
-	.aluop_o(id_aluop_o),		.alusel_o(id_alusel_o),
+	.opcode_o(id_opcode),
 	.reg1_o(id_reg1_o),			.reg2_o(id_reg2_o),
 	.wd_o(id_wd_o),				.wreg_o(id_wreg_o)
 );
@@ -151,11 +149,11 @@ id id0(
 id_ex id_ex0(
 	.clk(clk_in),				.rst(rst_in),
 	// from id
-	.id_aluop(id_aluop_o),		.id_alusel(id_alusel_o),
+	.id_opcode(id_opcode),
 	.id_reg1(id_reg1_o),		.id_reg2(id_reg2_o),
 	.id_wd(id_wd_o),			.id_wreg(id_wreg_o),
 	// to ex
-	.ex_aluop(ex_aluop_i),		.ex_alusel(ex_alusel_i),
+	.ex_opcode(ex_opcode),
 	.ex_reg1(ex_reg1_i),		.ex_reg2(ex_reg2_i),
 	.ex_wd(ex_wd_i),			.ex_wreg(ex_wreg_i)
 );
@@ -165,7 +163,7 @@ id_ex id_ex0(
 ex ex0(
 	.rst(rst_in),
 	// from id/ex
-	.aluop_i(ex_aluop_i),		.alusel_i(ex_alusel_i),
+	.opcode_i(ex_opcode),
 	.reg1_i(ex_reg1_i),			.reg2_i(ex_reg2_i),
 	.wd_i(ex_wd_i),				.wreg_i(ex_wreg_i),
 	// to ex/mem

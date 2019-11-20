@@ -14,18 +14,12 @@ module id(
 	output	reg[`RegAddrBus]		reg2_addr_o,
 
 	// to id_ex
-	output	reg[`AluOpBus]			aluop_o,
-	output	reg[`AluSelBus]			alusel_o,
+	output	reg[`OpcodeBus]			opcode_o,
 	output	reg[`RegBus]			reg1_o,
 	output	reg[`RegBus]			reg2_o,
 	output	reg[`RegAddrBus]		wd_o,
 	output	reg 					wreg_o
 );
-
-wire[5:0] op = inst_i[31:26];
-wire[4:0] op2 = inst_i[10:6];
-wire[5:0] op3 = inst_i[5:0];
-wire[4:0] op4 = inst_i[20:16];
 
 reg[`RegBus] imm;
 
@@ -35,8 +29,7 @@ reg instvalid;
 
 always @(*) begin
 	if(rst == `RstEnable) begin
-		aluop_o 	<= `EXE_NOP_OP;
-		alusel_o 	<= `EXE_RES_NOP;
+		opcode_o 	<= 10'b00000000000;
 		wd_o 		<= `NOPRegAddr;
 		wreg_o		<= `WriteDisable;
 		instvalid	<= `InstValid;
@@ -46,31 +39,49 @@ always @(*) begin
 		reg2_addr_o <= `NOPRegAddr;
 		imm			<= 32'h0;
 	end else begin
-		aluop_o 	<= `EXE_NOP_OP;
-		alusel_o 	<= `EXE_RES_NOP;
-		wd_o 		<= inst_i[15:11];
-		wreg_o		<= `WriteDisable;
-		instvalid	<= `InstValid;
-		reg1_read_o <= 1'b0;
-		reg2_read_o <= 1'b0;
-		reg1_addr_o <= inst_i[25:21];
-		reg2_addr_o <= inst_i[20:16];
-		imm			<= `ZeroWord;
+		instvalid	= `InstValid;
 
-		case (op)
-			`EXE_ORI :		begin
-				$display("ORI !");
-				wreg_o		<= `WriteEnable;
-				aluop_o		<= `EXE_OR_OP;
-				alusel_o	<= `EXE_RES_LOGIC;
-				reg1_read_o	<= 1'b1;
-				reg2_read_o	<= 1'b0;
-				imm			<= {16'h0, inst_i[15:0]};
-				wd_o		<= inst_i[20:16];
-				instvalid 	<= `InstValid;
+		reg1_read_o = 1'b0;
+		reg2_read_o = 1'b0;
+		wreg_o		= 1'b0;
+
+		reg1_addr_o = inst_i[19:15];// rs1
+		reg2_addr_o = inst_i[24:20];// rs2
+		wd_o 		= inst_i[11:7];	// rd
+
+		imm			= `ZeroWord;
+
+		case (inst_i[6:0])
+			7'b0110011: begin 		//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
+				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
+				reg1_read_o	= 1'b1;
+				reg2_read_o	= 1'b1;
+				wreg_o		= 1'b1;
 			end
-			default : begin
+			7'b0110111: begin 		//LUI
 			end
+			7'b0010111: begin 		//AUIPC
+			end
+			7'b0010011: begin 		//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI
+				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
+				reg1_read_o	= 1'b1;
+				reg2_read_o	= 1'b0;
+				wreg_o		= 1'b1;
+				imm			= {{21{inst_i[31]}}, inst_i[31:20]};
+			end
+			7'b1101111: begin 		//JAL
+			end
+			7'b1100111: begin 		//JALR
+			end
+			7'b1100011: begin	 	//B
+			end
+			7'b0000011: begin  		//LOAD
+			end
+			7'b0100011: begin  		//STORE
+			end
+			default: begin 			// something strange
+			end
+
 		endcase
 	end
 end

@@ -30,7 +30,8 @@ always @(posedge clk) begin
 		else begin 
 
 			if(busy_mem_ctrl == 1'b1) begin 	// busy
-				// just wait
+				if_inst <= 0;
+				if_addr <= 0;
 			end else begin 				// not busy
 
 				if(if_or_mem_i == 2'b01) begin 			// the data is sent to IF

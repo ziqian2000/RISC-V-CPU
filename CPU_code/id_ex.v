@@ -3,16 +3,14 @@ module id_ex(
 	input	wire 				rst,
 
 	// from id
-	input 	wire[`AluOpBus]		id_aluop,
-	input	wire[`AluSelBus]	id_alusel,
+	input 	wire[`OpcodeBus]	id_opcode,
 	input	wire[`RegBus]		id_reg1,
 	input	wire[`RegBus]		id_reg2,
 	input	wire[`RegAddrBus]	id_wd,
 	input	wire				id_wreg,
 
 	// to ex
-	output	reg[`AluOpBus]		ex_aluop,
-	output	reg[`AluSelBus]		ex_alusel,
+	output	reg[`OpcodeBus]		ex_opcode,
 	output	reg[`RegBus]		ex_reg1,
 	output	reg[`RegBus]		ex_reg2,
 	output	reg[`RegAddrBus]	ex_wd,
@@ -21,15 +19,24 @@ module id_ex(
 
 always @(posedge clk) begin
 	if (rst == `RstEnable) begin
-		ex_aluop <= `EXE_NOP_OP;
-		ex_alusel <= `EXE_RES_NOP;
+
+		ex_opcode <= 0;
 		ex_reg1 <= `ZeroWord;
 		ex_reg2 <= `ZeroWord;
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
+
 	end else begin
-		ex_aluop <= id_aluop;
-		ex_alusel <= id_alusel;
+
+		/* 	preprocess for instr of opcode 0010011 so that  stage EX can be easier 
+		 * 	as 0010011 instr and 0110011 instr are almost the same
+		 */
+		if(id_opcode[6:0] == 7'b0010011 && id_opcode[9:7] != 3'b001 && id_opcode[9:7] != 3'b101 ) begin
+			ex_opcode <= (id_opcode);
+		end else begin
+			ex_opcode <= id_opcode;
+		end
+
 		ex_reg1 <= id_reg1;
 		ex_reg2 <= id_reg2;
 		ex_wd <= id_wd;

@@ -15,15 +15,15 @@
 `define False_v				1'b0
 `define ChipEnable			1'b1
 `define ChipDisable			1'b0
+`define OpcodeBus 			10:0
 
 // **************************** instruction **************************** 
 
-`define EXE_ORI				6'b001101
 `define EXE_NOP				6'b000000
 // AluOp
 `define EXE_OR_OP			8'b00100101
 `define EXE_NOP_OP			8'b00000000
-//AluSel
+// AluSel
 `define EXE_RES_LOGIC		3'b001
 `define EXE_RES_NOP 		3'b000
 
