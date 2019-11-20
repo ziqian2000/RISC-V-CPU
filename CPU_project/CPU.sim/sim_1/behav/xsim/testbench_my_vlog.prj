@@ -13,7 +13,6 @@ verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU
 "../../../../../CPU_code/mem.v" \
 "../../../../../CPU_code/mem_ctrl.v" \
 "../../../../../CPU_code/mem_wb.v" \
-"../../../../../CPU_code/pc_reg.v" \
 "../../../../../CPU_code/common/ram.v" \
 "../../../../../CPU_code/regfile.v" \
 "../../../../../CPU_code/riscv_top.v" \

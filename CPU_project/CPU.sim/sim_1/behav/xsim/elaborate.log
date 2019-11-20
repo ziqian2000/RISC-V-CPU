@@ -9,7 +9,6 @@ WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/riscv_top.v" Line 4. Module riscv_top(S
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/ram.v" Line 3. Module ram doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/block_ram.v" Line 62. Module single_port_ram_sync(ADDR_WIDTH=17) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/cpu.v" Line 4. Module cpu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/pc_reg.v" Line 1. Module pc_reg doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/if.v" Line 1. Module if_ doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/if_id.v" Line 1. Module if_id doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/regfile.v" Line 1. Module regfile doesn't have a timescale but at least one module in design has a timescale.
@@ -32,7 +31,6 @@ Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.single_port_ram_sync(ADDR_WIDTH=...
 Compiling module xil_defaultlib.ram
-Compiling module xil_defaultlib.pc_reg
 Compiling module xil_defaultlib.if_
 Compiling module xil_defaultlib.if_id
 Compiling module xil_defaultlib.regfile

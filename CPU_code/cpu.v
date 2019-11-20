@@ -14,11 +14,6 @@ module cpu(
 	output wire [31:0]			dbgreg_dout		// cpu register output (debugging demo)
 );
 
-// if --- pc_reg
-
-wire[`InstAddrBus] 	pc;
-wire[`InstAddrBus] 	pc_back_pc_reg;
-
 // if --- if/id
 
 wire[`InstAddrBus]	if_pc;
@@ -82,34 +77,23 @@ wire[`RegAddrBus]	reg2_addr;
 
 wire 				if_request;
 wire[31:0]			if_addr;
-wire[31:0]			cpu_data_o;
+wire[7:0]			cpu_data_o;
 wire[1:0]			if_or_mem_o;
-wire 				busy_mem_ctrl;
-wire[`InstAddrBus]	pc_back_mem_ctrl;
 /////// TODO : mem part
 
 
 // **************************** instantiation **************************** 
 
-// pc_reg
-
-pc_reg pc_reg0(
-	.clk(clk_in),	.rst(rst_in),	
-	.pc(pc), 		.pc_back(pc_back_pc_reg)
-);
-
 // if
 
 if_ if0(
-	.clk(clk_in),		.rst(rst_in),	
-	// from pc_reg
-	.pc(pc),			.pc_back_to_pc_reg(pc_back_pc_reg),
+	.clk(clk_in),				.rst(rst_in),	
 	// mem_ctrl
 	.if_request(if_request), 	.if_addr(if_addr),
-	.mcl_instr(cpu_data_o),		.busy_mem_ctrl(busy_mem_ctrl),
-	.if_or_mem_i(if_or_mem_o), 	.pc_back_from_mem_ctrl(pc_back_mem_ctrl),
+	.mem_ctrl_data(cpu_data_o),
+	.if_or_mem_i(if_or_mem_o),
 	// to if/id
-	.if_pc(if_pc),		.if_inst(if_inst)
+	.pc(if_pc),					.if_inst(if_inst)
 );
 
 // if/id
@@ -207,12 +191,11 @@ mem_ctrl mem_ctrl0(
 	.clk(clk_in),				.rst(rst_in),
 	// IF
 	.if_request(if_request),	.if_addr(if_addr),
-	.pc_back(pc_back_mem_ctrl),
 	// MEM
 	.mem_request(),				.mem_addr(),
 	// common
 	.cpu_data_i(),				.cpu_data_o(cpu_data_o),
-	.if_or_mem_o(if_or_mem_o),	.busy_o(busy_mem_ctrl),
+	.if_or_mem_o(if_or_mem_o),
 	//RAM
 	.ram_data_i(mem_din),		.ram_data_o(mem_dout),
 	.ram_addr_o(mem_a),			.ram_rw(mem_wr)

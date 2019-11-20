@@ -26,8 +26,6 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/mem_ctrl.v" into li
 INFO: [VRFC 10-311] analyzing module mem_ctrl
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/mem_wb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module mem_wb
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/pc_reg.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module pc_reg
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/common/ram.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ram
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/regfile.v" into library xil_defaultlib
