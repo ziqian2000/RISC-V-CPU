@@ -11,7 +11,11 @@ module if_(
 
 	// to IF/ID
 	output	reg[`InstAddrBus]		pc,
-	output	reg[`InstBus]			if_inst
+	output	reg[`InstBus]			if_inst,
+
+	// from ID
+	input 	wire 					branch_enable_i,
+	input 	wire[`InstAddrBus] 		branch_addr_i
 );
 
 reg[3:0] state;
@@ -19,14 +23,20 @@ reg[31:0] inst;
 
 always @(posedge clk) begin
 		if (rst == `RstEnable) begin
-			if_request <= 0;
-			if_addr <= 0;
-			pc <= 0;
-			if_inst <= 0;
-			inst <= 0;
-			state <= 0;
-		end 
-		else begin 
+			if_request 	<= 0;
+			if_addr 	<= 0;
+			pc 			<= 0;
+			if_inst 	<= 0;
+			inst 		<= 0;
+			state 		<= 0;
+		end else if(branch_enable_i) begin
+			if_request 	<= 0;
+			if_addr 	<= 0;
+			pc 			<= branch_addr_i;
+			if_inst 	<= 0;
+			inst 		<= 0;
+			state 		<= 4'b0000;
+		end	else begin 
 
 			case(state)
 				4'b0000: begin // send the 1st address

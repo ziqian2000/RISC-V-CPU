@@ -18,12 +18,19 @@ module id(
 	output	reg[`RegBus]			reg1_o,
 	output	reg[`RegBus]			reg2_o,
 	output	reg[`RegAddrBus]		wd_o,
-	output	reg 					wreg_o
+	output	reg 					wreg_o,
+
+	// to if
+	output reg 						branch_enable_o,
+	output reg[`InstAddrBus]		branch_addr_o
 );
 
 reg[`RegBus] imm;
+wire[`InstAddrBus] pc_plus_4;
 
 reg instvalid;
+
+assign pc_plus_4 = pc_i + 31'h4;
 
 // decoding
 
@@ -51,6 +58,8 @@ always @(*) begin
 
 		imm			= `ZeroWord;
 
+		branch_enable_o = 0;
+
 		case (inst_i[6:0])
 			7'b0110011: begin 		//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
 				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
@@ -70,8 +79,24 @@ always @(*) begin
 				imm			= {{21{inst_i[31]}}, inst_i[31:20]};
 			end
 			7'b1101111: begin 		//JAL
+				opcode_o		= inst_i[6:0];
+				reg1_read_o 	= 0;
+				reg2_read_o 	= 0;
+				wreg_o			= 1'b1;
+				imm 			= pc_plus_4;
+
+				branch_enable_o = 1'b1;
+				branch_addr_o 	= {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
 			end
 			7'b1100111: begin 		//JALR
+				opcode_o	= inst_i[6:0];
+				reg1_read_o = 1'b1;
+				reg2_read_o = 0;
+				wreg_o		= 1'b1;
+				imm 		= pc_plus_4;
+
+				branch_enable_o = 1'b1;
+				branch_addr_o 	= {{20{inst_i[31]}}, inst_i[31:20]} + reg1_o;
 			end
 			7'b1100011: begin	 	//B
 			end

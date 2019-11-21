@@ -73,6 +73,11 @@ wire[`RegBus]		reg2_data;
 wire[`RegAddrBus]	reg1_addr;
 wire[`RegAddrBus]	reg2_addr;
 
+// id --- if
+
+wire 				branch_enable;
+wire[`InstAddrBus] 	branch_addr;
+
 // if, mem --- mem_ctrl
 
 wire 				if_request;
@@ -93,7 +98,10 @@ if_ if0(
 	.mem_ctrl_data(cpu_data_o),
 	.if_or_mem_i(if_or_mem_o),
 	// to if/id
-	.pc(if_pc),					.if_inst(if_inst)
+	.pc(if_pc),					.if_inst(if_inst),
+	// from ID
+	.branch_enable_i(branch_enable),
+	.branch_addr_i(branch_addr)
 );
 
 // if/id
@@ -125,7 +133,10 @@ id id0(
 	// to id/ex
 	.opcode_o(id_opcode),
 	.reg1_o(id_reg1_o),			.reg2_o(id_reg2_o),
-	.wd_o(id_wd_o),				.wreg_o(id_wreg_o)
+	.wd_o(id_wd_o),				.wreg_o(id_wreg_o),
+	// to IF
+	.branch_enable_o(branch_enable),
+	.branch_addr_o(branch_addr)
 );
 
 // id/ex

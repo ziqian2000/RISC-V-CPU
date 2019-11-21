@@ -50,5 +50,4 @@ module mem_ctrl(
 
 	assign cpu_data_o = ram_data_i;
 
-
 endmodule

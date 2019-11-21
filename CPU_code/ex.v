@@ -23,10 +23,9 @@ module ex(
 
 				7'b0110011, 7'b0010011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
 												//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI
-					$display("=== %b", opcode_i[10:0]);
 					case(opcode_i[10:7])
 						4'b0000: wdata_o <= (reg1_i + reg2_i); 								// ADD(I)
-						4'b1000: wdata_o <= (reg1_i - reg2_i); 								// SUB(I)
+						4'b1000: wdata_o <= (reg1_i - reg2_i); 								// SUB
 						4'b0001: wdata_o <= (reg1_i << reg2_i[4:0]); 						// SLL(I)
 						4'b0010: wdata_o <= ($signed(reg1_i) < $signed(reg2_i));			// SLT(I)
 						4'b0011: wdata_o <= (reg1_i < reg2_i); 								// SLT(I)U
@@ -37,7 +36,6 @@ module ex(
 						4'b0110: wdata_o <= (reg1_i | reg2_i); 								// OR(I)
 						4'b0111: wdata_o <= (reg1_i & reg2_i); 								// AND(I)
 					endcase
-					$display("wdata_o = %b = %b %b",wdata_o,reg1_i,reg2_i);
 				end
 
 				7'b0110111: begin 		//LUI
@@ -45,8 +43,10 @@ module ex(
 				7'b0010111: begin 		//AUIPC
 				end
 				7'b1101111: begin 		//JAL
+					wdata_o <= reg2_i;
 				end
 				7'b1100111: begin 		//JALR
+					wdata_o <= reg2_i;
 				end
 				7'b1100011: begin	 	//B
 				end
@@ -68,7 +68,6 @@ module ex(
 		end else begin
 			wd_o <= wd_i;
 			wreg_o <= wreg_i;
-			$display("--- %d %d", wd_i, wreg_i);
 		end
 	end
 
