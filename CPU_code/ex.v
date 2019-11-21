@@ -39,8 +39,10 @@ module ex(
 				end
 
 				7'b0110111: begin 		//LUI
+					wdata_o <= reg1_i;
 				end
 				7'b0010111: begin 		//AUIPC
+					wdata_o <= reg1_i;
 				end
 				7'b1101111: begin 		//JAL
 					wdata_o <= reg2_i;
@@ -48,7 +50,8 @@ module ex(
 				7'b1100111: begin 		//JALR
 					wdata_o <= reg2_i;
 				end
-				7'b1100011: begin	 	//B
+				7'b1100011: begin	 	//BEQ,BNE,BLT,BGE,BLTU,BGEU	
+					// nothing to do
 				end
 				7'b0000011: begin  		//LOAD
 				end
