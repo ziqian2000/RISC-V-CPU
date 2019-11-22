@@ -1,0 +1,319 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Thu Nov 21 20:41:40 2019
+# Process ID: 2848
+# Current directory: D:/CPU/CPU_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18344 D:\CPU\CPU_project\CPU.xpr
+# Log file: D:/CPU/CPU_project/vivado.log
+# Journal file: D:/CPU/CPU_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/CPU/CPU_project/CPU.xpr
+CRITICAL WARNING: [Project 1-19] Could not find the file 'D:/CPU/CPU_code/pc_reg.v'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2018.2/data/ip'.
+open_project: Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 778.414 ; gain = 67.195
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+synth_design -rtl -name rtl_1
+Command: synth_design -rtl -name rtl_1
+Starting synth_design
+Using part: xc7a35tcpg236-1
+Top: riscv_top
+ERROR: [Synth 8-1031] reg1_o is not declared [D:/CPU/CPU_code/ex.v:62]
+ERROR: [Synth 8-1031] imm is not declared [D:/CPU/CPU_code/ex.v:62]
+ERROR: [Synth 8-1031] reg1_o is not declared [D:/CPU/CPU_code/ex.v:65]
+ERROR: [Synth 8-1031] imm is not declared [D:/CPU/CPU_code/ex.v:65]
+ERROR: [Synth 8-1031] reg2_o is not declared [D:/CPU/CPU_code/ex.v:66]
+INFO: [Synth 8-2350] module ex ignored due to previous errors [D:/CPU/CPU_code/ex.v:1]
+Failed to read verilog 'D:/CPU/CPU_code/ex.v'
+1 Infos, 0 Warnings, 0 Critical Warnings and 6 Errors encountered.
+synth_design failed
+ERROR: [Vivado_Tcl 4-5] Elaboration failed - please see the console for details
+synth_design -rtl -name rtl_1
+Command: synth_design -rtl -name rtl_1
+Starting synth_design
+Using part: xc7a35tcpg236-1
+Top: riscv_top
+ERROR: [Synth 8-1031] opcode_o is not declared [D:/CPU/CPU_code/ex_mem.v:24]
+INFO: [Synth 8-2350] module ex_mem ignored due to previous errors [D:/CPU/CPU_code/ex_mem.v:1]
+Failed to read verilog 'D:/CPU/CPU_code/ex_mem.v'
+1 Infos, 0 Warnings, 0 Critical Warnings and 2 Errors encountered.
+synth_design failed
+ERROR: [Vivado_Tcl 4-5] Elaboration failed - please see the console for details
+synth_design -rtl -name rtl_1
+Command: synth_design -rtl -name rtl_1
+Starting synth_design
+Using part: xc7a35tcpg236-1
+Top: riscv_top
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 939.703 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'riscv_top' [D:/CPU/CPU_code/riscv_top.v:4]
+	Parameter SIM bound to: 0 - type: integer 
+	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter UART_BAUD_RATE bound to: 115200 - type: integer 
+	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'ram' [D:/CPU/CPU_code/common/ram.v:3]
+	Parameter ADDR_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'single_port_ram_sync' [D:/CPU/CPU_code/block_ram.v:62]
+	Parameter ADDR_WIDTH bound to: 17 - type: integer 
+	Parameter DATA_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'single_port_ram_sync' (1#1) [D:/CPU/CPU_code/block_ram.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'ram' (2#1) [D:/CPU/CPU_code/common/ram.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu' [D:/CPU/CPU_code/cpu.v:4]
+INFO: [Synth 8-6157] synthesizing module 'if_' [D:/CPU/CPU_code/if.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/if.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'if_' (3#1) [D:/CPU/CPU_code/if.v:1]
+INFO: [Synth 8-6157] synthesizing module 'if_id' [D:/CPU/CPU_code/if_id.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'if_id' (4#1) [D:/CPU/CPU_code/if_id.v:1]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [D:/CPU/CPU_code/regfile.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (5#1) [D:/CPU/CPU_code/regfile.v:1]
+INFO: [Synth 8-6157] synthesizing module 'id' [D:/CPU/CPU_code/id.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/id.v:118]
+WARNING: [Synth 8-3848] Net imm_o in module/entity id does not have driver. [D:/CPU/CPU_code/id.v:22]
+INFO: [Synth 8-6155] done synthesizing module 'id' (6#1) [D:/CPU/CPU_code/id.v:1]
+INFO: [Synth 8-6157] synthesizing module 'id_ex' [D:/CPU/CPU_code/id_ex.v:1]
+WARNING: [Synth 8-3848] Net ex_imm in module/entity id_ex does not have driver. [D:/CPU/CPU_code/id_ex.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'id_ex' (7#1) [D:/CPU/CPU_code/id_ex.v:1]
+INFO: [Synth 8-6157] synthesizing module 'ex' [D:/CPU/CPU_code/ex.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/ex.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'ex' (8#1) [D:/CPU/CPU_code/ex.v:1]
+INFO: [Synth 8-6157] synthesizing module 'ex_mem' [D:/CPU/CPU_code/ex_mem.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'ex_mem' (9#1) [D:/CPU/CPU_code/ex_mem.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mem' [D:/CPU/CPU_code/mem.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem' (10#1) [D:/CPU/CPU_code/mem.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mem_wb' [D:/CPU/CPU_code/mem_wb.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem_wb' (11#1) [D:/CPU/CPU_code/mem_wb.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mem_ctrl' [D:/CPU/CPU_code/mem_ctrl.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem_ctrl' (12#1) [D:/CPU/CPU_code/mem_ctrl.v:1]
+WARNING: [Synth 8-3848] Net dbgreg_dout in module/entity cpu does not have driver. [D:/CPU/CPU_code/cpu.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'cpu' (13#1) [D:/CPU/CPU_code/cpu.v:4]
+INFO: [Synth 8-6157] synthesizing module 'hci' [D:/CPU/CPU_code/common/hci.v:30]
+	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
+	Parameter BAUD_RATE bound to: 115200 - type: integer 
+	Parameter OP_ECHO bound to: 8'b00000000 
+	Parameter OP_CPU_REG_RD bound to: 8'b00000001 
+	Parameter OP_CPU_REG_WR bound to: 8'b00000010 
+	Parameter OP_DBG_BRK bound to: 8'b00000011 
+	Parameter OP_DBG_RUN bound to: 8'b00000100 
+	Parameter OP_IO_IN bound to: 8'b00000101 
+	Parameter OP_QUERY_DBG_BRK bound to: 8'b00000111 
+	Parameter OP_QUERY_ERR_CODE bound to: 8'b00001000 
+	Parameter OP_MEM_RD bound to: 8'b00001001 
+	Parameter OP_MEM_WR bound to: 8'b00001010 
+	Parameter OP_DISABLE bound to: 8'b00001011 
+	Parameter DBG_UART_PARITY_ERR bound to: 0 - type: integer 
+	Parameter DBG_UNKNOWN_OPCODE bound to: 1 - type: integer 
+	Parameter S_DISABLED bound to: 5'b00000 
+	Parameter S_DECODE bound to: 5'b00001 
+	Parameter S_ECHO_STG_0 bound to: 5'b00010 
+	Parameter S_ECHO_STG_1 bound to: 5'b00011 
+	Parameter S_IO_IN_STG_0 bound to: 5'b00100 
+	Parameter S_IO_IN_STG_1 bound to: 5'b00101 
+	Parameter S_CPU_REG_RD_STG0 bound to: 5'b00110 
+	Parameter S_CPU_REG_RD_STG1 bound to: 5'b00111 
+	Parameter S_QUERY_ERR_CODE bound to: 5'b01000 
+	Parameter S_MEM_RD_STG_0 bound to: 5'b01001 
+	Parameter S_MEM_RD_STG_1 bound to: 5'b01010 
+	Parameter S_MEM_WR_STG_0 bound to: 5'b01011 
+	Parameter S_MEM_WR_STG_1 bound to: 5'b01100 
+	Parameter S_DISABLE bound to: 5'b10000 
+	Parameter IO_IN_BUF_WIDTH bound to: 10 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'fifo' [D:/CPU/CPU_code/common/fifo.v:27]
+	Parameter DATA_BITS bound to: 8 - type: integer 
+	Parameter ADDR_BITS bound to: 10 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'fifo' (14#1) [D:/CPU/CPU_code/common/fifo.v:27]
+INFO: [Synth 8-6157] synthesizing module 'uart' [D:/CPU/CPU_code/common/uart.v:28]
+	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter BAUD_RATE bound to: 115200 - type: integer 
+	Parameter DATA_BITS bound to: 8 - type: integer 
+	Parameter STOP_BITS bound to: 1 - type: integer 
+	Parameter PARITY_MODE bound to: 1 - type: integer 
+	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_baud_clk' [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
+	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
+	Parameter CLKS_PER_OVERSAMPLE_TICK bound to: 16'b0000000000110110 
+INFO: [Synth 8-6155] done synthesizing module 'uart_baud_clk' (15#1) [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [D:/CPU/CPU_code/common/uart_rx.v:28]
+	Parameter DATA_BITS bound to: 8 - type: integer 
+	Parameter STOP_BITS bound to: 1 - type: integer 
+	Parameter PARITY_MODE bound to: 1 - type: integer 
+	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
+	Parameter STOP_OVERSAMPLE_TICKS bound to: 6'b010000 
+	Parameter S_IDLE bound to: 5'b00001 
+	Parameter S_START bound to: 5'b00010 
+	Parameter S_DATA bound to: 5'b00100 
+	Parameter S_PARITY bound to: 5'b01000 
+	Parameter S_STOP bound to: 5'b10000 
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/uart_rx.v:101]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (16#1) [D:/CPU/CPU_code/common/uart_rx.v:28]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [D:/CPU/CPU_code/common/uart_tx.v:28]
+	Parameter DATA_BITS bound to: 8 - type: integer 
+	Parameter STOP_BITS bound to: 1 - type: integer 
+	Parameter PARITY_MODE bound to: 1 - type: integer 
+	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
+	Parameter STOP_OVERSAMPLE_TICKS bound to: 6'b010000 
+	Parameter S_IDLE bound to: 5'b00001 
+	Parameter S_START bound to: 5'b00010 
+	Parameter S_DATA bound to: 5'b00100 
+	Parameter S_PARITY bound to: 5'b01000 
+	Parameter S_STOP bound to: 5'b10000 
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/uart_tx.v:101]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (17#1) [D:/CPU/CPU_code/common/uart_tx.v:28]
+INFO: [Synth 8-6157] synthesizing module 'fifo__parameterized0' [D:/CPU/CPU_code/common/fifo.v:27]
+	Parameter DATA_BITS bound to: 8 - type: integer 
+	Parameter ADDR_BITS bound to: 3 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'fifo__parameterized0' (17#1) [D:/CPU/CPU_code/common/fifo.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'uart' (18#1) [D:/CPU/CPU_code/common/uart.v:28]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:203]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:237]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:255]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:270]
+INFO: [Synth 8-6155] done synthesizing module 'hci' (19#1) [D:/CPU/CPU_code/common/hci.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'riscv_top' (20#1) [D:/CPU/CPU_code/riscv_top.v:4]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port clk
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[31]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[30]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[29]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[28]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[27]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[26]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[25]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[24]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[23]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[22]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[21]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[20]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[19]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[18]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[17]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[16]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[15]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[14]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[13]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[12]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[11]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[10]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[9]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[8]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[7]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[6]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[5]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[4]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[3]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[2]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[1]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port mem_addr[0]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[31]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[30]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[29]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[28]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[27]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[26]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[25]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[24]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[23]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[22]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[21]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[20]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[19]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[18]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[17]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[16]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[15]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[14]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[13]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[12]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[11]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[10]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[9]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[8]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[7]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[6]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[5]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[4]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[3]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[2]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[1]
+WARNING: [Synth 8-3331] design mem_ctrl has unconnected port cpu_data_i[0]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[10]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[9]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[8]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[7]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[6]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[5]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[4]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[3]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[2]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[1]
+WARNING: [Synth 8-3331] design mem has unconnected port opcode_i[0]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[31]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[30]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[29]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[28]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[27]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[26]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[25]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[24]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[23]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[22]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[21]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[20]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[19]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[18]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[17]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[16]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[15]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[14]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[13]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[12]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[11]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[10]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[9]
+WARNING: [Synth 8-3331] design ex_mem has unconnected port mem_addr[8]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:39 ; elapsed = 00:00:49 . Memory (MB): peak = 1051.047 ; gain = 111.344
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+WARNING: [Synth 8-3295] tying undriven pin mem_ctrl0:mem_request[1] to constant 0 [D:/CPU/CPU_code/cpu.v:216]
+WARNING: [Synth 8-3295] tying undriven pin mem_ctrl0:mem_request[0] to constant 0 [D:/CPU/CPU_code/cpu.v:216]
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:39 ; elapsed = 00:00:50 . Memory (MB): peak = 1051.047 ; gain = 111.344
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:39 ; elapsed = 00:00:50 . Memory (MB): peak = 1051.047 ; gain = 111.344
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:56 ; elapsed = 00:01:08 . Memory (MB): peak = 1333.500 ; gain = 393.797
+56 Infos, 105 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:56 ; elapsed = 00:01:08 . Memory (MB): peak = 1333.500 ; gain = 393.797

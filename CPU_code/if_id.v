@@ -6,15 +6,19 @@ module if_id(
 	input	wire[`InstBus]			if_inst,
 	// to ID
 	output	reg[`InstAddrBus]		id_pc,
-	output	reg[`InstBus]			id_inst
+	output	reg[`InstBus]			id_inst,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
 
 always @(posedge clk) begin
 	if (rst == `RstEnable) begin
 		id_pc <= `ZeroWord;		
 		id_inst <= `ZeroWord;
-	end
-	else begin
+	end else if(stall_sign[1]) begin
+		// STALL
+	end	else begin
 		id_pc <= if_pc;
 		id_inst <= if_inst;
 	end

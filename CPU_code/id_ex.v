@@ -8,13 +8,18 @@ module id_ex(
 	input	wire[`RegBus]		id_reg2,
 	input	wire[`RegAddrBus]	id_wd,
 	input	wire				id_wreg,
+	input 	wire[31:0] 			id_imm,
 
 	// to ex
 	output	reg[`OpcodeBus]		ex_opcode,
 	output	reg[`RegBus]		ex_reg1,
 	output	reg[`RegBus]		ex_reg2,
 	output	reg[`RegAddrBus]	ex_wd,
-	output	reg 				ex_wreg
+	output	reg 				ex_wreg,
+	output  reg[31:0] 			ex_imm,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
 
 always @(posedge clk) begin
@@ -25,7 +30,8 @@ always @(posedge clk) begin
 		ex_reg2 <= `ZeroWord;
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
-
+	end else if(stall_sign[3]) begin
+		// STALL
 	end else begin
 
 		/* 	preprocess for instr of opcode 0010011 so that  stage EX can be easier 

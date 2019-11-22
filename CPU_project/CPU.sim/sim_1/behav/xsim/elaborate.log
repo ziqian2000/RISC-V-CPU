@@ -3,6 +3,9 @@ Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
 Running: D:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 671debaf3dcf4673bfdd724e855e9221 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot testbench_my_behav xil_defaultlib.testbench_my xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
+WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 8 for port mem_ctrl_data_o [D:/CPU/CPU_code/cpu.v:231]
+WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 8 for port cpu_data_i [D:/CPU/CPU_code/cpu.v:258]
+WARNING: [VRFC 10-1783] select index 7 into stall_sign is out of bounds [D:/CPU/CPU_code/mem_wb.v:24]
 Completed static elaboration
 Starting simulation data flow analysis
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/riscv_top.v" Line 4. Module riscv_top(SIM=1) doesn't have a timescale but at least one module in design has a timescale.
@@ -19,6 +22,7 @@ WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/ex_mem.v" Line 1. Module ex_mem doesn't
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem.v" Line 1. Module mem doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem_wb.v" Line 1. Module mem_wb doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem_ctrl.v" Line 1. Module mem_ctrl doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/ctrl.v" Line 3. Module ctrl doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/hci.v" Line 30. Module hci doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/fifo.v" Line 27. Module fifo(ADDR_BITS=10) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/uart.v" Line 28. Module uart(SYS_CLK_FREQ=100000000,BAUD_RATE=115200,PARITY_MODE=1) doesn't have a timescale but at least one module in design has a timescale.
@@ -41,6 +45,7 @@ Compiling module xil_defaultlib.ex_mem
 Compiling module xil_defaultlib.mem
 Compiling module xil_defaultlib.mem_wb
 Compiling module xil_defaultlib.mem_ctrl
+Compiling module xil_defaultlib.ctrl
 Compiling module xil_defaultlib.cpu
 Compiling module xil_defaultlib.fifo(ADDR_BITS=10)
 Compiling module xil_defaultlib.uart_baud_clk(SYS_CLK_FREQ=10000...

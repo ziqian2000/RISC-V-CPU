@@ -7,16 +7,26 @@ module ex(
 	input	wire[`RegBus]		reg2_i,
 	input	wire[`RegAddrBus]	wd_i,
 	input	wire				wreg_i,
+	input 	wire[31:0] 			imm_i,
 
 	// to ex_mem
 	output 	reg[`RegAddrBus] 	wd_o,
 	output	reg 				wreg_o,
-	output	reg[`RegBus]		wdata_o
+	output	reg[`RegBus]		wdata_o,
+	output 	reg[`InstAddrBus] 	mem_addr,
+	output 	wire[`OpcodeBus] 	opcode_o,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
+	assign opcode_o = opcode_i;
+
 	// execute
 	always @ (*) begin
 		if(rst == `RstEnable) begin
 			wdata_o <= 0;
+		end else if(stall_sign[4]) begin
+			// STALL
 		end else begin
 			case(opcode_i[6:0])
 
@@ -31,8 +41,8 @@ module ex(
 						4'b0011: wdata_o <= (reg1_i < reg2_i); 								// SLT(I)U
 						4'b0100: wdata_o <= (reg1_i ^ reg2_i); 								// XOR(I)
 						4'b0101: wdata_o <= (reg1_i >> reg2_i[4:0]); 						// SRL(I)
-						4'b1101: wdata_o <= 
-							({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0])); // SRA(I)
+						4'b1101: wdata_o <=  												// SRA(I)
+							({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0]));
 						4'b0110: wdata_o <= (reg1_i | reg2_i); 								// OR(I)
 						4'b0111: wdata_o <= (reg1_i & reg2_i); 								// AND(I)
 					endcase
@@ -54,8 +64,11 @@ module ex(
 					// nothing to do
 				end
 				7'b0000011: begin  		//LOAD
+					mem_addr <= reg1_i + imm_i;
 				end
 				7'b0100011: begin  		//STORE
+					mem_addr <= reg1_i + imm_i;
+					wdata_o <= reg2_i;
 				end
 				default: begin 			// something strange
 				end

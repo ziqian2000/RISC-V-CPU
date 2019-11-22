@@ -19,10 +19,14 @@ module id(
 	output	reg[`RegBus]			reg2_o,
 	output	reg[`RegAddrBus]		wd_o,
 	output	reg 					wreg_o,
+	output 	reg[31:0] 				imm_o,
 
 	// to if
 	output reg 						branch_enable_o,
-	output reg[`InstAddrBus]		branch_addr_o
+	output reg[`InstAddrBus]		branch_addr_o,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
 
 reg[`RegBus] imm;
@@ -45,6 +49,8 @@ always @(*) begin
 		reg1_addr_o <= `NOPRegAddr;
 		reg2_addr_o <= `NOPRegAddr;
 		imm			<= 32'h0;
+	end else if(stall_sign[2]) begin
+		// STALL
 	end else begin
 		instvalid	= `InstValid;
 
@@ -96,7 +102,7 @@ always @(*) begin
 				imm 			= pc_plus_4;
 
 				branch_enable_o = 1'b1;
-				branch_addr_o 	= {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
+				branch_addr_o 	= {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0} + pc_i;
 			end
 			7'b1100111: begin 		//JALR
 				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
@@ -154,8 +160,22 @@ always @(*) begin
 				endcase
 			end
 			7'b0000011: begin  		//LOAD
+				opcode_o		= {inst_i[30], inst_i[14:12], inst_i[6:0]};
+				reg1_read_o 	= 1'b1;
+				reg2_read_o 	= 0;
+				wreg_o 			= 1'b1;
+				imm 			= {{21{inst_i[31]}}, inst_i[30:20]};
+
+				branch_enable_o = 0;
 			end
 			7'b0100011: begin  		//STORE
+				opcode_o		= {inst_i[30], inst_i[14:12], inst_i[6:0]};
+				reg1_read_o 	= 1'b1;
+				reg2_read_o 	= 1'b1;
+				wreg_o 			= 0;
+				imm 			= {{21{inst_i[31]}}, inst_i[30:20]};
+
+				branch_enable_o = 0;
 			end
 			default: begin 			// something strange
 				opcode_o 			= 0;

@@ -10,7 +10,10 @@ module mem_wb(
 	// to wb
 	output 	reg[`RegAddrBus]		wb_wd,
 	output	reg 					wb_wreg,
-	output 	reg[`RegBus]			wb_wdata
+	output 	reg[`RegBus]			wb_wdata,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
 
 	always @(posedge clk) begin
@@ -18,6 +21,8 @@ module mem_wb(
 			wb_wd <= `NOPRegAddr;
 			wb_wreg <= `WriteDisable;
 			wb_wdata <= `ZeroWord;
+		end else if(stall_sign[7]) begin
+			// STALL
 		end else begin
 			wb_wd <= mem_wd;
 			wb_wreg <= mem_wreg;

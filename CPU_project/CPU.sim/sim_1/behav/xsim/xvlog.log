@@ -4,6 +4,9 @@ INFO: [VRFC 10-311] analyzing module dual_port_ram_sync
 INFO: [VRFC 10-311] analyzing module single_port_ram_sync
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/cpu.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module cpu
+INFO: [VRFC 10-2458] undeclared symbol mem_stall_request, assumed default net type wire [D:/CPU/CPU_code/cpu.v:234]
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/ctrl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ctrl
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/ex.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ex
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/ex_mem.v" into library xil_defaultlib

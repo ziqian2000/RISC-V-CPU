@@ -8,11 +8,11 @@ module mem_ctrl(
 	input 	wire[31:0]			if_addr,
 
 	// MEM
-	input 	wire[1:0]			mem_request, 	// 	00 : no request 	01 : LOAD 				10 : STORE
+	input 	wire[1:0]			mem_request, 	// 	00 : no request 01 : LOAD	10 : STORE
 	input	wire[31:0]			mem_addr,
 
 	// common
-	input	wire[31:0]			cpu_data_i, 	// the data sent from CPU
+	input	wire[7:0]			cpu_data_i, 	// the data sent from CPU
 	output 	wire[7:0]			cpu_data_o,		// the data sent to CPU
 	output	reg[1:0]			if_or_mem_o,	// 01 : if 		10 : mem
 

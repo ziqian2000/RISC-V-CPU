@@ -2,6 +2,7 @@
 verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU_code" \
 "../../../../../CPU_code/block_ram.v" \
 "../../../../../CPU_code/cpu.v" \
+"../../../../../CPU_code/ctrl.v" \
 "../../../../../CPU_code/ex.v" \
 "../../../../../CPU_code/ex_mem.v" \
 "../../../../../CPU_code/common/fifo.v" \

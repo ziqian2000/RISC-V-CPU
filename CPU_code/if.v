@@ -15,11 +15,16 @@ module if_(
 
 	// from ID
 	input 	wire 					branch_enable_i,
-	input 	wire[`InstAddrBus] 		branch_addr_i
+	input 	wire[`InstAddrBus] 		branch_addr_i,
+
+	// from ctrl
+	input 	wire[`StallBus] 		stall_sign
 );
 
 reg[3:0] state;
 reg[31:0] inst;
+
+reg[3:0] avoid_data_h9zard;
 
 always @(posedge clk) begin
 		if (rst == `RstEnable) begin
@@ -29,6 +34,9 @@ always @(posedge clk) begin
 			if_inst 	<= 0;
 			inst 		<= 0;
 			state 		<= 0;
+			avoid_data_h9zard <= 4'h9;
+		end else if(stall_sign[0]) begin
+			// STALL
 		end else if(branch_enable_i) begin
 			if_request 	<= 0;
 			if_addr 	<= 0;
@@ -40,10 +48,17 @@ always @(posedge clk) begin
 
 			case(state)
 				4'b0000: begin // send the 1st address
-					if_request <= 1'b1;
-					if_addr <= pc;
-					if_inst <= 0;
-					state <= 4'b0001;
+					if(avoid_data_h9zard == 0) begin
+						if_request <= 1'b1;
+						if_addr <= pc;
+						if_inst <= 0;
+						state <= 4'b0001;
+						avoid_data_h9zard <= 4'h9;
+					end else begin
+						avoid_data_h9zard <= avoid_data_h9zard - 1;
+						if_inst <= 0;
+					end
+
 				end
 				4'b0001: begin // the 1st byte is being prepared, send the 2nd request
 					state <= 4'b0010;
@@ -69,7 +84,10 @@ always @(posedge clk) begin
 					if_inst <= {mem_ctrl_data, inst[23:0]};
 					pc <= pc + 31'h4;
 					if_addr <= pc + 31'h4;
-					state <= 4'b0001;
+
+					// state <= 4'b0001;
+					state <= 4'b0000; // avoid data h9zrad
+					
 				end
 			endcase
 		end
