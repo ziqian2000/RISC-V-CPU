@@ -12,7 +12,7 @@ module mem_ctrl(
 	input	wire[31:0]			mem_addr,
 
 	// common
-	input	wire[7:0]			cpu_data_i, 	// the data sent from CPU
+	input	wire[7:0]			cpu_data_i, 	// the data sent from CPU(MEM)
 	output 	wire[7:0]			cpu_data_o,		// the data sent to CPU
 	output	reg[1:0]			if_or_mem_o,	// 01 : if 		10 : mem
 
@@ -31,14 +31,19 @@ module mem_ctrl(
 			ram_addr_o <= 0;
 			ram_rw <= 0;
 		end else begin
-			if(if_request == 1) begin // to load a byte for IF
+			if(mem_request == 2'b01) begin // to load for MEM
+				if_or_mem_o <= 2'b10;
+				ram_addr_o <= mem_addr;
+				ram_rw <= 0;
+			end else if(mem_request == 2'b10) begin // to store for MEM
+				if_or_mem_o <= 2'b10;
+				ram_data_o <= cpu_data_i;
+				ram_addr_o <= mem_addr;
+				ram_rw <= 1'b1;
+			end else if(if_request == 1) begin // to load a byte for IF
 				if_or_mem_o <= 2'b01;
 				ram_addr_o <= if_addr;
 				ram_rw <= 0;
-			end else if(mem_request == 2'b01) begin // to load for MEM
-				// TODO
-			end else if(mem_request == 2'b10) begin // to store for MEM
-				// TODO
 			end else begin // nothing happened
 				if_or_mem_o <= 0;
 				ram_data_o <= 0;

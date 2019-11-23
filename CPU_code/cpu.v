@@ -115,7 +115,7 @@ if_ if0(
 	.mem_ctrl_data(cpu_data_o),
 	.if_or_mem_i(if_or_mem_o),
 	// to if/id
-	.pc(if_pc),					.if_inst(if_inst),
+	.pc_o(if_pc),					.if_inst(if_inst),
 	// from ID
 	.branch_enable_i(branch_enable),
 	.branch_addr_i(branch_addr),
@@ -155,7 +155,7 @@ id id0(
 	.opcode_o(id_opcode),
 	.reg1_o(id_reg1_o),			.reg2_o(id_reg2_o),
 	.wd_o(id_wd_o),				.wreg_o(id_wreg_o),
-	.imm_o(id_imm),
+	.imm(id_imm),
 	// to IF
 	.branch_enable_o(branch_enable),
 	.branch_addr_o(branch_addr),
@@ -217,7 +217,7 @@ ex_mem ex_mem0(
 // mem
 
 mem mem0(
-	.rst(rst_in),
+	.clk(clk_in),				.rst(rst_in),
 	// from ex/mem
 	.wd_i(mem_wd_i),			.wreg_i(mem_wreg_i), 		
 	.wdata_i(mem_wdata_i),	

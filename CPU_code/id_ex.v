@@ -30,23 +30,17 @@ always @(posedge clk) begin
 		ex_reg2 <= `ZeroWord;
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
+		ex_imm <= 0;
+
 	end else if(stall_sign[3]) begin
 		// STALL
 	end else begin
-
-		/* 	preprocess for instr of opcode 0010011 so that  stage EX can be easier 
-		 * 	as 0010011 instr and 0110011 instr are almost the same
-		 */
-		if(id_opcode[6:0] == 7'b0010011 && id_opcode[9:7] != 3'b001 && id_opcode[9:7] != 3'b101 ) begin
-			ex_opcode <= (id_opcode);
-		end else begin
-			ex_opcode <= id_opcode;
-		end
-
+		ex_opcode <= id_opcode;
 		ex_reg1 <= id_reg1;
 		ex_reg2 <= id_reg2;
 		ex_wd <= id_wd;
 		ex_wreg <= id_wreg;
+		ex_imm <= id_imm;
 	end
 end
 

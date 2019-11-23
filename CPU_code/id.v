@@ -19,7 +19,7 @@ module id(
 	output	reg[`RegBus]			reg2_o,
 	output	reg[`RegAddrBus]		wd_o,
 	output	reg 					wreg_o,
-	output 	reg[31:0] 				imm_o,
+	output 	reg[31:0] 				imm,
 
 	// to if
 	output reg 						branch_enable_o,
@@ -29,7 +29,6 @@ module id(
 	input 	wire[`StallBus] 		stall_sign
 );
 
-reg[`RegBus] imm;
 wire[`InstAddrBus] pc_plus_4;
 
 reg instvalid;
@@ -92,9 +91,10 @@ always @(*) begin
 				reg1_read_o	= 1'b1;
 				reg2_read_o	= 1'b0;
 				wreg_o		= 1'b1;
-				imm			= {{21{inst_i[31]}}, inst_i[31:20]};
+				imm			= {{20{inst_i[31]}}, inst_i[31:20]};
 			end
 			7'b1101111: begin 		//JAL
+				// $display("FUCK JAL %x %x %x",pc_i,imm,inst_i);
 				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
 				reg1_read_o 	= 0;
 				reg2_read_o 	= 0;
@@ -173,7 +173,7 @@ always @(*) begin
 				reg1_read_o 	= 1'b1;
 				reg2_read_o 	= 1'b1;
 				wreg_o 			= 0;
-				imm 			= {{21{inst_i[31]}}, inst_i[30:20]};
+				imm 			= {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]};
 
 				branch_enable_o = 0;
 			end

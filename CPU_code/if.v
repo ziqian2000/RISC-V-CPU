@@ -10,7 +10,7 @@ module if_(
 	input	wire[1:0]				if_or_mem_i,	// 01 : if 		10 : mem
 
 	// to IF/ID
-	output	reg[`InstAddrBus]		pc,
+	output	wire[`InstAddrBus]		pc_o, 			// the true pc value by substract 4 from pc
 	output	reg[`InstBus]			if_inst,
 
 	// from ID
@@ -23,6 +23,9 @@ module if_(
 
 reg[3:0] state;
 reg[31:0] inst;
+reg[`InstBus] pc;
+
+assign pc_o = pc - 32'h4;
 
 reg[3:0] avoid_data_h9zard;
 
@@ -30,7 +33,7 @@ always @(posedge clk) begin
 		if (rst == `RstEnable) begin
 			if_request 	<= 0;
 			if_addr 	<= 0;
-			pc 			<= 0;
+			pc  		<= 0;
 			if_inst 	<= 0;
 			inst 		<= 0;
 			state 		<= 0;
@@ -87,7 +90,9 @@ always @(posedge clk) begin
 
 					// state <= 4'b0001;
 					state <= 4'b0000; // avoid data h9zrad
-					
+
+					$display("read ins %x", {mem_ctrl_data, inst[23:0]});
+
 				end
 			endcase
 		end

@@ -8,7 +8,7 @@ module ctrl(
 
 	output     reg[`StallBus] 			stall_sign
 	// 	7		6		5		4		3		2		1		0
-	//	IF 		IF/ID 	ID 		ID/EX 	EX 		EX/MEM 	MEM 	MEM/WB
+	// MEM/WB 	MEM 	EX/MEM 	EX 		ID/EX 	ID 		IF/ID 	IF
 );
 
 always @(*) begin
@@ -16,7 +16,7 @@ always @(*) begin
 		stall_sign <= 0;
 	end else begin
 		if(mem_stall_request) begin
-			stall_sign <= 8'b11111100;
+			stall_sign <= 8'b00111111;
 		end else begin
 			stall_sign <= 8'b00000000;
 		end

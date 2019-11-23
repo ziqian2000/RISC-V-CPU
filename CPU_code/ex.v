@@ -30,22 +30,40 @@ module ex(
 		end else begin
 			case(opcode_i[6:0])
 
-
-				7'b0110011, 7'b0010011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
-												//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI
+				7'b0110011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
 					case(opcode_i[10:7])
-						4'b0000: wdata_o <= (reg1_i + reg2_i); 								// ADD(I)
+						4'b0000: wdata_o <= (reg1_i + reg2_i); 								// ADD
 						4'b1000: wdata_o <= (reg1_i - reg2_i); 								// SUB
-						4'b0001: wdata_o <= (reg1_i << reg2_i[4:0]); 						// SLL(I)
-						4'b0010: wdata_o <= ($signed(reg1_i) < $signed(reg2_i));			// SLT(I)
-						4'b0011: wdata_o <= (reg1_i < reg2_i); 								// SLT(I)U
-						4'b0100: wdata_o <= (reg1_i ^ reg2_i); 								// XOR(I)
-						4'b0101: wdata_o <= (reg1_i >> reg2_i[4:0]); 						// SRL(I)
-						4'b1101: wdata_o <=  												// SRA(I)
+						4'b0001: wdata_o <= (reg1_i << reg2_i[4:0]); 						// SLL
+						4'b0010: wdata_o <= ($signed(reg1_i) < $signed(reg2_i));			// SLT
+						4'b0011: wdata_o <= (reg1_i < reg2_i); 								// SLTU
+						4'b0100: wdata_o <= (reg1_i ^ reg2_i); 								// XOR
+						4'b0101: wdata_o <= (reg1_i >> reg2_i[4:0]); 						// SRL
+						4'b1101: wdata_o <=  												// SRA
 							({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0]));
-						4'b0110: wdata_o <= (reg1_i | reg2_i); 								// OR(I)
-						4'b0111: wdata_o <= (reg1_i & reg2_i); 								// AND(I)
+						4'b0110: wdata_o <= (reg1_i | reg2_i); 								// OR
+						4'b0111: wdata_o <= (reg1_i & reg2_i); 								// AND
 					endcase
+				end
+
+				7'b0010011: begin 	//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI    almost the same as above
+					case(opcode_i[9:7])
+						3'b000: wdata_o <= (reg1_i + reg2_i); 								// ADDI
+						3'b001: wdata_o <= (reg1_i << reg2_i[4:0]); 						// SLLI
+						3'b010: wdata_o <= ($signed(reg1_i) < $signed(reg2_i));				// SLTI
+						3'b011: wdata_o <= (reg1_i < reg2_i); 								// SLTIU
+						3'b100: wdata_o <= (reg1_i ^ reg2_i); 								// XORI
+						3'b101: begin
+							case(opcode_i[10])
+								1'b0: wdata_o <= (reg1_i >> reg2_i[4:0]); 						// SRLI
+								1'b1: wdata_o <=  												// SRAI
+									({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0]));
+							endcase
+						end
+						3'b110: wdata_o <= (reg1_i | reg2_i); 								// ORI
+						3'b111: wdata_o <= (reg1_i & reg2_i); 								// ANDI
+					endcase
+					// $display("%x and %x\n",reg1_i, reg2_i);
 				end
 
 				7'b0110111: begin 		//LUI

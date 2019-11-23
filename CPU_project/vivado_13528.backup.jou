@@ -1,0 +1,154 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Fri Nov 22 19:04:24 2019
+# Process ID: 13528
+# Current directory: D:/CPU/CPU_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15976 D:\CPU\CPU_project\CPU.xpr
+# Log file: D:/CPU/CPU_project/vivado.log
+# Journal file: D:/CPU/CPU_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/CPU/CPU_project/CPU.xpr
+update_compile_order -fileset sources_1
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close_design
+synth_design -rtl -name rtl_1
+refresh_design
+add_files -norecurse D:/CPU/CPU_code/ctrl.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+refresh_design
+close_design
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+refresh_design
+close_design
+synth_design -rtl -name rtl_1
+synth_design -rtl -name rtl_1
+close_design
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 80 ns
+run 80 ns
+run 80 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 80 ns
+run all
+run all
+run all
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+synth_design -rtl -name rtl_1
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+run 80 ns
+restart
+run 80 ns
+restart
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 250 ns
+restart
+run 250 ns
+restart
+run 250 ns
+run 250 ns
+run 250 ns
+run 250 ns
+run 250 ns
+run 250 ns
+run 250 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 250 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 250 ns
+run 250 ns
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 250 ns
+run 250 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
