@@ -94,7 +94,7 @@ initial begin
     ram[i] = 0;
   end
   // $readmemh("test.data", ram); // add test.data to vivado project or specify a valid file path
-  $readmemh("D:/CPU/CPU_code/test.data", ram); // add test.data to vivado project or specify a valid file path
+  $readmemh("E:/Study/ÒÑ½áÊø/PPCA/RISCV/RISCV-test/src/statement_test.data", ram); // add test.data to vivado project or specify a valid file path
 
   // DEBUG
   // for (j=0;j<4;j=j+1)

@@ -91,7 +91,7 @@ always @(posedge clk) begin
 					// state <= 4'b0001;
 					state <= 4'b0000; // avoid data h9zrad
 
-					$display("read ins %x", {mem_ctrl_data, inst[23:0]});
+					//$display("read ins %x", {mem_ctrl_data, inst[23:0]});
 
 				end
 			endcase

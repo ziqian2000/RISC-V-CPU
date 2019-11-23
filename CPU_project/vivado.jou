@@ -9,3 +9,213 @@
 # Log file: D:/CPU/CPU_project/vivado.log
 # Journal file: D:/CPU/CPU_project\vivado.jou
 #-----------------------------------------------------------
+start_gui
+open_project D:/CPU/CPU_project/CPU.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 250 ns
+run 250 ns
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+synth_design -rtl -name rtl_1
+launch_simulation
+close_design
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 250 ns
+run 250 ns
+run 250 ns
+run 250 ns
+run all
+restart
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 250 ns
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 250 ns
+restart
+run 250 ns
+restart
+run 250 ns
+restart
+run 250 ns
+update_compile_order -fileset sources_1
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+update_compile_order -fileset sources_1
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 520 ns
+restart
+run 550 ns
+run 550 ns
+restart
+run 550 ns
+run 550 ns
+restart
+run 550 ns
+run 550 ns
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 550 ns
+run 550 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 550 ns
+run 550 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 550 ns
+run 550 ns
+restart
+run 580 ns
+restart
+run 580 ns
+run 580 ns
+restart
+run 580 ns
+run 580 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 580 ns
+run 580 ns
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+restart
+run 580 ns
+run 580 ns
+restart
+run 200 ns
+save_wave_config {D:/CPU/CPU_project/testbench_my_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run 200 ns
+run 200 ns
+restart
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
+launch_simulation
+open_wave_config D:/CPU/CPU_project/testbench_my_behav.wcfg
+source testbench_my.tcl
+run all
+close_sim
