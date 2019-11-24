@@ -77,8 +77,10 @@ reg [ADDR_WIDTH-1:0] q_addr_a;
 
 always @(posedge clk)
   begin
-    if (we)
+    if (we) begin
+        $display("write %d (10) to %x (16)",din_a,addr_a);
         ram[addr_a] <= din_a;
+    end
     q_addr_a <= addr_a;
   end
 
@@ -94,11 +96,7 @@ initial begin
     ram[i] = 0;
   end
   // $readmemh("test.data", ram); // add test.data to vivado project or specify a valid file path
-  $readmemh("E:/Study/ÒÑ½áÊø/PPCA/RISCV/RISCV-test/src/statement_test.data", ram); // add test.data to vivado project or specify a valid file path
-
-  // DEBUG
-  // for (j=0;j<4;j=j+1)
-  //   $display("%b ",ram[j]);
+  $readmemh("D:/Arch2019_Assignment/riscv/test/test.data", ram); // add test.data to vivado project or specify a valid file path
 
 end
 

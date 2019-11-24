@@ -39,7 +39,7 @@ module mem_ctrl(
 				if_or_mem_o <= 2'b10;
 				ram_data_o <= cpu_data_i;
 				ram_addr_o <= mem_addr;
-				ram_rw <= 1'b1;
+				ram_rw <= 1;
 			end else if(if_request == 1) begin // to load a byte for IF
 				if_or_mem_o <= 2'b01;
 				ram_addr_o <= if_addr;

@@ -94,7 +94,6 @@ always @(*) begin
 				imm			= {{20{inst_i[31]}}, inst_i[31:20]};
 			end
 			7'b1101111: begin 		//JAL
-				// $display("FUCK JAL %x %x %x",pc_i,imm,inst_i);
 				opcode_o	= {inst_i[30], inst_i[14:12], inst_i[6:0]};
 				reg1_read_o 	= 0;
 				reg2_read_o 	= 0;

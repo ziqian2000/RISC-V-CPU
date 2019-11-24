@@ -1,6 +1,9 @@
 // RISCV32I CPU top module
 // port modification allowed for debugging purposes
 
+// `include "/mnt/d/Arch2019_Assignment/riscv/test/defines.v"
+`include "defines.v"
+
 module cpu(
 	input  wire				 	clk_in,			// system clock signal
 	input  wire				 	rst_in,			// reset signal
@@ -94,7 +97,7 @@ wire[31:0]			if_addr;
 	// mem
 wire[1:0] 			mem_request;
 wire[31:0] 			mem_addr;
-wire[31:0] 			cpu_data_i;
+wire[7:0] 			cpu_data_i;
 
 // mem --- ctrl
 
