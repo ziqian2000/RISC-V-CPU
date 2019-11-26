@@ -1,6 +1,6 @@
 Vivado Simulator 2018.2
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: D:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 671debaf3dcf4673bfdd724e855e9221 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot testbench_my_behav xil_defaultlib.testbench_my xil_defaultlib.glbl -log elaborate.log 
+Running: D:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 671debaf3dcf4673bfdd724e855e9221 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot testbench_behav xil_defaultlib.testbench xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 WARNING: [VRFC 10-1783] select index 7 into stall_sign is out of bounds [D:/CPU/CPU_code/mem_wb.v:24]
@@ -53,6 +53,6 @@ Compiling module xil_defaultlib.fifo
 Compiling module xil_defaultlib.uart(SYS_CLK_FREQ=100000000,BAUD...
 Compiling module xil_defaultlib.hci
 Compiling module xil_defaultlib.riscv_top(SIM=1)
-Compiling module xil_defaultlib.testbench_my
+Compiling module xil_defaultlib.testbench
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot testbench_my_behav
+Built simulation snapshot testbench_behav

@@ -43,5 +43,5 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/common/uart_rx.v" i
 INFO: [VRFC 10-311] analyzing module uart_rx
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/common/uart_tx.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module uart_tx
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/testbench_my.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module testbench_my
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/testbench/testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testbench
