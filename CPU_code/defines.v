@@ -14,7 +14,7 @@
 `define ChipEnable			1'b1
 `define ChipDisable			1'b0
 `define OpcodeBus 			10:0
-`define StallBus			6:0
+`define StallBus			7:0
 
 // **************************** RAM **************************** 
 

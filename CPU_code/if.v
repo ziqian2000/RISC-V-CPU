@@ -7,6 +7,7 @@ module if_(
 													//  1 : load instr for IF
 	output 	reg[31:0]				if_addr,
 	input	wire[7:0]				mem_ctrl_data,	// data from mem_ctrl
+	input	wire[1:0]				if_or_mem_i,	// 01 : if 		10 : mem
 
 	// to IF/ID
 	output	wire[`InstAddrBus]		pc_o, 			// the true pc value by substract 4 from pc
@@ -55,14 +56,14 @@ always @(posedge clk) begin
 		// end else if(stall_sign[0]) begin
 			// STALL
 		end else if(branch_enable_i) begin
-			// if(!stall_sign[0]) begin
+			if(!stall_sign[0]) begin
 				if_request 	<= 0;
 				if_addr 	<= 0;
 				pc 			<= branch_addr_i;
 				if_inst 	<= 0;
 				inst 		<= 0;
 				state 		<= 5'b00000;
-			// end
+			end
 		end	else begin 
 
 			// $display("%x",pc);
@@ -81,7 +82,7 @@ always @(posedge clk) begin
 								state <= 5'b00001;
 							end
 
-							avoid_data_hazard <= 4'h0; // !!!
+							avoid_data_hazard <= 4'h7; // !!!
 
 							raddr_o <= pc;
 							we_o <= 0;

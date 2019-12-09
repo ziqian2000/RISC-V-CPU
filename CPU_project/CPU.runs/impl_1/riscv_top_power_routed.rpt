@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Mon Dec  9 20:33:17 2019
+| Date             : Mon Dec  9 21:30:40 2019
 | Host             : ZIQIAN running 64-bit major release  (build 9200)
 | Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
 | Design           : riscv_top
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |     4246 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |     2130 |     20800 |           10.24 |
+| Slice Logic              |    <0.001 |     4266 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |     2165 |     20800 |           10.41 |
 |   CARRY4                 |    <0.001 |      148 |      8150 |            1.82 |
-|   Register               |    <0.001 |      928 |     41600 |            2.23 |
+|   Register               |    <0.001 |      929 |     41600 |            2.23 |
 |   LUT as Distributed RAM |    <0.001 |      556 |      9600 |            5.79 |
 |   F7/F8 Muxes            |    <0.001 |       65 |     32600 |            0.20 |
 |   Others                 |     0.000 |       32 |       --- |             --- |
-| Signals                  |    <0.001 |     3349 |       --- |             --- |
+| Signals                  |    <0.001 |     3404 |       --- |             --- |
 | Block RAM                |     0.003 |       32 |        50 |           64.00 |
 | I/O                      |    <0.001 |        5 |       106 |            4.72 |
 | Static Power             |     0.073 |          |           |                 |

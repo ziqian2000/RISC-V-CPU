@@ -68,9 +68,15 @@ always @(*) begin
 	end else begin
 		instvalid	= `InstValid;
 
+		reg1_read_o = 1'b0;
+		reg2_read_o = 1'b0;
+		wreg_o		= 1'b0;
+
 		reg1_addr_o = inst_i[19:15];// rs1
 		reg2_addr_o = inst_i[24:20];// rs2
 		wd_o 		= inst_i[11:7];	// rd
+
+		imm			= `ZeroWord;
 
 		case (inst_i[6:0])
 			7'b0110011: begin 		//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
@@ -78,7 +84,6 @@ always @(*) begin
 				reg1_read_o	= 1'b1;
 				reg2_read_o	= 1'b1;
 				wreg_o		= 1'b1;
-				imm 		= 0;
 				branch_addr_o = 0;
 			end
 			7'b0110111: begin 		//LUI
@@ -148,12 +153,12 @@ always @(*) begin
 				
 			end
 			default: begin 			// something strange
-				opcode_o		= 0;
-				reg1_read_o 	= 0;
-				reg2_read_o 	= 0;
-				wreg_o 			= 0;
-				imm 			= 0;
-				branch_addr_o 	= 0;
+				opcode_o 			= 0;
+				reg1_read_o 		= 0;
+				reg2_read_o 		= 0;
+				wreg_o 				= 0;
+				wd_o 				= 0;
+				branch_addr_o 		= 0;
 			end
 
 		endcase

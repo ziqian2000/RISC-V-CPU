@@ -15,6 +15,7 @@ module mem(
 	output 	reg[`RegBus]			wdata_o,
 
 	// to mem_ctrl
+	input	wire[1:0]				if_or_mem,	// 01 : if 		10 : mem
 	input 	wire[7:0] 				mem_ctrl_data_i,
 	output 	reg[7:0] 				mem_ctrl_data_o,
 	output 	reg[1:0] 				mem_request,// 	00 : no request 01 : LOAD	10 : STORE

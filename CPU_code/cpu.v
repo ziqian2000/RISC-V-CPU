@@ -21,8 +21,6 @@ module cpu(
 wire[`InstAddrBus]	if_pc;
 wire[`InstBus]		if_inst;
 
-assign dbgreg_dout = if_pc;
-
 // if/id --- id
 
 wire[`InstAddrBus] 	id_pc_i;
@@ -138,6 +136,7 @@ if_ if0(
 	// mem_ctrl
 	.if_request(if_request), 	.if_addr(if_addr),
 	.mem_ctrl_data(cpu_data_o),
+	.if_or_mem_i(if_or_mem_o),
 	// to if/id
 	.pc_o(if_pc),					.if_inst(if_inst),
 	// from ID
@@ -266,6 +265,7 @@ mem mem0(
 	.wd_o(mem_wd_o),			.wreg_o(mem_wreg_o), 		
 	.wdata_o(mem_wdata_o),
 	// to mem_ctrl
+	.if_or_mem(if_or_mem_o),
 	.mem_ctrl_data_i(cpu_data_o), 	
 	.mem_ctrl_data_o(cpu_data_i),
 	.mem_request(mem_request), 		.mem_addr(mem_addr),
@@ -295,6 +295,7 @@ mem_ctrl mem_ctrl0(
 	.mem_request(mem_request),	.mem_addr(mem_addr),
 	// common
 	.cpu_data_i(cpu_data_i),	.cpu_data_o(cpu_data_o),
+	.if_or_mem_o(if_or_mem_o),
 	//RAM
 	.ram_data_i(mem_din),		.ram_data_o(mem_dout),
 	.ram_addr_o(mem_a),			.ram_rw(mem_wr)

@@ -41,7 +41,7 @@ module ex(
 						4'b0000: wdata_o = (reg1_i + reg2_i); 								// ADD
 						4'b1000: wdata_o = (reg1_i - reg2_i); 								// SUB
 						4'b0001: wdata_o = (reg1_i << reg2_i[4:0]); 						// SLL
-						4'b0010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));				// SLT
+						4'b0010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));			// SLT
 						4'b0011: wdata_o = (reg1_i < reg2_i); 								// SLTU
 						4'b0100: wdata_o = (reg1_i ^ reg2_i); 								// XOR
 						4'b0101: wdata_o = (reg1_i >> reg2_i[4:0]); 						// SRL
