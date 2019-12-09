@@ -1,5 +1,6 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU_code" \
+"../../../../../CPU_code/defines.v" \
 "../../../../../CPU_code/block_ram.v" \
 "../../../../../CPU_code/cpu.v" \
 "../../../../../CPU_code/ctrl.v" \
@@ -16,11 +17,12 @@ verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU
 "../../../../../CPU_code/mem_wb.v" \
 "../../../../../CPU_code/common/ram.v" \
 "../../../../../CPU_code/regfile.v" \
-"../../../../../CPU_code/riscv_top.v" \
 "../../../../../CPU_code/common/uart.v" \
 "../../../../../CPU_code/common/uart_baud_clk.v" \
 "../../../../../CPU_code/common/uart_rx.v" \
 "../../../../../CPU_code/common/uart_tx.v" \
+"../../../../../CPU_code/riscv_top.v" \
+"../../../../../CPU_code/inst_cache.v" \
 "../../../../../CPU_code/testbench/testbench.v" \
 
 # compile glbl module

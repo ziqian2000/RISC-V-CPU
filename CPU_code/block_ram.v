@@ -78,7 +78,6 @@ reg [ADDR_WIDTH-1:0] q_addr_a;
 always @(posedge clk)
   begin
     if (we) begin
-        // $display("write %d (10) to %x (16)",din_a,addr_a);
         ram[addr_a] <= din_a;
     end
     q_addr_a <= addr_a;

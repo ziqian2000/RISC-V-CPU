@@ -16,6 +16,8 @@ always @(posedge clk) begin
 	if (rst == `RstEnable) begin
 		id_pc <= `ZeroWord;		
 		id_inst <= `ZeroWord;
+	end else if(stall_sign[1] && !stall_sign[2]) begin
+		id_inst <= 0;
 	end else if(stall_sign[1]) begin
 		// STALL
 	end	else begin

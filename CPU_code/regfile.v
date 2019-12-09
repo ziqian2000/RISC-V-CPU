@@ -26,6 +26,9 @@ always @(posedge clk) begin
 	if (rst == `RstEnable) begin
 		
 	end else begin
+
+		// $display("%x %x %x --- %x",regs[13],regs[14],regs[15],regs[18]);
+
 		if((we == `WriteEnable) && (waddr != `RegNumLog2'h0)) begin
 			regs[waddr] <= wdata;
 		end

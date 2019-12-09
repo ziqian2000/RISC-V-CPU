@@ -1,0 +1,343 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date             : Mon Dec  9 20:33:17 2019
+| Host             : ZIQIAN running 64-bit major release  (build 9200)
+| Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
+| Design           : riscv_top
+| Device           : xc7a35tcpg236-1
+| Design State     : routed
+| Grade            : commercial
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 0.077        |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 0.004        |
+| Device Static (W)        | 0.073        |
+| Effective TJA (C/W)      | 5.0          |
+| Max Ambient (C)          | 84.6         |
+| Junction Temperature (C) | 25.4         |
+| Confidence Level         | Medium       |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Clocks                   |    <0.001 |        3 |       --- |             --- |
+| Slice Logic              |    <0.001 |     4246 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |     2130 |     20800 |           10.24 |
+|   CARRY4                 |    <0.001 |      148 |      8150 |            1.82 |
+|   Register               |    <0.001 |      928 |     41600 |            2.23 |
+|   LUT as Distributed RAM |    <0.001 |      556 |      9600 |            5.79 |
+|   F7/F8 Muxes            |    <0.001 |       65 |     32600 |            0.20 |
+|   Others                 |     0.000 |       32 |       --- |             --- |
+| Signals                  |    <0.001 |     3349 |       --- |             --- |
+| Block RAM                |     0.003 |       32 |        50 |           64.00 |
+| I/O                      |    <0.001 |        5 |       106 |            4.72 |
+| Static Power             |     0.073 |          |           |                 |
+| Total                    |     0.077 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++-----------+-------------+-----------+-------------+------------+
+| Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
++-----------+-------------+-----------+-------------+------------+
+| Vccint    |       1.000 |     0.014 |       0.004 |      0.010 |
+| Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
+| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
+| Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
+| Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
+| Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
+| Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
+| Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vccbram   |       1.000 |     0.001 |       0.000 |      0.001 |
+| MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
+| MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
+| Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
++-----------+-------------+-----------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                               | Action                                                                                                     |
++-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                                      |                                                                                                            |
+| Clock nodes activity        | High       | User specified more than 95% of clocks                |                                                                                                            |
+| I/O nodes activity          | Medium     | More than 5% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view   |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes        | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                          |                                                                                                            |
+|                             |            |                                                       |                                                                                                            |
+| Overall confidence level    | Medium     |                                                       |                                                                                                            |
++-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 5.0                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 4.6                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-------------+--------+-----------------+
+| Clock       | Domain | Constraint (ns) |
++-------------+--------+-----------------+
+| sys_clk_pin | EXCLK  |           100.0 |
++-------------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++---------------------------------------+-----------+
+| Name                                  | Power (W) |
++---------------------------------------+-----------+
+| riscv_top                             |     0.004 |
+|   cpu0                                |     0.001 |
+|     ctrl0                             |    <0.001 |
+|     ex_mem0                           |    <0.001 |
+|     icache0                           |    <0.001 |
+|       cache_data_reg_0_63_0_2         |    <0.001 |
+|       cache_data_reg_0_63_12_14       |    <0.001 |
+|       cache_data_reg_0_63_15_17       |    <0.001 |
+|       cache_data_reg_0_63_18_20       |    <0.001 |
+|       cache_data_reg_0_63_21_23       |    <0.001 |
+|       cache_data_reg_0_63_24_26       |    <0.001 |
+|       cache_data_reg_0_63_27_29       |    <0.001 |
+|       cache_data_reg_0_63_30_30       |    <0.001 |
+|       cache_data_reg_0_63_31_31       |    <0.001 |
+|       cache_data_reg_0_63_3_5         |    <0.001 |
+|       cache_data_reg_0_63_6_8         |    <0.001 |
+|       cache_data_reg_0_63_9_11        |    <0.001 |
+|       cache_data_reg_64_127_0_2       |    <0.001 |
+|       cache_data_reg_64_127_12_14     |    <0.001 |
+|       cache_data_reg_64_127_15_17     |    <0.001 |
+|       cache_data_reg_64_127_18_20     |    <0.001 |
+|       cache_data_reg_64_127_21_23     |    <0.001 |
+|       cache_data_reg_64_127_24_26     |    <0.001 |
+|       cache_data_reg_64_127_27_29     |    <0.001 |
+|       cache_data_reg_64_127_30_30     |    <0.001 |
+|       cache_data_reg_64_127_31_31     |    <0.001 |
+|       cache_data_reg_64_127_3_5       |    <0.001 |
+|       cache_data_reg_64_127_6_8       |    <0.001 |
+|       cache_data_reg_64_127_9_11      |    <0.001 |
+|       cache_tag_reg_0_63_0_2          |    <0.001 |
+|       cache_tag_reg_0_63_3_5          |    <0.001 |
+|       cache_tag_reg_0_63_6_8          |    <0.001 |
+|       cache_tag_reg_0_63_9_9          |    <0.001 |
+|       cache_tag_reg_64_127_0_2        |    <0.001 |
+|       cache_tag_reg_64_127_3_5        |    <0.001 |
+|       cache_tag_reg_64_127_6_8        |    <0.001 |
+|       cache_tag_reg_64_127_9_9        |    <0.001 |
+|     id_ex0                            |    <0.001 |
+|     if0                               |    <0.001 |
+|     if_id0                            |    <0.001 |
+|     mem0                              |    <0.001 |
+|     mem_wb0                           |    <0.001 |
+|     regfile0                          |    <0.001 |
+|       regs_reg_r1_0_31_0_5            |    <0.001 |
+|       regs_reg_r1_0_31_12_17          |    <0.001 |
+|       regs_reg_r1_0_31_18_23          |    <0.001 |
+|       regs_reg_r1_0_31_24_29          |    <0.001 |
+|       regs_reg_r1_0_31_30_31          |    <0.001 |
+|       regs_reg_r1_0_31_6_11           |    <0.001 |
+|       regs_reg_r2_0_31_0_5            |    <0.001 |
+|       regs_reg_r2_0_31_12_17          |    <0.001 |
+|       regs_reg_r2_0_31_18_23          |    <0.001 |
+|       regs_reg_r2_0_31_24_29          |    <0.001 |
+|       regs_reg_r2_0_31_30_31          |    <0.001 |
+|       regs_reg_r2_0_31_6_11           |    <0.001 |
+|   hci0                                |    <0.001 |
+|     io_in_fifo                        |    <0.001 |
+|       q_data_array_reg_0_63_0_2       |    <0.001 |
+|       q_data_array_reg_0_63_3_5       |    <0.001 |
+|       q_data_array_reg_0_63_6_6       |    <0.001 |
+|       q_data_array_reg_0_63_7_7       |    <0.001 |
+|       q_data_array_reg_128_191_0_2    |    <0.001 |
+|       q_data_array_reg_128_191_3_5    |    <0.001 |
+|       q_data_array_reg_128_191_6_6    |    <0.001 |
+|       q_data_array_reg_128_191_7_7    |    <0.001 |
+|       q_data_array_reg_192_255_0_2    |    <0.001 |
+|       q_data_array_reg_192_255_3_5    |    <0.001 |
+|       q_data_array_reg_192_255_6_6    |    <0.001 |
+|       q_data_array_reg_192_255_7_7    |    <0.001 |
+|       q_data_array_reg_256_319_0_2    |    <0.001 |
+|       q_data_array_reg_256_319_3_5    |    <0.001 |
+|       q_data_array_reg_256_319_6_6    |    <0.001 |
+|       q_data_array_reg_256_319_7_7    |    <0.001 |
+|       q_data_array_reg_320_383_0_2    |    <0.001 |
+|       q_data_array_reg_320_383_3_5    |    <0.001 |
+|       q_data_array_reg_320_383_6_6    |    <0.001 |
+|       q_data_array_reg_320_383_7_7    |    <0.001 |
+|       q_data_array_reg_384_447_0_2    |    <0.001 |
+|       q_data_array_reg_384_447_3_5    |    <0.001 |
+|       q_data_array_reg_384_447_6_6    |    <0.001 |
+|       q_data_array_reg_384_447_7_7    |    <0.001 |
+|       q_data_array_reg_448_511_0_2    |    <0.001 |
+|       q_data_array_reg_448_511_3_5    |    <0.001 |
+|       q_data_array_reg_448_511_6_6    |    <0.001 |
+|       q_data_array_reg_448_511_7_7    |    <0.001 |
+|       q_data_array_reg_512_575_0_2    |    <0.001 |
+|       q_data_array_reg_512_575_3_5    |    <0.001 |
+|       q_data_array_reg_512_575_6_6    |    <0.001 |
+|       q_data_array_reg_512_575_7_7    |    <0.001 |
+|       q_data_array_reg_576_639_0_2    |    <0.001 |
+|       q_data_array_reg_576_639_3_5    |    <0.001 |
+|       q_data_array_reg_576_639_6_6    |    <0.001 |
+|       q_data_array_reg_576_639_7_7    |    <0.001 |
+|       q_data_array_reg_640_703_0_2    |    <0.001 |
+|       q_data_array_reg_640_703_3_5    |    <0.001 |
+|       q_data_array_reg_640_703_6_6    |    <0.001 |
+|       q_data_array_reg_640_703_7_7    |    <0.001 |
+|       q_data_array_reg_64_127_0_2     |    <0.001 |
+|       q_data_array_reg_64_127_3_5     |    <0.001 |
+|       q_data_array_reg_64_127_6_6     |    <0.001 |
+|       q_data_array_reg_64_127_7_7     |    <0.001 |
+|       q_data_array_reg_704_767_0_2    |    <0.001 |
+|       q_data_array_reg_704_767_3_5    |    <0.001 |
+|       q_data_array_reg_704_767_6_6    |    <0.001 |
+|       q_data_array_reg_704_767_7_7    |    <0.001 |
+|       q_data_array_reg_768_831_0_2    |    <0.001 |
+|       q_data_array_reg_768_831_3_5    |    <0.001 |
+|       q_data_array_reg_768_831_6_6    |    <0.001 |
+|       q_data_array_reg_768_831_7_7    |    <0.001 |
+|       q_data_array_reg_832_895_0_2    |    <0.001 |
+|       q_data_array_reg_832_895_3_5    |    <0.001 |
+|       q_data_array_reg_832_895_6_6    |    <0.001 |
+|       q_data_array_reg_832_895_7_7    |    <0.001 |
+|       q_data_array_reg_896_959_0_2    |    <0.001 |
+|       q_data_array_reg_896_959_3_5    |    <0.001 |
+|       q_data_array_reg_896_959_6_6    |    <0.001 |
+|       q_data_array_reg_896_959_7_7    |    <0.001 |
+|       q_data_array_reg_960_1023_0_2   |    <0.001 |
+|       q_data_array_reg_960_1023_3_5   |    <0.001 |
+|       q_data_array_reg_960_1023_6_6   |    <0.001 |
+|       q_data_array_reg_960_1023_7_7   |    <0.001 |
+|     uart_blk                          |    <0.001 |
+|       uart_baud_clk_blk               |    <0.001 |
+|       uart_rx_blk                     |    <0.001 |
+|       uart_rx_fifo                    |    <0.001 |
+|         q_data_array_reg_0_7_0_5      |    <0.001 |
+|         q_data_array_reg_0_7_6_7      |    <0.001 |
+|       uart_tx_blk                     |    <0.001 |
+|       uart_tx_fifo                    |    <0.001 |
+|         q_data_array_reg_0_63_0_2     |    <0.001 |
+|         q_data_array_reg_0_63_3_5     |    <0.001 |
+|         q_data_array_reg_0_63_6_6     |    <0.001 |
+|         q_data_array_reg_0_63_7_7     |    <0.001 |
+|         q_data_array_reg_128_191_0_2  |    <0.001 |
+|         q_data_array_reg_128_191_3_5  |    <0.001 |
+|         q_data_array_reg_128_191_6_6  |    <0.001 |
+|         q_data_array_reg_128_191_7_7  |    <0.001 |
+|         q_data_array_reg_192_255_0_2  |    <0.001 |
+|         q_data_array_reg_192_255_3_5  |    <0.001 |
+|         q_data_array_reg_192_255_6_6  |    <0.001 |
+|         q_data_array_reg_192_255_7_7  |    <0.001 |
+|         q_data_array_reg_256_319_0_2  |    <0.001 |
+|         q_data_array_reg_256_319_3_5  |    <0.001 |
+|         q_data_array_reg_256_319_6_6  |    <0.001 |
+|         q_data_array_reg_256_319_7_7  |    <0.001 |
+|         q_data_array_reg_320_383_0_2  |    <0.001 |
+|         q_data_array_reg_320_383_3_5  |    <0.001 |
+|         q_data_array_reg_320_383_6_6  |    <0.001 |
+|         q_data_array_reg_320_383_7_7  |    <0.001 |
+|         q_data_array_reg_384_447_0_2  |    <0.001 |
+|         q_data_array_reg_384_447_3_5  |    <0.001 |
+|         q_data_array_reg_384_447_6_6  |    <0.001 |
+|         q_data_array_reg_384_447_7_7  |    <0.001 |
+|         q_data_array_reg_448_511_0_2  |    <0.001 |
+|         q_data_array_reg_448_511_3_5  |    <0.001 |
+|         q_data_array_reg_448_511_6_6  |    <0.001 |
+|         q_data_array_reg_448_511_7_7  |    <0.001 |
+|         q_data_array_reg_512_575_0_2  |    <0.001 |
+|         q_data_array_reg_512_575_3_5  |    <0.001 |
+|         q_data_array_reg_512_575_6_6  |    <0.001 |
+|         q_data_array_reg_512_575_7_7  |    <0.001 |
+|         q_data_array_reg_576_639_0_2  |    <0.001 |
+|         q_data_array_reg_576_639_3_5  |    <0.001 |
+|         q_data_array_reg_576_639_6_6  |    <0.001 |
+|         q_data_array_reg_576_639_7_7  |    <0.001 |
+|         q_data_array_reg_640_703_0_2  |    <0.001 |
+|         q_data_array_reg_640_703_3_5  |    <0.001 |
+|         q_data_array_reg_640_703_6_6  |    <0.001 |
+|         q_data_array_reg_640_703_7_7  |    <0.001 |
+|         q_data_array_reg_64_127_0_2   |    <0.001 |
+|         q_data_array_reg_64_127_3_5   |    <0.001 |
+|         q_data_array_reg_64_127_6_6   |    <0.001 |
+|         q_data_array_reg_64_127_7_7   |    <0.001 |
+|         q_data_array_reg_704_767_0_2  |    <0.001 |
+|         q_data_array_reg_704_767_3_5  |    <0.001 |
+|         q_data_array_reg_704_767_6_6  |    <0.001 |
+|         q_data_array_reg_704_767_7_7  |    <0.001 |
+|         q_data_array_reg_768_831_0_2  |    <0.001 |
+|         q_data_array_reg_768_831_3_5  |    <0.001 |
+|         q_data_array_reg_768_831_6_6  |    <0.001 |
+|         q_data_array_reg_768_831_7_7  |    <0.001 |
+|         q_data_array_reg_832_895_0_2  |    <0.001 |
+|         q_data_array_reg_832_895_3_5  |    <0.001 |
+|         q_data_array_reg_832_895_6_6  |    <0.001 |
+|         q_data_array_reg_832_895_7_7  |    <0.001 |
+|         q_data_array_reg_896_959_0_2  |    <0.001 |
+|         q_data_array_reg_896_959_3_5  |    <0.001 |
+|         q_data_array_reg_896_959_6_6  |    <0.001 |
+|         q_data_array_reg_896_959_7_7  |    <0.001 |
+|         q_data_array_reg_960_1023_0_2 |    <0.001 |
+|         q_data_array_reg_960_1023_3_5 |    <0.001 |
+|         q_data_array_reg_960_1023_6_6 |    <0.001 |
+|         q_data_array_reg_960_1023_7_7 |    <0.001 |
+|   ram0                                |     0.003 |
+|     ram_bram                          |     0.003 |
++---------------------------------------+-----------+
+
+
