@@ -2,7 +2,7 @@ module ex(
     input wire                  rst,
     input wire                  rdy,
 
-    // read from id_ex
+    // from ID/EX
     input wire[`OpcodeBus]      opcode_i,
     input wire[`FunctBus3]      funct3_i,
     input wire[`FunctBus7]      funct7_i,
@@ -13,7 +13,7 @@ module ex(
     input wire                  wreg_i,
     input wire[`StallBus]       stall_sign,
 
-    // output the result of ex
+    // to EX/MEM
     output reg[`OpcodeBus]      opcode_o,
     output reg[`FunctBus3]      funct3_o,
     output reg[`InstAddrBus]    mem_addr_o,
