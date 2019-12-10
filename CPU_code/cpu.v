@@ -92,7 +92,7 @@ wire[`InstAddrBus]	  mem_mem_addr;
 wire[`MemDataBus]	   mem_mem_data_o;
 wire					if_write_enable;
 wire					mem_write_enable;
-wire					stage_mem_busy_sign;
+wire					mem_busy_sign;
 
 // ctrl signal
 wire[`StallBus]		 stall_signal;
@@ -129,14 +129,14 @@ regfile regfile0(
 	.rdata2(reg2_data)
 );
 
-stage_if if0(
+if_ if0(
 	.clk(clk_in),
 	.rst(rst_in),
 	.stall_sign(stall_signal),
 	.mem_data_i(mem_din),
 	.cache_inst_i(cache_inst),
 	.cache_hit_i(cache_hit),
-	.mem_addr_o(if_mem_addr),
+	.if_addr(if_mem_addr),
 	.mem_we_o(if_write_enable),
 	.cache_waddr_o(cache_wpc),
 	.cache_we_o(cache_we),
@@ -147,7 +147,7 @@ stage_if if0(
 	.if_mem_req_o(if_mem_req),
 	.branch_stall_req_o(branch_stall_req),
 	.pc_o(if_pc_o),
-	.inst_o(if_inst_o)
+	.if_inst(if_inst_o)
 );
 
 if_id if_id0(
@@ -160,7 +160,7 @@ if_id if_id0(
 	.stall_sign(stall_signal)
 );
 
-stage_id id0(
+id id0(
 	.rst(rst_in),
 	.rdy(rdy_in),
 	.pc_i(id_pc_i),
@@ -213,7 +213,7 @@ id_ex id_ex0(
 	.stall_sign(stall_signal)
 );
 
-stage_ex ex0(
+ex ex0(
 	.rst(rst_in),
 	.rdy(rdy_in),
 	.opcode_i(ex_opcode_i),
@@ -251,7 +251,7 @@ ex_mem ex_mem0(
 	.mem_mem_addr(mem_mem_addr_i)
 );
 
-stage_mem mem0(
+mem mem0(
 	.clk(clk_in),
 	.rst(rst_in),
 	.opcode_i(mem_opcode_i),

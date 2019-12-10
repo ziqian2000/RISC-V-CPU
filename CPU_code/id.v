@@ -1,4 +1,4 @@
-module stage_id(
+module id(
     input wire                  rst,
     input wire                  rdy,
 

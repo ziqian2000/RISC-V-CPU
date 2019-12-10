@@ -1,4 +1,4 @@
-module stage_ex(
+module ex(
     input wire                  rst,
     input wire                  rdy,
 

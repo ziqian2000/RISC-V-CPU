@@ -1,4 +1,4 @@
-module stage_mem(
+module mem(
 	input wire				  clk,
 	input wire				  rst,
 
