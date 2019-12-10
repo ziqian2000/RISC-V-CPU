@@ -28,17 +28,17 @@ module mem(
 reg[3:0]			state;
 reg					mem_done;
 reg[`RegBus]		mem_data;
-reg[`MemDataBus]    data_block1;
-reg[`MemDataBus]    data_block2;
-reg[`MemDataBus]    data_block3;
+reg[`MemDataBus]	data_block1;
+reg[`MemDataBus]	data_block2;
+reg[`MemDataBus]	data_block3;
 
 	// observer
 	always @(*) begin
 		if (rst) begin
-			mem_mem_req_o		      = 0;
+			mem_mem_req_o			  = 0;
 		end else begin
 			if (mem_done) begin
-				mem_mem_req_o	      = 0;
+				mem_mem_req_o		  = 0;
 			end else if (!mem_done) begin
 				case(opcode_i)
 					7'b0000011, 7'b0100011:				// LOAD, STORE

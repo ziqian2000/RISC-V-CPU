@@ -28,7 +28,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 
 7 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 579.734 ; gain = 330.766
+link_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 579.781 ; gain = 331.227
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a35t'
@@ -36,38 +36,9 @@ Running DRC as a precondition to command opt_design
 
 Starting DRC Task
 INFO: [DRC 23-27] Running DRC with 2 threads
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[0] has multiple drivers: cpu0/ex_mem0/wb_wdata[0]_i_1/O, and cpu0/mem0/wdata_o_reg[0]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[10] has multiple drivers: cpu0/ex_mem0/wb_wdata[10]_i_1/O, and cpu0/mem0/wdata_o_reg[10]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[11] has multiple drivers: cpu0/ex_mem0/wb_wdata[11]_i_1/O, and cpu0/mem0/wdata_o_reg[11]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[12] has multiple drivers: cpu0/ex_mem0/wb_wdata[12]_i_1/O, and cpu0/mem0/wdata_o_reg[12]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[13] has multiple drivers: cpu0/ex_mem0/wb_wdata[13]_i_1/O, and cpu0/mem0/wdata_o_reg[13]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[14] has multiple drivers: cpu0/ex_mem0/wb_wdata[14]_i_1/O, and cpu0/mem0/wdata_o_reg[14]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[15] has multiple drivers: cpu0/ex_mem0/wb_wdata[15]_i_1/O, and cpu0/mem0/wdata_o_reg[15]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[16] has multiple drivers: cpu0/ex_mem0/wb_wdata[16]_i_1/O, and cpu0/mem0/wdata_o_reg[16]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[17] has multiple drivers: cpu0/ex_mem0/wb_wdata[17]_i_1/O, and cpu0/mem0/wdata_o_reg[17]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[18] has multiple drivers: cpu0/ex_mem0/wb_wdata[18]_i_1/O, and cpu0/mem0/wdata_o_reg[18]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[19] has multiple drivers: cpu0/ex_mem0/wb_wdata[19]_i_1/O, and cpu0/mem0/wdata_o_reg[19]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[1] has multiple drivers: cpu0/ex_mem0/wb_wdata[1]_i_1/O, and cpu0/mem0/wdata_o_reg[1]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[20] has multiple drivers: cpu0/ex_mem0/wb_wdata[20]_i_1/O, and cpu0/mem0/wdata_o_reg[20]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[21] has multiple drivers: cpu0/ex_mem0/wb_wdata[21]_i_1/O, and cpu0/mem0/wdata_o_reg[21]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[22] has multiple drivers: cpu0/ex_mem0/wb_wdata[22]_i_1/O, and cpu0/mem0/wdata_o_reg[22]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[23] has multiple drivers: cpu0/ex_mem0/wb_wdata[23]_i_1/O, and cpu0/mem0/wdata_o_reg[23]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[2] has multiple drivers: cpu0/ex_mem0/wb_wdata[2]_i_1/O, and cpu0/mem0/wdata_o_reg[2]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[3] has multiple drivers: cpu0/ex_mem0/wb_wdata[3]_i_1/O, and cpu0/mem0/wdata_o_reg[3]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[4] has multiple drivers: cpu0/ex_mem0/wb_wdata[4]_i_1/O, and cpu0/mem0/wdata_o_reg[4]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[5] has multiple drivers: cpu0/ex_mem0/wb_wdata[5]_i_1/O, and cpu0/mem0/wdata_o_reg[5]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[6] has multiple drivers: cpu0/ex_mem0/wb_wdata[6]_i_1/O, and cpu0/mem0/wdata_o_reg[6]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[7] has multiple drivers: cpu0/ex_mem0/wb_wdata[7]_i_1/O, and cpu0/mem0/wdata_o_reg[7]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[8] has multiple drivers: cpu0/ex_mem0/wb_wdata[8]_i_1/O, and cpu0/mem0/wdata_o_reg[8]/Q.
-ERROR: [DRC MDRV-1] Multiple Driver Nets: Net cpu0/ex_mem0/D[9] has multiple drivers: cpu0/ex_mem0/wb_wdata[9]_i_1/O, and cpu0/mem0/wdata_o_reg[9]/Q.
-INFO: [Project 1-461] DRC finished with 24 Errors
+INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
-ERROR: [Vivado_Tcl 4-78] Error(s) found during DRC. Opt_design not run.
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.773 . Memory (MB): peak = 590.383 ; gain = 10.648
-INFO: [Common 17-83] Releasing license: Implementation
-12 Infos, 0 Warnings, 0 Critical Warnings and 25 Errors encountered.
-opt_design failed
-ERROR: [Common 17-39] 'opt_design' failed due to earlier errors.
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.677 . Memory (MB): peak = 587.414 ; gain = 7.633
 
-INFO: [Common 17-206] Exiting Vivado at Tue Dec 10 11:48:20 2019...
+Starting Cache Timing Information Task

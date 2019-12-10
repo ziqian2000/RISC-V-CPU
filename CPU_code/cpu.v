@@ -2,22 +2,17 @@
 // port modification allowed for debugging purposes
 `include "defines.v"
 module cpu(
-	input  wire				 clk_in,			// system clock signal
-	input  wire				 rst_in,			// reset signal
-	input  wire					rdy_in,			// ready signal, pause cpu when low
+	input  wire				clk_in,			// system clock signal
+	input  wire				rst_in,			// reset signal
+	input  wire				rdy_in,			// ready signal, pause cpu when low
 
-	input  wire [7:0]		   mem_din,		// data input bus
-	output wire [7:0]		   mem_dout,		// data output bus
-	output wire [31:0]		  mem_a,			// address bus (only 17:0 is used)
-	output wire				 mem_wr,			// write/read signal (1 for write)
+	input  wire [7:0]		mem_din,		// data input bus
+	output wire [7:0]		mem_dout,		// data output bus
+	output wire [31:0]		mem_a,			// address bus (only 17:0 is used)
+	output wire				mem_wr,			// write/read signal (1 for write)
 
-	output wire [31:0]			dbgreg_dout		// cpu register output (debugging demo)
+	output wire [31:0]		dbgreg_dout		// cpu register output (debugging demo)
 );
-
-// link pc_reg to if
-wire[`InstAddrBus]	  inst_addr;
-
-// assign  dbgreg_dout = inst_addr;
 
 // link if to if_id
 wire[`CntBus8]		  ifid_cnt;
@@ -282,14 +277,14 @@ mem_wb mem_wb0(
 	.stall_sign(stall_signal)
 );
 
-mcu mcu0(
+mem_ctrl mem_ctrl0(
 	.rst(rst_in),
 	.rdy(rdy_in),
 	.if_request(if_mem_req),
 	.mem_request(mem_mem_req),
 	.mem_write_enable_i(mem_write_enable),
-	.if_mem_addr_i(if_mem_addr),
-	.mem_mem_addr_i(mem_mem_addr),
+	.if_addr_i(if_mem_addr),
+	.mem_addr_i(mem_mem_addr),
 	.mem_data_i(mem_mem_data_o),
 	.write_enable_o(mem_wr),
 	.mem_addr_o(mem_a),

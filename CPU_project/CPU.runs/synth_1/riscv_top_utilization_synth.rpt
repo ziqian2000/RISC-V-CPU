@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Tue Dec 10 11:48:00 2019
+| Date         : Tue Dec 10 12:03:57 2019
 | Host         : ZIQIAN running 64-bit major release  (build 9200)
 | Command      : report_utilization -file riscv_top_utilization_synth.rpt -pb riscv_top_utilization_synth.pb
 | Design       : riscv_top
@@ -30,8 +30,8 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                | 2887 |     0 |     20800 | 13.88 |
-|   LUT as Logic             | 2331 |     0 |     20800 | 11.21 |
+| Slice LUTs*                | 2881 |     0 |     20800 | 13.85 |
+|   LUT as Logic             | 2325 |     0 |     20800 | 11.18 |
 |   LUT as Memory            |  556 |     0 |      9600 |  5.79 |
 |     LUT as Distributed RAM |  556 |     0 |           |       |
 |     LUT as Shift Register  |    0 |     0 |           |       |
@@ -152,13 +152,13 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     | 1379 |                 LUT |
+| LUT6     | 1375 |                 LUT |
 | FDRE     |  841 |        Flop & Latch |
 | RAMD64E  |  500 |  Distributed Memory |
-| LUT4     |  361 |                 LUT |
-| LUT2     |  324 |                 LUT |
+| LUT4     |  352 |                 LUT |
+| LUT2     |  318 |                 LUT |
 | LUT3     |  266 |                 LUT |
-| LUT5     |  221 |                 LUT |
+| LUT5     |  233 |                 LUT |
 | CARRY4   |  152 |          CarryLogic |
 | LUT1     |  106 |                 LUT |
 | RAMD32   |   84 |  Distributed Memory |
