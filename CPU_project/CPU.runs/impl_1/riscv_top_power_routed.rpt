@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Mon Dec  9 21:30:40 2019
+| Date             : Mon Dec  9 23:59:28 2019
 | Host             : ZIQIAN running 64-bit major release  (build 9200)
 | Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
 | Design           : riscv_top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.077        |
+| Total On-Chip Power (W)  | 0.117        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.004        |
+| Dynamic (W)              | 0.043        |
 | Device Static (W)        | 0.073        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.6         |
-| Junction Temperature (C) | 25.4         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,19 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |     4266 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |     2165 |     20800 |           10.41 |
+| Clocks                   |     0.008 |        3 |       --- |             --- |
+| Slice Logic              |     0.004 |     4246 |       --- |             --- |
+|   LUT as Logic           |     0.004 |     2153 |     20800 |           10.35 |
 |   CARRY4                 |    <0.001 |      148 |      8150 |            1.82 |
 |   Register               |    <0.001 |      929 |     41600 |            2.23 |
 |   LUT as Distributed RAM |    <0.001 |      556 |      9600 |            5.79 |
 |   F7/F8 Muxes            |    <0.001 |       65 |     32600 |            0.20 |
 |   Others                 |     0.000 |       32 |       --- |             --- |
-| Signals                  |    <0.001 |     3404 |       --- |             --- |
-| Block RAM                |     0.003 |       32 |        50 |           64.00 |
+| Signals                  |     0.005 |     3381 |       --- |             --- |
+| Block RAM                |     0.026 |       32 |        50 |           64.00 |
 | I/O                      |    <0.001 |        5 |       106 |            4.72 |
 | Static Power             |     0.073 |          |           |                 |
-| Total                    |     0.077 |          |           |                 |
+| Total                    |     0.117 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.014 |       0.004 |      0.010 |
+| Vccint    |       1.000 |     0.051 |       0.041 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -83,7 +83,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.001 |       0.000 |      0.001 |
+| Vccbram   |       1.000 |     0.003 |       0.002 |      0.001 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
@@ -130,7 +130,7 @@ Table of Contents
 +-------------+--------+-----------------+
 | Clock       | Domain | Constraint (ns) |
 +-------------+--------+-----------------+
-| sys_clk_pin | EXCLK  |           100.0 |
+| sys_clk_pin | EXCLK  |            10.0 |
 +-------------+--------+-----------------+
 
 
@@ -143,11 +143,11 @@ Table of Contents
 +---------------------------------------+-----------+
 | Name                                  | Power (W) |
 +---------------------------------------+-----------+
-| riscv_top                             |     0.004 |
-|   cpu0                                |     0.001 |
+| riscv_top                             |     0.043 |
+|   cpu0                                |     0.012 |
 |     ctrl0                             |    <0.001 |
 |     ex_mem0                           |    <0.001 |
-|     icache0                           |    <0.001 |
+|     icache0                           |     0.001 |
 |       cache_data_reg_0_63_0_2         |    <0.001 |
 |       cache_data_reg_0_63_12_14       |    <0.001 |
 |       cache_data_reg_0_63_15_17       |    <0.001 |
@@ -180,9 +180,9 @@ Table of Contents
 |       cache_tag_reg_64_127_3_5        |    <0.001 |
 |       cache_tag_reg_64_127_6_8        |    <0.001 |
 |       cache_tag_reg_64_127_9_9        |    <0.001 |
-|     id_ex0                            |    <0.001 |
-|     if0                               |    <0.001 |
-|     if_id0                            |    <0.001 |
+|     id_ex0                            |     0.002 |
+|     if0                               |     0.003 |
+|     if_id0                            |     0.004 |
 |     mem0                              |    <0.001 |
 |     mem_wb0                           |    <0.001 |
 |     regfile0                          |    <0.001 |
@@ -198,8 +198,8 @@ Table of Contents
 |       regs_reg_r2_0_31_24_29          |    <0.001 |
 |       regs_reg_r2_0_31_30_31          |    <0.001 |
 |       regs_reg_r2_0_31_6_11           |    <0.001 |
-|   hci0                                |    <0.001 |
-|     io_in_fifo                        |    <0.001 |
+|   hci0                                |     0.004 |
+|     io_in_fifo                        |     0.001 |
 |       q_data_array_reg_0_63_0_2       |    <0.001 |
 |       q_data_array_reg_0_63_3_5       |    <0.001 |
 |       q_data_array_reg_0_63_6_6       |    <0.001 |
@@ -264,14 +264,14 @@ Table of Contents
 |       q_data_array_reg_960_1023_3_5   |    <0.001 |
 |       q_data_array_reg_960_1023_6_6   |    <0.001 |
 |       q_data_array_reg_960_1023_7_7   |    <0.001 |
-|     uart_blk                          |    <0.001 |
+|     uart_blk                          |     0.002 |
 |       uart_baud_clk_blk               |    <0.001 |
 |       uart_rx_blk                     |    <0.001 |
 |       uart_rx_fifo                    |    <0.001 |
 |         q_data_array_reg_0_7_0_5      |    <0.001 |
 |         q_data_array_reg_0_7_6_7      |    <0.001 |
 |       uart_tx_blk                     |    <0.001 |
-|       uart_tx_fifo                    |    <0.001 |
+|       uart_tx_fifo                    |     0.001 |
 |         q_data_array_reg_0_63_0_2     |    <0.001 |
 |         q_data_array_reg_0_63_3_5     |    <0.001 |
 |         q_data_array_reg_0_63_6_6     |    <0.001 |
@@ -336,8 +336,8 @@ Table of Contents
 |         q_data_array_reg_960_1023_3_5 |    <0.001 |
 |         q_data_array_reg_960_1023_6_6 |    <0.001 |
 |         q_data_array_reg_960_1023_7_7 |    <0.001 |
-|   ram0                                |     0.003 |
-|     ram_bram                          |     0.003 |
+|   ram0                                |     0.027 |
+|     ram_bram                          |     0.027 |
 +---------------------------------------+-----------+
 
 
