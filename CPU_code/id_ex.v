@@ -1,72 +1,61 @@
 module id_ex(
-	input	wire 				clk,
-	input	wire 				rst,
+    input wire                  clk,
+    input wire                  rst,
 
-	// from id
-	input 	wire[`OpcodeBus]	id_opcode,
-	input	wire[`RegBus]		id_reg1,
-	input	wire[`RegBus]		id_reg2,
-	input	wire[`RegAddrBus]	id_wd,
-	input	wire				id_wreg,
-	input 	wire[31:0] 			id_imm,
-	input 	wire[`InstAddrBus]	id_branch_addr,
+    // ctrl signal
+    input wire[`StallBus]       stall_sign,
 
-	// to ex
-	output	reg[`OpcodeBus]		ex_opcode,
-	output	reg[`RegBus]		ex_reg1,
-	output	reg[`RegBus]		ex_reg2,
-	output	reg[`RegAddrBus]	ex_wd,
-	output	reg 				ex_wreg,
-	output  reg[31:0] 			ex_imm,
-	output 	reg[`InstAddrBus]	ex_branch_addr,
+    // read from id
+    input wire[`OpcodeBus]      id_opcode,
+    input wire[`FunctBus3]      id_funct3,
+    input wire[`FunctBus7]      id_funct7,
+    input wire[`RegBus]         id_reg1,
+    input wire[`RegBus]         id_reg2,
+    input wire[`RegBus]         id_ls_offset,
+    input wire[`RegAddrBus]     id_wd,
+    input wire                  id_wreg,
 
-	// from ctrl
-	input 	wire[`StallBus] 		stall_sign
+    // send to ex
+    output reg[`OpcodeBus]      ex_opcode,
+    output reg[`FunctBus3]      ex_funct3,
+    output reg[`FunctBus7]      ex_funct7,
+    output reg[`RegBus]         ex_reg1,
+    output reg[`RegBus]         ex_reg2,
+    output reg[`RegBus]         ex_ls_offset,
+    output reg[`RegAddrBus]     ex_wd,
+    output reg                  ex_wreg
+
 );
 
-always @(posedge clk) begin
-	if (rst == `RstEnable) begin
+    always @ (posedge clk) begin
+        if (rst) begin
+            ex_opcode       <= `NON_OP;
+            ex_funct3       <= `NON_FUNCT3;
+            ex_funct7       <= `NON_FUNCT7;
+            ex_reg1         <= `ZeroWord;
+            ex_reg2         <= `ZeroWord;
+            ex_ls_offset    <= `ZeroWord;
+            ex_wd           <= `NOPRegAddr;
+            ex_wreg         <= `WriteDisable;
+        end else if (stall_sign[3] && !stall_sign[4]) begin
+            ex_opcode       <= `NON_OP;
+            ex_funct3       <= `NON_FUNCT3;
+            ex_funct7       <= `NON_FUNCT7;
+            ex_reg1         <= `ZeroWord;
+            ex_reg2         <= `ZeroWord;
+            ex_ls_offset    <= `ZeroWord;
+            ex_wd           <= `NOPRegAddr;
+            ex_wreg         <= `WriteDisable;
+        end else if (!stall_sign[3]) begin
+            ex_opcode       <= id_opcode;
+            ex_funct3       <= id_funct3;
+            ex_funct7       <= id_funct7;
+            ex_reg1         <= id_reg1;
+            ex_reg2         <= id_reg2;
+            ex_ls_offset    <= id_ls_offset;
+            ex_wd           <= id_wd;
+            ex_wreg         <= id_wreg;
+        end
+    end
 
-		ex_opcode <= 0;
-		ex_reg1 <= `ZeroWord;
-		ex_reg2 <= `ZeroWord;
-		ex_wd <= `NOPRegAddr;
-		ex_wreg <= `WriteDisable;
-		ex_imm <= 0;
-		ex_branch_addr <= 0;
-
-	end else if(stall_sign[2] && !stall_sign[3]) begin
-
-		ex_opcode <= 0;
-		ex_reg1 <= `ZeroWord;
-		ex_reg2 <= `ZeroWord;
-		ex_wd <= `NOPRegAddr;
-		ex_wreg <= `WriteDisable;
-		ex_imm <= 0;
-		ex_branch_addr <= 0;
-
-	end else if(stall_sign[3] && !stall_sign[4]) begin
-
-		ex_opcode <= 0;
-		ex_reg1 <= `ZeroWord;
-		ex_reg2 <= `ZeroWord;
-		ex_wd <= `NOPRegAddr;
-		ex_wreg <= `WriteDisable;
-		ex_imm <= 0;
-		ex_branch_addr <= 0;
-		
-	end else if(stall_sign[3]) begin
-		// STALL
-	end else begin
-	
-		ex_opcode <= id_opcode;
-		ex_reg1 <= id_reg1;
-		ex_reg2 <= id_reg2;
-		ex_wd <= id_wd;
-		ex_wreg <= id_wreg;
-		ex_imm <= id_imm;
-		ex_branch_addr <= id_branch_addr;
-	end
-end
-
-endmodule
+endmodule // id_ex

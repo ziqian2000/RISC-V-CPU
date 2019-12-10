@@ -61,8 +61,8 @@ read_verilog -library xil_defaultlib {
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
+read_xdc D:/CPU/CPU_code/common/Basys-3-Master.xdc
+set_property used_in_implementation false [get_files D:/CPU/CPU_code/common/Basys-3-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]

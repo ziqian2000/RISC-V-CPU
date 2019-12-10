@@ -1,59 +1,50 @@
-module mem_ctrl(
+module mcu (
+    input wire                  rst,
+    input wire                  rdy,
 
-	input 	wire 				rst,
+    input wire                  if_mem_req_i,
+    input wire                  mem_mem_req_i,
 
-	// IF
-	input 	wire				if_request, 	//	0 : no request 		1 : load instruction for IF
-	input 	wire[31:0]			if_addr,
+    input wire                  mem_write_enable_i,
+    input wire[`InstAddrBus]    if_mem_addr_i,
+    input wire[`InstAddrBus]    mem_mem_addr_i,
+    input wire[`MemDataBus]     mem_data_i,
 
-	// MEM
-	input 	wire[1:0]			mem_request, 	// 	00 : no request 01 : LOAD	10 : STORE
-	input	wire[31:0]			mem_addr,
-
-	// common
-	input	wire[7:0]			cpu_data_i, 	// the data sent from CPU(MEM)
-	output 	wire[7:0]			cpu_data_o,		// the data sent to CPU
-	output	reg[1:0]			if_or_mem_o,	// 01 : if 		10 : mem
-
-	// RAM
-	input	wire[7:0]			ram_data_i,	// the data sent from RAM
-	output	reg[7:0]			ram_data_o,	// the data sent to RAM
-	output 	reg[31:0]			ram_addr_o,	// the addr sent to RAM
-	output	reg 				ram_rw		// 0 : read		1 : write
+    output reg                  write_enable_o,
+    output reg[`InstAddrBus]    mem_addr_o,
+    output reg[`MemDataBus]     mem_data_o,
+    output reg                  if_stall_req_o,
+    output reg                  mem_stall_req_o
 
 );
 
-	always @(*) begin
-		if (rst == `RstEnable) begin
-			if_or_mem_o = 0;
-			ram_data_o = 0;
-			ram_addr_o = 0;
-			ram_rw = 0;
-		end else begin
-			if(mem_request == 2'b01) begin // to load for MEM
-				if_or_mem_o = 2'b10;
-				ram_data_o = 0;
-				ram_addr_o = mem_addr;
-				ram_rw = 0;
-			end else if(mem_request == 2'b10) begin // to store for MEM
-				if_or_mem_o = 2'b10;
-				ram_data_o = cpu_data_i;
-				ram_addr_o = mem_addr;
-				ram_rw = 1;
-			end else if(if_request == 1) begin // to load a byte for IF
-				if_or_mem_o = 2'b01;
-				ram_data_o = 0;
-				ram_addr_o = if_addr;
-				ram_rw = 0;
-			end else begin // nothing happened
-				if_or_mem_o = 0;
-				ram_data_o = 0;
-				ram_addr_o = 0;
-				ram_rw = 0;
-			end
-		end
-	end
+    always @ ( * ) begin
+        if (rst || !rdy) begin
+            write_enable_o          <= `False_v;
+            mem_addr_o              <= `ZeroWord;
+            mem_data_o              <= 8'h00;
+            if_stall_req_o          <= `False_v;
+            mem_stall_req_o         <= `False_v;
+        end else begin
+            write_enable_o      <= `False_v;
+            mem_addr_o          <= `ZeroWord;
+            mem_data_o          <= 8'h00;
+            if (mem_mem_req_i) begin
+                if_stall_req_o  <= `False_v;
+                mem_stall_req_o     <= `True_v;
+                write_enable_o      <= mem_write_enable_i;
+                mem_addr_o          <= mem_mem_addr_i;
+                mem_data_o          <= mem_data_i;
+            end else if (if_mem_req_i) begin
+                if_stall_req_o      <= `True_v;
+                mem_stall_req_o     <= `False_v;
+                write_enable_o      <= `False_v;
+                mem_addr_o          <= if_mem_addr_i;
+            end else begin
+                if_stall_req_o      <= `False_v;
+                mem_stall_req_o     <= `False_v;
+            end
+        end
+    end
 
-	assign cpu_data_o = ram_data_i;
-
-endmodule
+endmodule // mcu

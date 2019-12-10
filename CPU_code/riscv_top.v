@@ -32,7 +32,7 @@ begin
 		rst			<=	1'b1;
 		rst_delay	<=	1'b1;
 	end
-	else 
+	else
 	begin
 		rst_delay	<=	1'b0;
 		rst			<=	rst_delay;

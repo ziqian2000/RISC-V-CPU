@@ -1,169 +1,142 @@
-module ex(
-	input	wire 				rst,
+module stage_ex(
+    input wire                  rst,
+    input wire                  rdy,
 
-	// from id_ex
-	input	wire[`OpcodeBus]	opcode_i,
-	input	wire[`RegBus]		reg1_i,
-	input	wire[`RegBus]		reg2_i,
-	input	wire[`RegAddrBus]	wd_i,
-	input	wire				wreg_i,
-	input 	wire[31:0] 			imm_i,
-	input 	wire[`InstAddrBus] 	branch_addr_i,
+    // read from id_ex
+    input wire[`OpcodeBus]      opcode_i,
+    input wire[`FunctBus3]      funct3_i,
+    input wire[`FunctBus7]      funct7_i,
+    input wire[`RegBus]         reg1_i,
+    input wire[`RegBus]         reg2_i,
+    input wire[`RegBus]         ls_offset_i,
+    input wire[`RegAddrBus]     wd_i,
+    input wire                  wreg_i,
+    input wire[`StallBus]       stall_sign,
 
-	// to if
-	output 	reg					branch_enable_o,
-	output 	wire[`InstAddrBus]	branch_addr_o,
-
-	// to ex_mem
-	output 	reg[`RegAddrBus] 	wd_o,
-	output	reg 				wreg_o,
-	output	reg[`RegBus]		wdata_o,
-	output 	reg[`InstAddrBus] 	mem_addr,
-	output 	wire[`OpcodeBus] 	opcode_o,
-
-	// from ctrl
-	input 	wire[`StallBus] 		stall_sign
+    // output the result of ex
+    output reg[`OpcodeBus]      opcode_o,
+    output reg[`FunctBus3]      funct3_o,
+    output reg[`InstAddrBus]    mem_addr_o,
+    output reg[`RegAddrBus]     wd_o,
+    output reg                  wreg_o,
+    output reg[`RegBus]         wdata_o
 );
-	assign opcode_o = opcode_i;
-	assign branch_addr_o = branch_addr_i;
 
-	// execute
-	always @ (*) begin
-		if(rst == `RstEnable) begin
-			wdata_o = 0;
-			branch_enable_o = 0;
-			mem_addr = 0;
-		end else begin
-			case(opcode_i[6:0])
+    reg[`RegBus]        op_imm_res;
+    reg[`RegBus]        op_op_res;
 
-				7'b0110011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
-					case(opcode_i[10:7])
-						4'b0000: wdata_o = (reg1_i + reg2_i); 								// ADD
-						4'b1000: wdata_o = (reg1_i - reg2_i); 								// SUB
-						4'b0001: wdata_o = (reg1_i << reg2_i[4:0]); 						// SLL
-						4'b0010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));			// SLT
-						4'b0011: wdata_o = (reg1_i < reg2_i); 								// SLTU
-						4'b0100: wdata_o = (reg1_i ^ reg2_i); 								// XOR
-						4'b0101: wdata_o = (reg1_i >> reg2_i[4:0]); 						// SRL
-						4'b1101: wdata_o =  												// SRA
-							({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0]));
-						4'b0110: wdata_o = (reg1_i | reg2_i); 								// OR
-						4'b0111: wdata_o = (reg1_i & reg2_i); 								// AND
-						default: wdata_o = 0;
-					endcase
-					branch_enable_o = 0;
-					mem_addr = 0;
-				end
+    wire                reg1_eq_reg2; // if reg1 == reg2, thisi is 1'b1;
+    wire                reg1_lt_reg2; // if reg1 < reg2, this is 1'b1;
+    wire[`RegBus]       reg2_i_mux;   // reg2's two's complement representation;
+    wire[`RegBus]       result_sum;
+    wire[`RegBus]       shift_sra;
 
-				7'b0010011: begin 	//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI    almost the same as above
-					case(opcode_i[9:7])
-						3'b000: wdata_o = (reg1_i + reg2_i); 								// ADDI
-						3'b001: wdata_o = (reg1_i << reg2_i[4:0]); 						// SLLI
-						3'b010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));				// SLTI
-						3'b011: wdata_o = (reg1_i < reg2_i); 								// SLTIU
-						3'b100: wdata_o = (reg1_i ^ reg2_i); 								// XORI
-						3'b101: begin
-							case(opcode_i[10])
-								1'b0: wdata_o = (reg1_i >> reg2_i[4:0]); 						// SRLI
-								1'b1: wdata_o =  												// SRAI
-									({reg1_i >> reg2_i[4:0]} | {32{reg1_i[31]}} << (~reg2_i[4:0]));
-							endcase
-						end
-						3'b110: wdata_o = (reg1_i | reg2_i); 								// ORI
-						3'b111: wdata_o = (reg1_i & reg2_i); 								// ANDI
-						default: wdata_o = 0;
-					endcase
-					branch_enable_o = 0;
-					mem_addr = 0;
-				end
+    assign reg1_eq_reg2 = reg1_i == reg2_i;
+    assign reg2_i_mux = ((funct7_i == `SUB_FUNCT7) ||
+                        (funct3_i ==  `SLT_FUNCT3))? (~reg2_i) + 1 : reg2_i;
+    assign result_sum = reg1_i + reg2_i_mux;
+    assign reg1_lt_reg2 = (funct3_i == `SLT_FUNCT3)? ((reg1_i[31] & !reg2_i[31])
+                        || (!reg1_i[31] && !reg2_i[31] && result_sum[31])
+                        || (reg1_i[31] && reg2_i[31] && result_sum[31])):
+                        (reg1_i < reg2_i);
+    assign shift_sra = ({32{reg1_i[31]}} << (6'd32 - {1'b0, reg2_i[4:0]})) | reg1_i >> reg2_i[4:0];
 
-				7'b0110111: begin 		//LUI
-					branch_enable_o = 0;
-					wdata_o = reg1_i;
-					mem_addr = 0;
-				end
-				7'b0010111: begin 		//AUIPC
-					branch_enable_o = 0;
-					wdata_o = reg1_i;
-					mem_addr = 0;
-				end
-				7'b1101111: begin 		//JAL
-					branch_enable_o = 1'b1;
-					wdata_o = reg2_i;
-					mem_addr = 0;
-				end
-				7'b1100111: begin 		//JALR
-					branch_enable_o = 1'b1;
-					wdata_o = reg2_i;
-					mem_addr = 0;
-				end
-				7'b1100011: begin	 	//BEQ,BNE,BLT,BGE,BLTU,BGEU	
-					case(opcode_i[9:7])
-						3'b000: begin // BEQ
-							if(reg1_i == reg2_i) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						3'b001: begin // BNE
-							if(reg1_i != reg2_i) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						3'b100: begin // BLT
-							if($signed(reg1_i) < $signed(reg2_i)) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						3'b101: begin // BGE
-							if($signed(reg1_i) >= $signed(reg2_i)) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						3'b110: begin // BLTU
-							if(reg1_i < reg2_i) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						3'b111: begin // BGEU
-							if(reg1_i >= reg2_i) begin
-								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
-						end
-						default: begin
-							branch_enable_o = 0;
-						end	
-					endcase
-					mem_addr = 0;
-					wdata_o = 0;
-				end
-				7'b0000011: begin  		//LOAD
-					branch_enable_o = 0;
-					mem_addr = reg1_i + imm_i;
-					wdata_o = 0;
-				end
-				7'b0100011: begin  		//STORE
-					branch_enable_o = 0;
-					mem_addr = reg1_i + imm_i;
-					wdata_o = reg2_i;
-				end
-				default: begin 			// something strange
-					branch_enable_o = 0;
-					wdata_o = 0;
-					mem_addr = 0;
-				end
+    always @ ( * ) begin
+        if (rst) begin
+            wd_o        <= `ZeroWord;
+            wreg_o      <= `WriteDisable;
+            wdata_o     <= `ZeroWord;
+            opcode_o    <= `NON_OP;
+            funct3_o    <= `NON_FUNCT3;
+            mem_addr_o  <= `ZeroWord;
+        end else begin
+            wd_o        <= wd_i;
+            wreg_o      <= wreg_i;
+            wdata_o     <= `ZeroWord;
+            opcode_o    <= opcode_i;
+            funct3_o    <= funct3_i;
+            mem_addr_o  <= `ZeroWord;
+            case (opcode_i)
+                `OP_IMM_OP: begin
+                    case (funct3_i)
+                        `ADDI_FUNCT3: begin
+                            wdata_o  <= result_sum;
+                        end
+                        `ORI_FUNCT3: begin
+                            wdata_o  <= reg1_i | reg2_i;
+                        end
+                        `XORI_FUNCT3: begin
+                            wdata_o  <= reg1_i ^ reg2_i;
+                        end
+                        `ANDI_FUNCT3: begin
+                            wdata_o <= reg1_i & reg2_i;
+                        end
+                        default: begin
+                        end
+                    endcase
+                end
+                `OP_OP: begin
+                    case (funct3_i)
+                        `ADD_SUB_FUNCT3: begin
+                            wdata_o <= result_sum;
+                        end
+                        `SLT_FUNCT3, `SLTU_FUNCT3: begin
+                            wdata_o <= reg1_lt_reg2;
+                        end
+                        `OR_FUNCT3: begin
+                            wdata_o <= reg1_i | reg2_i;
+                        end
+                        `XOR_FUNCT3: begin
+                            wdata_o <= reg1_i ^ reg2_i;
+                        end
+                        `AND_FUNCT3: begin
+                            wdata_o <= reg1_i & reg2_i;
+                        end
+                        `SLL_FUNCT3: begin
+                            wdata_o <= reg1_i << reg2_i[4:0];
+                        end
+                        `SRL_SRA_FUNCT3: begin
+                            case (funct7_i)
+                                `SRL_FUNCT7: begin
+                                    wdata_o <= reg1_i >> reg2_i[4:0];
+                                end
+                                `SRA_FUNCT7: begin
+                                    wdata_o <= shift_sra;
+                                end
+                                default: begin
+                                end
+                            endcase
+                        end
+                        default: begin
+                        end
+                    endcase
+                end
+                `LOAD_OP: begin
+                    mem_addr_o  <= reg1_i + ls_offset_i;
+                end
+                `STORE_OP: begin
+                    mem_addr_o  <= reg1_i + ls_offset_i;
+                    wdata_o     <= reg2_i;
+                end
+                `LUI_OP: begin
+                    wdata_o <= reg1_i;
+                end
+                `AUIPC_OP: begin
+                    wdata_o <= reg1_i;
+                end
+                `JAL_OP: begin
+                    wdata_o <= reg1_i;
+                end
+                `JALR_OP: begin
+                    wdata_o <= reg2_i;
+                end
+                `BRANCH_OP: begin
+                end
+                default: begin
+                    wdata_o <= `ZeroWord;
+                end
+            endcase
+        end
+    end
 
-			endcase
-		end
-	end
-
-	always @ (*) begin
-		if(rst == `RstEnable) begin
-			wd_o = 0;
-			wreg_o = 0;
-		end else begin
-			wd_o = wd_i;
-			wreg_o = wreg_i;
-		end
-	end
-
-endmodule 
+endmodule // ex
