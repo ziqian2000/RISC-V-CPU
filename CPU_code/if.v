@@ -2,37 +2,36 @@ module if_(
 	input wire				  clk,
 	input wire				  rst,
 
-	// input from ctrl
+	// to & from ctrl
+	// (request)
+	output reg				 	if_mem_req_o,
+	output reg 					branch_stall_req_o,
+	// (stall)
 	input wire[`StallBus]	   	stall_sign,
 
-	// input from mem_data
-	input wire[`MemDataBus]	 	mem_data_i,
-	// input from cache
-	input wire[`InstAddrBus]	cache_inst_i,
-	input wire				  	cache_hit_i,
-	// input for branch
+	// to IF/ID
+	output wire[`InstAddrBus]	pc_o,
+	output reg[`InstBus]		if_inst,
+
+	// branch
 	input wire				  	branch_enable_i,
 	input wire[`InstAddrBus]	branch_addr_i,
+
 	// mem ctrl
 	output reg[`InstAddrBus]	if_addr,
 	output reg				 	mem_we_o,
-	// cache ctrl
-	output reg[`InstAddrBus]	cache_waddr_o,
-	output reg				 	cache_we_o,
-	output reg[`InstBus]		cache_winst_o,
-	output reg[`InstAddrBus]	cache_raddr_o,
+	input wire[`MemDataBus]	 	mem_data_i,
 
 	// to & from icache
 	// (read)
 	input wire[`InstAddrBus]	cache_inst_i,
 	input wire				  	cache_hit_i,
+	output reg[`InstAddrBus]	cache_raddr_o,
 	// (write)
-	output reg				 	if_mem_req_o,
-	output reg 					branch_stall_req_o,
-	
-	// to IF/ID
-	output wire[`InstAddrBus]	pc_o,
-	output reg[`InstBus]		if_inst
+	output reg[`InstAddrBus]	cache_waddr_o,
+	output reg				 	cache_we_o,
+	output reg[`InstBus]		cache_winst_o
+
 );
 
 reg[3:0]			state;
