@@ -19,7 +19,7 @@
 `define ChipEnable		  	1'b1
 `define ChipDisable		 	1'b0
 
-// For InterFace
+// bus
 `define RegAddrBus		  	4:0
 `define RegBus			  	31:0
 `define InstAddrBus		 	31:0
@@ -30,9 +30,6 @@
 `define FunctBus3			2:0
 `define FunctBus7			6:0
 `define StallBus			6:0
-`define CntBus2			 	1:0
-`define CntBus4			 	2:0
-`define CntBus8			 	3:0
 
 // opcode
 `define NON_OP			  	7'b0000000 // Nothing

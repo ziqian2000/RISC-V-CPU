@@ -65,8 +65,6 @@ wire[`InstAddrBus]		mem_mem_addr_i;
 wire[`RegAddrBus]		mem_wd_o;
 wire[`RegBus]			mem_wdata_o;
 wire					mem_wreg_o;
-wire[`CntBus8]			memwb_cnt;
-wire[`CntBus8]			wbmem_cnt;
 
 // MEM/WB --- regfile
 wire[`RegAddrBus]		wb_wd_i;

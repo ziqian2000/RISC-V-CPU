@@ -68,7 +68,7 @@ set_property used_in_implementation false [get_files D:/CPU/CPU_code/common/Basy
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top riscv_top -part xc7a35tcpg236-1 -fanout_limit 600
+synth_design -top riscv_top -part xc7a35tcpg236-1 -fanout_limit 1000
 
 
 # disable binary constraint mode for synth run checkpoints
