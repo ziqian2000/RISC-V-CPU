@@ -28,6 +28,9 @@ module mem(
 reg[3:0]			state;
 reg					mem_done;
 reg[`RegBus]		mem_data;
+reg[`MemDataBus]    data_block1;
+reg[`MemDataBus]    data_block2;
+reg[`MemDataBus]    data_block3;
 
 	// observer
 	always @(*) begin
@@ -53,9 +56,9 @@ reg[`RegBus]		mem_data;
 			mem_we_o		<= `WriteDisable;
 			mem_data		<= `ZeroWord;
 			mem_addr_o		<= `ZeroWord;
-			wdata_o[7:0]		<= 8'h00;
-			wdata_o[15:8]		<= 8'h00;
-			wdata_o[23:16]		<= 8'h00;
+			data_block1		<= 8'h00;
+			data_block2		<= 8'h00;
+			data_block3		<= 8'h00;
 			mem_data_o		<= 8'h00;
 			mem_done		<= `False_v;
 		end else if (mem_mem_req_o) begin
@@ -128,11 +131,11 @@ reg[`RegBus]		mem_data;
 									state		<= 4'b0000;
 								end
 								`LH_FUNCT3, `LHU_FUNCT3: begin
-									wdata_o[7:0]<= mem_data_i;
+									data_block1	<= mem_data_i;
 									state		<= 4'b0011;
 								end
 								`LW_FUNCT3: begin
-									wdata_o[7:0]<= mem_data_i;
+									data_block1	<= mem_data_i;
 									mem_addr_o  <= mem_addr_i + 2;
 									state		<= 4'b0011;
 								end
@@ -163,19 +166,19 @@ reg[`RegBus]		mem_data;
 						`LOAD_OP: begin
 							case (funct3_i)
 								`LH_FUNCT3: begin
-									mem_data	<= {{16{mem_data_i[7]}}, mem_data_i, wdata_o[7:0]};
+									mem_data	<= {{16{mem_data_i[7]}}, mem_data_i, data_block1};
 									mem_done	<= `True_v;
 									state		<= 4'b0000;
 									mem_addr_o  <= `ZeroWord;
 								end
 								`LHU_FUNCT3: begin
-									mem_data	<= {16'b0, mem_data_i, wdata_o[7:0]};
+									mem_data	<= {16'b0, mem_data_i, data_block1};
 									mem_done	<= `True_v;
 									state		<= 4'b0000;
 									mem_addr_o  <= `ZeroWord;
 								end
 								`LW_FUNCT3: begin
-									wdata_o[15:8] <= mem_data_i;
+									data_block2 <= mem_data_i;
 									mem_addr_o  <= mem_addr_i + 3;
 									state		<= 4'b0100;
 								end
@@ -199,7 +202,7 @@ reg[`RegBus]		mem_data;
 						`LOAD_OP: begin
 							case (funct3_i)
 								`LW_FUNCT3: begin
-									wdata_o[23:16] <= mem_data_i;
+									data_block3 <= mem_data_i;
 									state	<= 4'b0101;
 								end
 								default: ;
@@ -220,7 +223,7 @@ reg[`RegBus]		mem_data;
 
 				end
 				4'b0101: begin
-					mem_data				<= {mem_data_i, wdata_o[23:0]};
+					mem_data				<= {mem_data_i, data_block3, data_block2, data_block1};
 					mem_done				<= `True_v;
 					mem_addr_o			  	<= `ZeroWord;
 					state					<= 4'b0000;

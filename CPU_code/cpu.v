@@ -285,8 +285,8 @@ mem_wb mem_wb0(
 mcu mcu0(
 	.rst(rst_in),
 	.rdy(rdy_in),
-	.if_mem_req_i(if_mem_req),
-	.mem_mem_req_i(mem_mem_req),
+	.if_request(if_mem_req),
+	.mem_request(mem_mem_req),
 	.mem_write_enable_i(mem_write_enable),
 	.if_mem_addr_i(if_mem_addr),
 	.mem_mem_addr_i(mem_mem_addr),
