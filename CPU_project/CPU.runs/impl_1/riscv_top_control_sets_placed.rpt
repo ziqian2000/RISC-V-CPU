@@ -1,0 +1,145 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Tue Dec 10 12:04:56 2019
+| Host         : ZIQIAN running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file riscv_top_control_sets_placed.rpt
+| Design       : riscv_top
+| Device       : xc7a35t
+--------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    78 |
+| Unused register locations in slices containing registers |    74 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      4 |            1 |
+|      8 |            4 |
+|     10 |            3 |
+|    16+ |           70 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              10 |            4 |
+| No           | No                    | Yes                    |              62 |           13 |
+| No           | Yes                   | No                     |             484 |          103 |
+| Yes          | No                    | No                     |              48 |           10 |
+| Yes          | No                    | Yes                    |              68 |           12 |
+| Yes          | Yes                   | No                     |            1278 |          270 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++------------------+---------------------------------------------------------------------+------------------------------------------+------------------+----------------+
+|   Clock Signal   |                            Enable Signal                            |             Set/Reset Signal             | Slice Load Count | Bel Load Count |
++------------------+---------------------------------------------------------------------+------------------------------------------+------------------+----------------+
+|  EXCLK_IBUF_BUFG |                                                                     | btnC_IBUF                                |                1 |              4 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_blk/d_baud_clk_tick_cnt                       | rst                                      |                2 |              8 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/FSM_sequential_state[3]_i_2_n_1                            | cpu0/if0/FSM_sequential_state[3]_i_1_n_1 |                3 |              8 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_blk/d_oversample_tick_cnt                     | rst                                      |                2 |              8 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_fifo/FSM_sequential_q_state_reg[3]_0[0]       | rst                                      |                2 |              8 |
+|  EXCLK_IBUF_BUFG |                                                                     |                                          |                4 |             10 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_blk/q_state[4]_i_1_n_1                        | rst                                      |                1 |             10 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_blk/q_state[4]_i_1__0_n_1                     | rst                                      |                2 |             10 |
+|  EXCLK_IBUF_BUFG |                                                                     | cpu0/mem0/q_tx_data_reg[7][0]            |                6 |             16 |
+|  EXCLK_IBUF_BUFG |                                                                     | cpu0/mem0/q_io_in_wr_data_reg[7][0]      |                1 |             16 |
+|  EXCLK_IBUF_BUFG |                                                                     | hci0/uart_blk/uart_rx_fifo/SR[0]         |                6 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/ex_mem0/data_block1_reg[7]_0[0]                                | rst                                      |                7 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/ex_mem0/data_block3_reg[7]_0[0]                                | rst                                      |                5 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/ex_mem0/mem_data_o_reg[7][0]                                   | rst                                      |                4 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_blk/d_data                                    | rst                                      |                2 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/mem0/data_block2[7]_i_1_n_1                                    | rst                                      |                5 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_fifo/E[0]                                     | rst                                      |                8 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_blk/d_data                                    | rst                                      |                3 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/p_0_in__1[23]                                              |                                          |                5 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/p_0_in__1[8]                                               |                                          |                1 |             16 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/p_0_in__1[6]                                               |                                          |                4 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_addr_reg[2]                            | rst                                      |                5 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_addr_reg[15]                           | rst                                      |                5 |             16 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_fifo/E[1]                                     | rst                                      |                8 |             18 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_blk/rd_en_prot                                | rst                                      |                4 |             20 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/wr_en_prot                               | rst                                      |                5 |             20 |
+|  EXCLK_IBUF_BUFG | cpu0/mem0/rd_en_prot_0                                              | rst                                      |                3 |             20 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/wr_en_prot                                          | rst                                      |                4 |             20 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_192_255_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_128_191_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_0_63_0_2_i_1_n_1                   |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_256_319_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_384_447_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_448_511_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_512_575_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_704_767_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_832_895_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_768_831_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_64_127_0_2_i_1_n_1                 |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_640_703_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_576_639_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_960_1023_0_2_i_1_n_1               |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_896_959_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_0_63_0_2_i_1__0_n_1     |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_128_191_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_192_255_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_512_575_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_256_319_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_320_383_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_384_447_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_576_639_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_448_511_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_896_959_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_960_1023_0_2_i_1__0_n_1 |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_704_767_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_640_703_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_768_831_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_832_895_0_2_i_1__0_n_1  |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_64_127_0_2_i_1__0_n_1   |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/io_in_fifo/q_data_array_reg_320_383_0_2_i_1_n_1                |                                          |                3 |             24 |
+|  EXCLK_IBUF_BUFG | hci0/uart_blk/uart_rx_fifo/q_data_array_reg_0_7_0_5_i_1_n_1         |                                          |                2 |             32 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/if_addr[17]_i_1_n_1                                        | cpu0/if0/FSM_sequential_state[3]_i_1_n_1 |                8 |             36 |
+|  EXCLK_IBUF_BUFG | cpu0/ex_mem0/mem_addr_o_reg[17][0]                                  | rst                                      |               10 |             36 |
+|  EXCLK_IBUF_BUFG | cpu0/mem0/mem_data[31]_i_1_n_1                                      | rst                                      |               14 |             64 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/pc[31]_i_1_n_1                                             | rst                                      |                9 |             64 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/cache_raddr_o[31]_i_1_n_1                                  | rst                                      |                9 |             64 |
+|  EXCLK_IBUF_BUFG | n_0_2244_BUFG                                                       | rst                                      |                8 |             64 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/if_inst[31]_i_1_n_1                                        | cpu0/if0/FSM_sequential_state[3]_i_1_n_1 |               15 |             66 |
+|  EXCLK_IBUF_BUFG | hci0/E[0]                                                           | hci0/SR[0]                               |               16 |             76 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/if_inst_reg[7]_0                                           |                                          |               15 |            116 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/if_inst_reg[0]_0                                           |                                          |               15 |            116 |
+|  EXCLK_IBUF_BUFG | cpu0/mem0/E[0]                                                      | rst                                      |               24 |            128 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/cache_waddr_o[31]_i_1_n_1                                  | rst                                      |               23 |            128 |
+|  n_0_2244_BUFG   |                                                                     | rst                                      |               25 |            128 |
+|  EXCLK_IBUF_BUFG | hci0/E[0]                                                           | rst                                      |               29 |            130 |
+|  EXCLK_IBUF_BUFG | cpu0/mem_wb0/p_0_in                                                 |                                          |               12 |            192 |
+|  EXCLK_IBUF_BUFG | cpu0/if0/E[0]                                                       | cpu0/mem0/SR[0]                          |               37 |            196 |
+|  EXCLK_IBUF_BUFG |                                                                     | rst                                      |               77 |            366 |
++------------------+---------------------------------------------------------------------+------------------------------------------+------------------+----------------+
+
+

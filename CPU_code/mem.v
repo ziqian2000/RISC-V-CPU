@@ -54,25 +54,25 @@ reg[`MemDataBus]	data_block3;
 		if (rst) begin
 			state			<= 4'b0000;
 			mem_we_o		<= `WriteDisable;
-			mem_data		<= `ZeroWord;
-			mem_addr_o		<= `ZeroWord;
+			mem_data		<= 0;
+			mem_addr_o		<= 0;
 			data_block1		<= 8'h00;
 			data_block2		<= 8'h00;
 			data_block3		<= 8'h00;
 			mem_data_o		<= 8'h00;
-			mem_done		<= `False_v;
+			mem_done		<= 0;
 		end else if (mem_mem_req_o) begin
 			case (state)
 				4'b0000: begin
 					mem_addr_o  <= mem_addr_i;
-					mem_done	<= `False_v;
+					mem_done	<= 0;
 					case (opcode_i)
 						`LOAD_OP: begin
-							mem_we_o	<= `False_v;
+							mem_we_o	<= 0;
 							state		<= 4'b0001;
 						end
 						`STORE_OP: begin
-							mem_we_o	<= `True_v;
+							mem_we_o	<= 1'b1;
 							mem_data_o  <= wdata_i[7:0];
 							state		<= 4'b0001;
 						end
@@ -96,9 +96,9 @@ reg[`MemDataBus]	data_block3;
 						`STORE_OP: begin
 							case (funct3_i)
 								`SB_FUNCT3: begin
-									mem_we_o	<= `False_v;
-									mem_done	<= `True_v;
-									mem_addr_o  <= `ZeroWord;
+									mem_we_o	<= 0;
+									mem_done	<= 1'b1;
+									mem_addr_o  <= 0;
 									state		<= 4'b0000;
 								end
 								`SH_FUNCT3, `SW_FUNCT3: begin
@@ -120,14 +120,14 @@ reg[`MemDataBus]	data_block3;
 							case (funct3_i)
 								`LB_FUNCT3: begin
 									mem_data	<= {{24{mem_data_i[7]}}, mem_data_i};
-									mem_done	<= `True_v;
-									mem_addr_o  <= `ZeroWord;
+									mem_done	<= 1'b1;
+									mem_addr_o  <= 0;
 									state		<= 4'b0000;
 								end
 								`LBU_FUNCT3: begin
 									mem_data	<= {24'b0, mem_data_i};
-									mem_done	<= `True_v;
-									mem_addr_o  <= `ZeroWord;
+									mem_done	<= 1'b1;
+									mem_addr_o  <= 0;
 									state		<= 4'b0000;
 								end
 								`LH_FUNCT3, `LHU_FUNCT3: begin
@@ -145,10 +145,10 @@ reg[`MemDataBus]	data_block3;
 						`STORE_OP: begin
 							case (funct3_i)
 								`SH_FUNCT3: begin
-									mem_we_o	<= `False_v;
-									mem_done	<= `True_v;
+									mem_we_o	<= 0;
+									mem_done	<= 1'b1;
 									state		<= 4'b0000;
-									mem_addr_o  <= `ZeroWord;
+									mem_addr_o  <= 0;
 								end
 								`SW_FUNCT3: begin
 									mem_data_o  <= wdata_i[23:16];
@@ -167,15 +167,15 @@ reg[`MemDataBus]	data_block3;
 							case (funct3_i)
 								`LH_FUNCT3: begin
 									mem_data	<= {{16{mem_data_i[7]}}, mem_data_i, data_block1};
-									mem_done	<= `True_v;
+									mem_done	<= 1'b1;
 									state		<= 4'b0000;
-									mem_addr_o  <= `ZeroWord;
+									mem_addr_o  <= 0;
 								end
 								`LHU_FUNCT3: begin
 									mem_data	<= {16'b0, mem_data_i, data_block1};
-									mem_done	<= `True_v;
+									mem_done	<= 1'b1;
 									state		<= 4'b0000;
-									mem_addr_o  <= `ZeroWord;
+									mem_addr_o  <= 0;
 								end
 								`LW_FUNCT3: begin
 									data_block2 <= mem_data_i;
@@ -210,9 +210,9 @@ reg[`MemDataBus]	data_block3;
 						end
 						`STORE_OP: begin
 							if (funct3_i == `SW_FUNCT3) begin
-								mem_we_o	<= `False_v;
-								mem_done	<= `True_v;
-								mem_addr_o  <= `ZeroWord;
+								mem_we_o	<= 0;
+								mem_done	<= 1'b1;
+								mem_addr_o  <= 0;
 								state		<= 4'b0000;
 							end
 						end
@@ -224,22 +224,22 @@ reg[`MemDataBus]	data_block3;
 				end
 				4'b0101: begin
 					mem_data				<= {mem_data_i, data_block3, data_block2, data_block1};
-					mem_done				<= `True_v;
-					mem_addr_o			  	<= `ZeroWord;
+					mem_done				<= 1'b1;
+					mem_addr_o			  	<= 0;
 					state					<= 4'b0000;
 				end
 				default: begin
 				end
 			endcase
 		end else begin
-			mem_done	   					<= `False_v;
+			mem_done	   					<= 0;
 		end
 	end
 
 	
 	always @ ( * ) begin
 		if (rst) begin
-			wdata_o			<= `ZeroWord;
+			wdata_o			<= 0;
 			wd_o			<= `NOPRegAddr;
 			wreg_o			<= `WriteDisable;
 		end else begin

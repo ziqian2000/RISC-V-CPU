@@ -81,14 +81,14 @@ reg	 inst_valid;
 			wd_o			= `NOPRegAddr;
 			wreg_o		  	= `WriteDisable;
 			inst_valid	  	= `InstValid;
-			reg1_read_o	 	= `False_v;
-			reg2_read_o	 	= `False_v;
+			reg1_read_o	 	= 0;
+			reg2_read_o	 	= 0;
 			reg1_addr_o	 	= `NOPRegAddr;
 			reg2_addr_o	 	= `NOPRegAddr;
-			imm			 	= `ZeroWord;
-			branch_enable_o = `False_v;
-			branch_addr_o   = `ZeroWord;
-			ls_offset_o	 = `ZeroWord;
+			imm			 	= 0;
+			branch_enable_o = 0;
+			branch_addr_o   = 0;
+			ls_offset_o	 = 0;
 		end else begin
 			opcode_o		= `NON_OP;
 			funct3_o		= `NON_FUNCT3;
@@ -96,20 +96,20 @@ reg	 inst_valid;
 			wd_o			= inst_i[11:7];
 			wreg_o		  	= `WriteDisable;
 			inst_valid	  	= `InstInvalid;
-			reg1_read_o	 	= `False_v;
-			reg2_read_o	 	= `False_v;
+			reg1_read_o	 	= 0;
+			reg2_read_o	 	= 0;
 			reg1_addr_o	 	= inst_i[19:15];
 			reg2_addr_o	 	= inst_i[24:20];
-			imm			 	= `ZeroWord;
-			branch_enable_o = `False_v;
-			branch_addr_o   = `ZeroWord;
-			ls_offset_o	 	= `ZeroWord;
+			imm			 	= 0;
+			branch_enable_o = 0;
+			branch_addr_o   = 0;
+			ls_offset_o	 	= 0;
 			case (opcode)
 				`OP_IMM_OP: begin
 					wreg_o	  	= `WriteEnable;
 					opcode_o	= `OP_IMM_OP; // to simply the ex
-					reg1_read_o = `True_v;
-					reg2_read_o = `False_v;
+					reg1_read_o = 1'b1;
+					reg2_read_o = 0;
 					funct7_o	= `NON_FUNCT7;
 					wd_o		= inst_i[11:7];
 					inst_valid  = `InstValid;
@@ -158,8 +158,8 @@ reg	 inst_valid;
 				`OP_OP: begin
 					wreg_o	  	= `WriteEnable;
 					opcode_o	= `OP_OP;
-					reg1_read_o = `True_v;
-					reg2_read_o = `True_v;
+					reg1_read_o = 1'b1;
+					reg2_read_o = 1'b1;
 					wd_o		= inst_i[11:7];
 					inst_valid  = `InstValid;
 					funct3_o	= funct3;
@@ -171,8 +171,8 @@ reg	 inst_valid;
 					wreg_o		  	= `WriteEnable;
 					opcode_o		= `JAL_OP;
 					funct3_o		= `NON_FUNCT3;
-					reg1_read_o	 	= `False_v;
-					reg2_read_o	 	= `False_v;
+					reg1_read_o	 	= 0;
+					reg2_read_o	 	= 0;
 					imm			 	= pc_plus_4;
 					wd_o			= inst_i[11:7];
 					inst_valid	  	= `InstValid;
@@ -182,8 +182,8 @@ reg	 inst_valid;
 					wreg_o		  	= `WriteEnable;
 					opcode_o		= `JALR_OP;
 					funct3_o		= `NON_FUNCT3;
-					reg1_read_o	 	= `True_v;
-					reg2_read_o	 	= `False_v;
+					reg1_read_o	 	= 1'b1;
+					reg2_read_o	 	= 0;
 					imm			 	= pc_plus_4;
 					wd_o			= inst_i[11:7];
 					inst_valid	  	= `InstValid;
@@ -193,10 +193,10 @@ reg	 inst_valid;
 					wreg_o		  	= `WriteDisable;
 					opcode_o		= `BRANCH_OP;
 					funct3_o		= funct3;
-					reg1_read_o	 	= `True_v;
-					reg2_read_o	 	= `True_v;
-					imm			 	= `ZeroWord;
-					wd_o			= `ZeroWord;
+					reg1_read_o	 	= 1'b1;
+					reg2_read_o	 	= 1'b1;
+					imm			 	= 0;
+					wd_o			= 0;
 					inst_valid	  	= `InstValid;
 					branch_enable_o = 1'b1;
 					case (funct3)
@@ -252,8 +252,8 @@ reg	 inst_valid;
 					funct3_o	= funct3;
 					funct7_o	= `NON_FUNCT7;
 					ls_offset_o = {{20{inst_i[31]}}, inst_i[31:20]};
-					reg1_read_o = `True_v;
-					reg2_read_o = `False_v;
+					reg1_read_o = 1'b1;
+					reg2_read_o = 0;
 					wd_o		= inst_i[11:7];
 					inst_valid  = `InstValid;
 				end
@@ -263,8 +263,8 @@ reg	 inst_valid;
 					funct3_o	= funct3;
 					funct7_o	= `NON_FUNCT7;
 					ls_offset_o = {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]};
-					reg1_read_o = `True_v;
-					reg2_read_o = `True_v;
+					reg1_read_o = 1'b1;
+					reg2_read_o = 1'b1;
 					wd_o		= inst_i[11:7];
 					inst_valid  = `InstValid;
 				end
@@ -272,8 +272,8 @@ reg	 inst_valid;
 					wreg_o		  = `WriteEnable;
 					opcode_o		= `LUI_OP;
 					funct3_o		= `NON_FUNCT3;
-					reg1_read_o	 = `False_v;
-					reg2_read_o	 = `False_v;
+					reg1_read_o	 = 0;
+					reg2_read_o	 = 0;
 					imm			 = {inst_i[31:12], 12'b0};
 					wd_o			= inst_i[11:7];
 					inst_valid	  = `InstValid;
@@ -282,8 +282,8 @@ reg	 inst_valid;
 					wreg_o		  = `WriteEnable;
 					opcode_o		= `AUIPC_OP;
 					funct3_o		= `NON_FUNCT3;
-					reg1_read_o	 = `False_v;
-					reg2_read_o	 = `False_v;
+					reg1_read_o	 = 0;
+					reg2_read_o	 = 0;
 					imm			 = {inst_i[31:12], 12'b0} + pc_i;
 					wd_o			= inst_i[11:7];
 					inst_valid	  = `InstValid;
@@ -296,36 +296,36 @@ reg	 inst_valid;
 
 	always @ ( * ) begin
 		if (rst) begin
-			reg1_o = `ZeroWord;
+			reg1_o = 0;
 		end else if (rdy) begin
-			if ((reg1_read_o == `True_v) && (ex_wreg_i == `True_v) && (ex_wd_i == reg1_addr_o) && (ex_wd_i != `ZeroWord)) begin
+			if ((reg1_read_o == 1'b1) && (ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o) && (ex_wd_i != 0)) begin
 				reg1_o  = ex_wdata_i;
-			end else if ((reg1_read_o == `True_v) && (mem_wreg_i == `True_v) && (mem_wd_i == reg1_addr_o) && (mem_wd_i != `ZeroWord)) begin
+			end else if ((reg1_read_o == 1'b1) && (mem_wreg_i == 1'b1) && (mem_wd_i == reg1_addr_o) && (mem_wd_i != 0)) begin
 				reg1_o = mem_wdata_i;
-			end else if (reg1_read_o == `True_v) begin
+			end else if (reg1_read_o == 1'b1) begin
 				reg1_o = reg1_data_i;
-			end else if (reg1_read_o == `False_v) begin
+			end else if (reg1_read_o == 0) begin
 				reg1_o = imm;
 			end else begin
-				reg1_o = `ZeroWord;
+				reg1_o = 0;
 			end
 		end
 	end
 
 	always @ ( * ) begin
 		if (rst) begin
-			reg2_o = `ZeroWord;
+			reg2_o = 0;
 		end else if (rdy) begin
-			if ((reg2_read_o == `True_v) && (ex_wreg_i == `True_v) && (ex_wd_i == reg2_addr_o) && (ex_wd_i != `ZeroWord)) begin
+			if ((reg2_read_o == 1'b1) && (ex_wreg_i == 1'b1) && (ex_wd_i == reg2_addr_o) && (ex_wd_i != 0)) begin
 				reg2_o  = ex_wdata_i;
-			end else if ((reg2_read_o == `True_v) && (mem_wreg_i == `True_v) && (mem_wd_i == reg2_addr_o) && (mem_wd_i != `ZeroWord)) begin
+			end else if ((reg2_read_o == 1'b1) && (mem_wreg_i == 1'b1) && (mem_wd_i == reg2_addr_o) && (mem_wd_i != 0)) begin
 				reg2_o = mem_wdata_i;
-			end else if (reg2_read_o == `True_v) begin
+			end else if (reg2_read_o == 1'b1) begin
 				reg2_o = reg2_data_i;
-			end else if (reg2_read_o == `False_v) begin
+			end else if (reg2_read_o == 0) begin
 				reg2_o = imm;
 			end else begin
-				reg2_o = `ZeroWord;
+				reg2_o = 0;
 			end
 		end
 	end

@@ -24,29 +24,29 @@ module mem_ctrl (
 
 	always @(*) begin
 		if (rst || !rdy) begin
-			write_enable_o		  	<= `False_v;
-			mem_addr_o			  	<= `ZeroWord;
+			write_enable_o		  	<= 0;
+			mem_addr_o			  	<= 0;
 			mem_data_o			  	<= 8'h00;
-			if_stall_req_o		  	<= `False_v;
-			mem_stall_req_o		 	<= `False_v;	
+			if_stall_req_o		  	<= 0;
+			mem_stall_req_o		 	<= 0;	
 		end else begin
-			write_enable_o	  		<= `False_v;
-			mem_addr_o		  		<= `ZeroWord;
+			write_enable_o	  		<= 0;
+			mem_addr_o		  		<= 0;
 			mem_data_o		  		<= 8'h00;
 			if (mem_request) begin
-				if_stall_req_o  	<= `False_v;
-				mem_stall_req_o	 	<= `True_v;
+				if_stall_req_o  	<= 0;
+				mem_stall_req_o	 	<= 1'b1;
 				write_enable_o	  	<= mem_write_enable_i;
 				mem_addr_o		  	<= mem_addr_i;
 				mem_data_o		  	<= mem_data_i;
 			end else if (if_request) begin
-				if_stall_req_o	  	<= `True_v;
-				mem_stall_req_o	 	<= `False_v;
-				write_enable_o	  	<= `False_v;
+				if_stall_req_o	  	<= 1'b1;
+				mem_stall_req_o	 	<= 0;
+				write_enable_o	  	<= 0;
 				mem_addr_o		  	<= if_addr_i;
 			end else begin
-				if_stall_req_o	  	<= `False_v;
-				mem_stall_req_o	 	<= `False_v;
+				if_stall_req_o	  	<= 0;
+				mem_stall_req_o	 	<= 0;
 			end
 		end
 	end

@@ -44,7 +44,7 @@ always @ (posedge clk) begin
 	if (rst) begin
 		pc					<= 0;   
 		state			   	<= 0;
-		if_addr		  	<= 0;
+		if_addr		  		<= 0;
 		mem_we_o			<= 0;
 		branch_stall_req_o  <= 0;
 		if_mem_req_o		<= 0;
@@ -59,7 +59,7 @@ always @ (posedge clk) begin
 		cache_raddr_o	   	<= branch_addr_i;
 		state			   	<= 0;
 		if_inst			  	<= 0;
-		if_addr		  	<= 0;
+		if_addr		  		<= 0;
 		if_mem_req_o		<= 0;
 		branch_stall_req_o	<= 0;
 	end else begin

@@ -1,96 +1,96 @@
 // RISCV32I CPU top module
 // port modification allowed for debugging purposes
+
 `include "defines.v"
+
 module cpu(
-	input  wire				clk_in,			// system clock signal
-	input  wire				rst_in,			// reset signal
-	input  wire				rdy_in,			// ready signal, pause cpu when low
+	input  wire				 	clk_in,			// system clock signal
+	input  wire				 	rst_in,			// reset signal
+	input  wire				 	rdy_in,			// ready signal, pause cpu when low
 
-	input  wire [7:0]		mem_din,		// data input bus
-	output wire [7:0]		mem_dout,		// data output bus
-	output wire [31:0]		mem_a,			// address bus (only 17:0 is used)
-	output wire				mem_wr,			// write/read signal (1 for write)
+	input  wire [ 7:0]		  	mem_din,		// data input bus
+	output wire [ 7:0]		  	mem_dout,		// data output bus
+	output wire [31:0]		  	mem_a,			// address bus (only 17:0 is used)
+	output wire				 	mem_wr,			// write/read signal (1 for write)
 
-	output wire [31:0]		dbgreg_dout		// cpu register output (debugging demo)
+	output wire [31:0]			dbgreg_dout		// cpu register output (debugging demo)
 );
 
-// link if to if_id
-wire[`CntBus8]		  ifid_cnt;
-wire[`CntBus8]		  idif_cnt;
-wire[`InstAddrBus]	  if_pc_o;
-wire[`InstBus]		  if_inst_o;
+// IF --- IF/ID
+wire[`InstAddrBus]	if_pc;
+wire[`InstBus]		if_inst;
 
 
-// link if_id to id
-wire[`InstAddrBus]	  id_pc_i;
-wire[`InstBus]		  id_inst_i;
+// IF/ID --- ID
+wire[`InstAddrBus]	id_pc_i;
+wire[`InstBus]		id_inst_i;
 
-// link id to id_ex
+// ID --- ID/EX
 wire[`OpcodeBus]		id_opcode_o;
 wire[`FunctBus3]		id_funct3_o;
 wire[`FunctBus7]		id_funct7_o;
-wire[`RegBus]		   id_reg1_o;
-wire[`RegBus]		   id_reg2_o;
-wire[`RegBus]		   id_ls_offset_o;
-wire[`RegAddrBus]	   id_wd_o;
+wire[`RegBus]			id_reg1_o;
+wire[`RegBus]			id_reg2_o;
+wire[`RegBus]			id_ls_offset_o;
+wire[`RegAddrBus]		id_wd_o;
 wire					id_wreg_o;
 
-// link id_ex to ex
+// ID/EX --- EX
 wire[`OpcodeBus]		ex_opcode_i;
 wire[`FunctBus3]		ex_funct3_i;
 wire[`FunctBus7]		ex_funct7_i;
-wire[`RegBus]		   ex_reg1_i;
-wire[`RegBus]		   ex_reg2_i;
-wire[`RegBus]		   ex_ls_offset_i;
-wire[`RegAddrBus]	   ex_wd_i;
+wire[`RegBus]			ex_reg1_i;
+wire[`RegBus]			ex_reg2_i;
+wire[`RegBus]			ex_ls_offset_i;
+wire[`RegAddrBus]		ex_wd_i;
 wire					ex_wreg_i;
 
-// link ex to ex_mem
-wire[`RegAddrBus]	   ex_wd_o;
-wire[`RegBus]		   ex_wdata_o;
+// EX --- EX/MEM
+wire[`RegAddrBus]		ex_wd_o;
+wire[`RegBus]			ex_wdata_o;
 wire					ex_wreg_o;
 wire[`OpcodeBus]		ex_opcode_o;
 wire[`FunctBus3]		ex_funct3_o;
-wire[`InstAddrBus]	  ex_mem_addr_o;
+wire[`InstAddrBus]		ex_mem_addr_o;
 
-// link ex_mem to mem
-wire[`RegAddrBus]	   mem_wd_i;
-wire[`RegBus]		   mem_wdata_i;
+// EX/MEM --- MEM
+wire[`RegAddrBus]		mem_wd_i;
+wire[`RegBus]			mem_wdata_i;
 wire					mem_wreg_i;
 wire[`OpcodeBus]		mem_opcode_i;
 wire[`FunctBus3]		mem_funct3_i;
-wire[`InstAddrBus]	  mem_mem_addr_i;
+wire[`InstAddrBus]		mem_mem_addr_i;
 
-// link mem to mem_wb
-wire[`RegAddrBus]	   mem_wd_o;
-wire[`RegBus]		   mem_wdata_o;
+// MEM --- MEM/WB
+wire[`RegAddrBus]		mem_wd_o;
+wire[`RegBus]			mem_wdata_o;
 wire					mem_wreg_o;
-wire[`CntBus8]		  memwb_cnt;
-wire[`CntBus8]		  wbmem_cnt;
+wire[`CntBus8]			memwb_cnt;
+wire[`CntBus8]			wbmem_cnt;
 
-// link mem_wb to reg
-wire[`RegAddrBus]	   wb_wd_i;
-wire[`RegBus]		   wb_wdata_i;
+// MEM/WB --- regfile
+wire[`RegAddrBus]		wb_wd_i;
+wire[`RegBus]			wb_wdata_i;
 wire					wb_wreg_i;
 
-// link id to regfile
+// ID --- regfile
 wire					reg1_read;
 wire					reg2_read;
-wire[`RegAddrBus]	   reg1_addr;
-wire[`RegAddrBus]	   reg2_addr;
-wire[`RegBus]		   reg1_data;
-wire[`RegBus]		   reg2_data;
+wire[`RegAddrBus]		reg1_addr;
+wire[`RegAddrBus]		reg2_addr;
+wire[`RegBus]			reg1_data;
+wire[`RegBus]			reg2_data;
 
-// mcu
-wire[`InstAddrBus]	  if_mem_addr;
-wire[`InstAddrBus]	  mem_mem_addr;
-wire[`MemDataBus]	   mem_mem_data_o;
+// mem_ctrl
+wire[`InstAddrBus]		if_mem_addr;
+wire[`InstAddrBus]		mem_mem_addr;
+wire[`MemDataBus]		mem_mem_data_o;
 wire					if_write_enable;
 wire					mem_write_enable;
 wire					mem_busy_sign;
 
-// ctrl signal
-wire[`StallBus]		 stall_signal;
+// ctrl
+wire[`StallBus]		 	stall_signal;
 wire					if_mem_req;
 wire					if_stall_req;
 wire					branch_stall_req;
@@ -99,15 +99,15 @@ wire					mem_stall_req;
 
 // branch
 wire					branch_enable;
-wire[`InstAddrBus]	  branch_addr;
+wire[`InstAddrBus]		branch_addr;
 
-// Instruction cache
+// inst_cache
 wire					cache_we;
-wire[`InstAddrBus]	  cache_wpc;
-wire[`InstBus]		  cache_winst;
-wire[`InstAddrBus]	  cache_rpc;
+wire[`InstAddrBus]		cache_wpc;
+wire[`InstBus]			cache_winst;
+wire[`InstAddrBus]		cache_rpc;
 wire					cache_hit;
-wire[`InstBus]		  cache_inst;
+wire[`InstBus]			cache_inst;
 
 regfile regfile0(
 	.clk(clk_in),
@@ -141,15 +141,15 @@ if_ if0(
 	.branch_addr_i(branch_addr),
 	.if_mem_req_o(if_mem_req),
 	.branch_stall_req_o(branch_stall_req),
-	.pc_o(if_pc_o),
-	.if_inst(if_inst_o)
+	.pc_o(if_pc),
+	.if_inst(if_inst)
 );
 
 if_id if_id0(
 	.clk(clk_in),
 	.rst(rst_in),
-	.if_pc(if_pc_o),
-	.if_inst(if_inst_o),
+	.if_pc(if_pc),
+	.if_inst(if_inst),
 	.id_pc(id_pc_i),
 	.id_inst(id_inst_i),
 	.stall_sign(stall_signal)
