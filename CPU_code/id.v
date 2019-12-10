@@ -54,8 +54,8 @@ wire[`InstAddrBus]  pc_plus_4;
 wire				reg1_eq_reg2;
 wire				reg1_lt_reg2_u;
 wire				reg1_gt_reg2_u;
-wire[`RegBus]	   	reg1_mux;
-wire[`RegBus]	   	reg2_mux;
+wire[`RegBus]	   	reg1_opp;
+wire[`RegBus]	   	reg2_opp;
 wire				reg1_lt_reg2;
 reg				 	id_stall_req1;
 reg				 	id_stall_req2;
@@ -64,23 +64,19 @@ assign pc_plus_4 = pc_i + 32'h4;
 assign reg1_eq_reg2 = (reg1_o == reg2_o);
 assign reg1_lt_reg2_u = reg1_o < reg2_o;
 assign reg1_gt_reg2_u = reg1_o > reg2_o;
-assign reg1_mux = ~reg1_o + 32'h1;
-assign reg2_mux = ~reg2_o + 32'h1;
-assign reg1_lt_reg2 = ((reg1_o[31] & !reg2_o[31]) // neg < pos
-					|| (reg1_o[31] && reg2_o[31] && (reg1_mux > reg2_mux)) // neg neg use abs
-					|| (!reg1_o[31] && !reg2_o[31] && reg1_lt_reg2_u)); // pos pos compare
+assign reg1_opp = ~reg1_o + 32'h1;
+assign reg2_opp = ~reg2_o + 32'h1;
+assign reg1_lt_reg2 = ((reg1_o[31] & !reg2_o[31]) // - +
+					|| (reg1_o[31] && reg2_o[31] && (reg1_opp > reg2_opp)) // - -
+					|| (!reg1_o[31] && !reg2_o[31] && reg1_lt_reg2_u)); // + +
 
-// InstValid bit
-reg	 inst_valid;
-
-	always @ ( * ) begin
+	always @ (*) begin
 		if (rst) begin
 			opcode_o		= `NON_OP;
 			funct3_o		= `NON_FUNCT3;
 			funct7_o		= `NON_FUNCT7;
 			wd_o			= `NOPRegAddr;
 			wreg_o		  	= `WriteDisable;
-			inst_valid	  	= `InstValid;
 			reg1_read_o	 	= 0;
 			reg2_read_o	 	= 0;
 			reg1_addr_o	 	= `NOPRegAddr;
@@ -95,7 +91,6 @@ reg	 inst_valid;
 			funct7_o		= `NON_FUNCT7;
 			wd_o			= inst_i[11:7];
 			wreg_o		  	= `WriteDisable;
-			inst_valid	  	= `InstInvalid;
 			reg1_read_o	 	= 0;
 			reg2_read_o	 	= 0;
 			reg1_addr_o	 	= inst_i[19:15];
@@ -107,12 +102,10 @@ reg	 inst_valid;
 			case (opcode)
 				`OP_IMM_OP: begin
 					wreg_o	  	= `WriteEnable;
-					opcode_o	= `OP_IMM_OP; // to simply the ex
+					opcode_o	= `OP_IMM_OP;
 					reg1_read_o = 1'b1;
 					reg2_read_o = 0;
 					funct7_o	= `NON_FUNCT7;
-					wd_o		= inst_i[11:7];
-					inst_valid  = `InstValid;
 					case (funct3)
 						`ADDI_FUNCT3: begin
 							funct3_o	= `ADDI_FUNCT3;
@@ -161,7 +154,6 @@ reg	 inst_valid;
 					reg1_read_o = 1'b1;
 					reg2_read_o = 1'b1;
 					wd_o		= inst_i[11:7];
-					inst_valid  = `InstValid;
 					funct3_o	= funct3;
 					funct7_o	= funct7;
 				end
@@ -175,10 +167,10 @@ reg	 inst_valid;
 					reg2_read_o	 	= 0;
 					imm			 	= pc_plus_4;
 					wd_o			= inst_i[11:7];
-					inst_valid	  	= `InstValid;
 				end
 				`JALR_OP: begin
 					branch_enable_o = 1'b1;
+					branch_addr_o   = {{20{inst_i[31]}}, inst_i[31:20]} + reg1_o;
 					wreg_o		  	= `WriteEnable;
 					opcode_o		= `JALR_OP;
 					funct3_o		= `NON_FUNCT3;
@@ -186,8 +178,6 @@ reg	 inst_valid;
 					reg2_read_o	 	= 0;
 					imm			 	= pc_plus_4;
 					wd_o			= inst_i[11:7];
-					inst_valid	  	= `InstValid;
-					branch_addr_o   = {{20{inst_i[31]}}, inst_i[31:20]} + reg1_o;
 				end
 				`BRANCH_OP: begin
 					wreg_o		  	= `WriteDisable;
@@ -197,7 +187,6 @@ reg	 inst_valid;
 					reg2_read_o	 	= 1'b1;
 					imm			 	= 0;
 					wd_o			= 0;
-					inst_valid	  	= `InstValid;
 					branch_enable_o = 1'b1;
 					case (funct3)
 						`BEQ_FUNCT3: begin
@@ -255,7 +244,6 @@ reg	 inst_valid;
 					reg1_read_o = 1'b1;
 					reg2_read_o = 0;
 					wd_o		= inst_i[11:7];
-					inst_valid  = `InstValid;
 				end
 				`STORE_OP: begin
 					wreg_o	  = `WriteDisable;
@@ -266,7 +254,6 @@ reg	 inst_valid;
 					reg1_read_o = 1'b1;
 					reg2_read_o = 1'b1;
 					wd_o		= inst_i[11:7];
-					inst_valid  = `InstValid;
 				end
 				`LUI_OP: begin
 					wreg_o		  = `WriteEnable;
@@ -276,7 +263,6 @@ reg	 inst_valid;
 					reg2_read_o	 = 0;
 					imm			 = {inst_i[31:12], 12'b0};
 					wd_o			= inst_i[11:7];
-					inst_valid	  = `InstValid;
 				end
 				`AUIPC_OP: begin
 					wreg_o		  = `WriteEnable;
@@ -286,7 +272,6 @@ reg	 inst_valid;
 					reg2_read_o	 = 0;
 					imm			 = {inst_i[31:12], 12'b0} + pc_i;
 					wd_o			= inst_i[11:7];
-					inst_valid	  = `InstValid;
 				end
 				default: begin
 				end

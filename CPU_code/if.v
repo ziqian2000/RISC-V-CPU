@@ -68,7 +68,7 @@ always @ (posedge clk) begin
 				cache_we_o  <= 0;
 				if (!stall_sign[2] && !stall_sign[3]) begin
 					if_mem_req_o			<= 1'b1;
-					if_addr		  		<= pc;
+					if_addr		  			<= pc;
 					cache_raddr_o	   		<= pc;
 					state				 	<= 4'b0001;
 				end
@@ -96,7 +96,7 @@ always @ (posedge clk) begin
 				end
 			end
 			4'b0010: begin
-				if_addr	  		<= pc[17:0] + 17'h2;
+				if_addr	  			<= pc[17:0] + 17'h2;
 				inst[7:0]	 		<= mem_data_i;
 				state			 	<= 4'b0011;
 			end
