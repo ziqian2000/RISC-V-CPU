@@ -77,7 +77,7 @@
 `define SW_FUNCT3           3'b010
 
 // For Inst funct7
-`define NON_FUNCT7          7'b0000000 // Nothing
+`define NON_FUNCT7          7'b0000000
 `define ADD_FUNCT7          7'b0000000
 `define SUB_FUNCT7          7'b0100000
 `define SRL_FUNCT7          7'b0000000
