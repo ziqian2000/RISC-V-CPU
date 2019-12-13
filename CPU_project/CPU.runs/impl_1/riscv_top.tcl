@@ -74,7 +74,7 @@ set rc [catch {
   set_property ip_output_repo D:/CPU/CPU_project/CPU.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   add_files -quiet D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.dcp
-  read_xdc D:/CPU/CPU_code/common/Basys-3-Master.xdc
+  read_xdc D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc
   link_design -top riscv_top -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb
 } RESULT]

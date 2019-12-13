@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Tue Dec 10 12:43:11 2019
+| Date             : Sat Dec 14 01:10:09 2019
 | Host             : ZIQIAN running 64-bit major release  (build 9200)
 | Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
 | Design           : riscv_top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.109        |
+| Total On-Chip Power (W)  | 0.121        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.036        |
+| Dynamic (W)              | 0.048        |
 | Device Static (W)        | 0.073        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.5         |
-| Junction Temperature (C) | 25.5         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,20 +52,20 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.006 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     4488 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     2315 |     20800 |           11.13 |
-|   CARRY4                 |    <0.001 |      152 |      8150 |            1.87 |
-|   LUT as Distributed RAM |    <0.001 |      556 |      9600 |            5.79 |
-|   Register               |    <0.001 |      975 |     41600 |            2.34 |
-|   F7/F8 Muxes            |    <0.001 |       65 |     32600 |            0.20 |
+| Clocks                   |     0.015 |        3 |       --- |             --- |
+| Slice Logic              |     0.003 |    12163 |       --- |             --- |
+|   LUT as Logic           |     0.003 |     3672 |     20800 |           17.65 |
+|   CARRY4                 |    <0.001 |      148 |      8150 |            1.82 |
+|   Register               |    <0.001 |     6400 |     41600 |           15.38 |
+|   LUT as Distributed RAM |    <0.001 |      440 |      9600 |            4.58 |
+|   F7/F8 Muxes            |    <0.001 |     1114 |     32600 |            3.42 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       32 |       --- |             --- |
-| Signals                  |     0.002 |     3570 |       --- |             --- |
+| Signals                  |     0.004 |     9290 |       --- |             --- |
 | Block RAM                |     0.026 |       32 |        50 |           64.00 |
 | I/O                      |    <0.001 |        5 |       106 |            4.72 |
 | Static Power             |     0.073 |          |           |                 |
-| Total                    |     0.109 |          |           |                 |
+| Total                    |     0.121 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.044 |       0.033 |      0.010 |
+| Vccint    |       1.000 |     0.056 |       0.046 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -144,45 +144,14 @@ Table of Contents
 +---------------------------------------+-----------+
 | Name                                  | Power (W) |
 +---------------------------------------+-----------+
-| riscv_top                             |     0.036 |
-|   cpu0                                |     0.006 |
+| riscv_top                             |     0.048 |
+|   cpu0                                |     0.018 |
+|     ctrl0                             |    <0.001 |
 |     ex_mem0                           |    <0.001 |
-|     icache0                           |    <0.001 |
-|       cache_data_reg_0_63_0_2         |    <0.001 |
-|       cache_data_reg_0_63_12_14       |    <0.001 |
-|       cache_data_reg_0_63_15_17       |    <0.001 |
-|       cache_data_reg_0_63_18_20       |    <0.001 |
-|       cache_data_reg_0_63_21_23       |    <0.001 |
-|       cache_data_reg_0_63_24_26       |    <0.001 |
-|       cache_data_reg_0_63_27_29       |    <0.001 |
-|       cache_data_reg_0_63_30_30       |    <0.001 |
-|       cache_data_reg_0_63_31_31       |    <0.001 |
-|       cache_data_reg_0_63_3_5         |    <0.001 |
-|       cache_data_reg_0_63_6_8         |    <0.001 |
-|       cache_data_reg_0_63_9_11        |    <0.001 |
-|       cache_data_reg_64_127_0_2       |    <0.001 |
-|       cache_data_reg_64_127_12_14     |    <0.001 |
-|       cache_data_reg_64_127_15_17     |    <0.001 |
-|       cache_data_reg_64_127_18_20     |    <0.001 |
-|       cache_data_reg_64_127_21_23     |    <0.001 |
-|       cache_data_reg_64_127_24_26     |    <0.001 |
-|       cache_data_reg_64_127_27_29     |    <0.001 |
-|       cache_data_reg_64_127_30_30     |    <0.001 |
-|       cache_data_reg_64_127_31_31     |    <0.001 |
-|       cache_data_reg_64_127_3_5       |    <0.001 |
-|       cache_data_reg_64_127_6_8       |    <0.001 |
-|       cache_data_reg_64_127_9_11      |    <0.001 |
-|       cache_tag_reg_0_63_0_2          |    <0.001 |
-|       cache_tag_reg_0_63_3_5          |    <0.001 |
-|       cache_tag_reg_0_63_6_8          |    <0.001 |
-|       cache_tag_reg_0_63_9_9          |    <0.001 |
-|       cache_tag_reg_64_127_0_2        |    <0.001 |
-|       cache_tag_reg_64_127_3_5        |    <0.001 |
-|       cache_tag_reg_64_127_6_8        |    <0.001 |
-|       cache_tag_reg_64_127_9_9        |    <0.001 |
+|     icache0                           |     0.012 |
 |     id0                               |    <0.001 |
 |     id_ex0                            |    <0.001 |
-|     if0                               |     0.002 |
+|     if0                               |     0.003 |
 |     if_id0                            |    <0.001 |
 |     mem0                              |    <0.001 |
 |     mem_wb0                           |    <0.001 |
@@ -199,7 +168,7 @@ Table of Contents
 |       regs_reg_r2_0_31_24_29          |    <0.001 |
 |       regs_reg_r2_0_31_30_31          |    <0.001 |
 |       regs_reg_r2_0_31_6_11           |    <0.001 |
-|   hci0                                |     0.004 |
+|   hci0                                |     0.003 |
 |     io_in_fifo                        |    <0.001 |
 |       q_data_array_reg_0_63_0_2       |    <0.001 |
 |       q_data_array_reg_0_63_3_5       |    <0.001 |

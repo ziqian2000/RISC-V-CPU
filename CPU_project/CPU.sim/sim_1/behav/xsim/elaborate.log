@@ -5,30 +5,30 @@ Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
 Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/riscv_top.v" Line 4. Module riscv_top(SIM=1) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/ram.v" Line 3. Module ram doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/block_ram.v" Line 62. Module single_port_ram_sync(ADDR_WIDTH=17) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/cpu.v" Line 6. Module cpu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/inst_cache.v" Line 1. Module icache doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/if.v" Line 1. Module if_ doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/if_id.v" Line 1. Module if_id doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/regfile.v" Line 1. Module regfile doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/id.v" Line 1. Module id doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/id_ex.v" Line 1. Module id_ex doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/ex.v" Line 1. Module ex doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/ex_mem.v" Line 1. Module ex_mem doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem.v" Line 1. Module mem doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem_wb.v" Line 1. Module mem_wb doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/mem_ctrl.v" Line 1. Module mem_ctrl doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/ctrl.v" Line 3. Module ctrl doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/hci.v" Line 30. Module hci doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/fifo.v" Line 27. Module fifo(ADDR_BITS=10) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/uart.v" Line 28. Module uart(SYS_CLK_FREQ=100000000,BAUD_RATE=115200,PARITY_MODE=1) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/uart_baud_clk.v" Line 29. Module uart_baud_clk(SYS_CLK_FREQ=100000000,BAUD=115200) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/uart_rx.v" Line 28. Module uart_rx_default doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/uart_tx.v" Line 28. Module uart_tx_default doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/fifo.v" Line 27. Module fifo doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "D:/CPU/CPU_code/common/fifo.v" Line 27. Module fifo(ADDR_BITS=10) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/riscv_top.v" Line 4. Module riscv_top(SIM=1) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/ram.v" Line 3. Module ram doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/block_ram.v" Line 62. Module single_port_ram_sync(ADDR_WIDTH=17) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/cpu.v" Line 6. Module cpu doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/inst_cache.v" Line 1. Module icache doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/if.v" Line 1. Module if_ doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/if_id.v" Line 1. Module if_id doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/regfile.v" Line 1. Module regfile doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/id.v" Line 1. Module id doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/id_ex.v" Line 1. Module id_ex doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/ex.v" Line 1. Module ex doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/ex_mem.v" Line 1. Module ex_mem doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/mem.v" Line 1. Module mem doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/mem_wb.v" Line 1. Module mem_wb doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/mem_ctrl.v" Line 1. Module mem_ctrl doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/ctrl.v" Line 3. Module ctrl doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/hci.v" Line 30. Module hci doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/fifo.v" Line 27. Module fifo(ADDR_BITS=10) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/uart.v" Line 28. Module uart(SYS_CLK_FREQ=100000000,BAUD_RATE=115200,PARITY_MODE=1) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/uart_baud_clk.v" Line 29. Module uart_baud_clk(SYS_CLK_FREQ=100000000,BAUD=115200) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/uart_rx.v" Line 28. Module uart_rx_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/uart_tx.v" Line 28. Module uart_tx_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/fifo.v" Line 27. Module fifo doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/CPU_0/CPU_code/common/fifo.v" Line 27. Module fifo(ADDR_BITS=10) doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.single_port_ram_sync(ADDR_WIDTH=...
