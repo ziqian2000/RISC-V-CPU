@@ -24,8 +24,26 @@ module ex(
 	// from ctrl
 	input 	wire[`StallBus] 		stall_sign
 );
+
+	wire 				reg1_eq_reg2;
+	wire 				reg1_lt_reg2_u;
+	wire 				reg1_gt_reg2_u;
+	wire 				reg1_mux;
+	wire 				reg2_mux;
+	wire 				reg1_lt_reg2; 		// reg1 < reg2
+
 	assign opcode_o = opcode_i;
 	assign branch_addr_o = branch_addr_i;
+
+	assign reg1_eq_reg2 = (reg1_i == reg2_i);
+	assign reg1_lt_reg2_u = reg1_i < reg2_i;
+	assign reg1_gt_reg2_u = reg1_i > reg2_i;
+	assign reg1_mux = ~reg1_i + 32'h1;
+	assign reg2_mux = ~reg2_i + 32'h1;
+	assign reg1_lt_reg2 = ((reg1_i[31] & !reg2_i[31]) // neg < pos
+	                    || (reg1_i[31] && reg2_i[31] && (reg1_mux > reg2_mux)) // neg neg use abs
+	                    || (!reg1_i[31] && !reg2_i[31] && reg1_lt_reg2_u)); // pos pos compare
+
 
 	// execute
 	always @ (*) begin
@@ -41,7 +59,7 @@ module ex(
 						4'b0000: wdata_o = (reg1_i + reg2_i); 								// ADD
 						4'b1000: wdata_o = (reg1_i - reg2_i); 								// SUB
 						4'b0001: wdata_o = (reg1_i << reg2_i[4:0]); 						// SLL
-						4'b0010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));				// SLT
+						4'b0010: wdata_o = reg1_lt_reg2;									// SLT
 						4'b0011: wdata_o = (reg1_i < reg2_i); 								// SLTU
 						4'b0100: wdata_o = (reg1_i ^ reg2_i); 								// XOR
 						4'b0101: wdata_o = (reg1_i >> reg2_i[4:0]); 						// SRL
@@ -59,7 +77,7 @@ module ex(
 					case(opcode_i[9:7])
 						3'b000: wdata_o = (reg1_i + reg2_i); 								// ADDI
 						3'b001: wdata_o = (reg1_i << reg2_i[4:0]); 							// SLLI
-						3'b010: wdata_o = ($signed(reg1_i) < $signed(reg2_i));				// SLTI
+						3'b010: wdata_o = reg1_lt_reg2;										// SLTI
 						3'b011: wdata_o = (reg1_i < reg2_i); 								// SLTIU
 						3'b100: wdata_o = (reg1_i ^ reg2_i); 								// XORI
 						3'b101: begin
@@ -110,12 +128,12 @@ module ex(
 							end else branch_enable_o = 0;
 						end
 						3'b100: begin // BLT
-							if($signed(reg1_i) < $signed(reg2_i)) begin
+							if(reg1_lt_reg2) begin
 								branch_enable_o	= 1'b1;
 							end else branch_enable_o = 0;
 						end
 						3'b101: begin // BGE
-							if($signed(reg1_i) >= $signed(reg2_i)) begin
+							if(!reg1_lt_reg2) begin
 								branch_enable_o	= 1'b1;
 							end else branch_enable_o = 0;
 						end

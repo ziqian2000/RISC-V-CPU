@@ -45,7 +45,7 @@ module id(
 	input 	wire[`StallBus] 		stall_sign
 );
 
-wire[`InstAddrBus] pc_plus_4;
+wire[`InstAddrBus] 	pc_plus_4;
 
 assign pc_plus_4 = pc_i + 31'h4;
 

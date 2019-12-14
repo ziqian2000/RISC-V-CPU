@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Sat Dec 14 01:10:09 2019
+| Date             : Sat Dec 14 13:45:08 2019
 | Host             : ZIQIAN running 64-bit major release  (build 9200)
 | Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
 | Design           : riscv_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.121        |
+| Total On-Chip Power (W)  | 0.120        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.048        |
+| Dynamic (W)              | 0.046        |
 | Device Static (W)        | 0.073        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.4         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.015 |        3 |       --- |             --- |
-| Slice Logic              |     0.003 |    12163 |       --- |             --- |
-|   LUT as Logic           |     0.003 |     3672 |     20800 |           17.65 |
-|   CARRY4                 |    <0.001 |      148 |      8150 |            1.82 |
+| Slice Logic              |     0.003 |    12078 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     3620 |     20800 |           17.40 |
+|   CARRY4                 |    <0.001 |      135 |      8150 |            1.66 |
 |   Register               |    <0.001 |     6400 |     41600 |           15.38 |
 |   LUT as Distributed RAM |    <0.001 |      440 |      9600 |            4.58 |
-|   F7/F8 Muxes            |    <0.001 |     1114 |     32600 |            3.42 |
+|   F7/F8 Muxes            |    <0.001 |     1117 |     32600 |            3.43 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       32 |       --- |             --- |
-| Signals                  |     0.004 |     9290 |       --- |             --- |
-| Block RAM                |     0.026 |       32 |        50 |           64.00 |
+| Signals                  |     0.003 |     9253 |       --- |             --- |
+| Block RAM                |     0.025 |       32 |        50 |           64.00 |
 | I/O                      |    <0.001 |        5 |       106 |            4.72 |
 | Static Power             |     0.073 |          |           |                 |
-| Total                    |     0.121 |          |           |                 |
+| Total                    |     0.120 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.056 |       0.046 |      0.010 |
+| Vccint    |       1.000 |     0.054 |       0.044 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -144,14 +144,14 @@ Table of Contents
 +---------------------------------------+-----------+
 | Name                                  | Power (W) |
 +---------------------------------------+-----------+
-| riscv_top                             |     0.048 |
-|   cpu0                                |     0.018 |
+| riscv_top                             |     0.046 |
+|   cpu0                                |     0.017 |
 |     ctrl0                             |    <0.001 |
 |     ex_mem0                           |    <0.001 |
 |     icache0                           |     0.012 |
 |     id0                               |    <0.001 |
 |     id_ex0                            |    <0.001 |
-|     if0                               |     0.003 |
+|     if0                               |     0.002 |
 |     if_id0                            |    <0.001 |
 |     mem0                              |    <0.001 |
 |     mem_wb0                           |    <0.001 |
