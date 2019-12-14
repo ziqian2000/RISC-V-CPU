@@ -40,7 +40,7 @@ reg 			stalled; // has been stalled, so the address is lost
 
 assign pc_o = pc - 32'h4;
 
-reg[3:0] avoid_data_hazard;
+// reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
@@ -52,7 +52,7 @@ always @(posedge clk) begin
 			inst 		<= 0;
 			state 		<= 0;
 			we_o 		<= 0;
-			avoid_data_hazard <= 0;
+			// avoid_data_hazard <= 0;
 		// end else if(stall_sign[0]) begin
 		// 	STALL
 		end else if(branch_enable_i) begin
@@ -71,7 +71,7 @@ always @(posedge clk) begin
 			case(state)
 				5'b00000: begin // send the 1st address
 					if(!stall_sign[1])  begin
-						if(avoid_data_hazard == 0) begin
+						// if(avoid_data_hazard == 0) begin
 							if_request <= 1'b1;
 							if_addr <= pc;
 							if_inst <= 0;
@@ -82,14 +82,14 @@ always @(posedge clk) begin
 								state <= 5'b00001;
 							end
 
-							avoid_data_hazard <= 4'ha; // !!!
+							// avoid_data_hazard <= 4'ha; // !!!
 
 							raddr_o <= pc;
 							we_o <= 0;
-						end else begin
-							avoid_data_hazard <= avoid_data_hazard - 1;
-							if_inst <= 0;
-						end
+						// end else begin
+						// 	avoid_data_hazard <= avoid_data_hazard - 1;
+						// 	if_inst <= 0;
+						// end
 					end
 				end
 				5'b00001: begin // the 1st byte is being prepared, send the 2nd request

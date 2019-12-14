@@ -929,3 +929,7 @@ selectMenuItem(PAResourceCommand.PACommandNames_PROGRAM_FPGA, "Program Device...
 // Elapsed time: 17 seconds
 selectButton(PAResourceOtoP.ProgramFpgaDialog_SPECIFY_BITSTREAM_FILE, (String) null); // q (ak, bB)
 dismissFileChooser();
+// Elapsed time: 270 seconds
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (bB)
+// 'I' command handler elapsed time: 293 seconds
+dismissDialog("Program Device"); // bB (ck)

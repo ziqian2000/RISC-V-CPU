@@ -1,5 +1,5 @@
 # compile verilog/system verilog design source files
-verilog xil_defaultlib "D:/CPU_0/CPU_code/defines.v" --include "../../../../../CPU_code" \
+verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU_code" \
 "../../../../../CPU_code/defines.v" \
 "../../../../../CPU_code/block_ram.v" \
 "../../../../../CPU_code/cpu.v" \

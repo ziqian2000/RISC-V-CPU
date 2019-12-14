@@ -18,6 +18,7 @@ proc create_report { reportName command } {
   }
 }
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -68,7 +69,7 @@ set_property used_in_implementation false [get_files D:/Arch2019_Assignment/risc
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top riscv_top -part xc7a35tcpg236-1 -fanout_limit 600
+synth_design -top riscv_top -part xc7a35tcpg236-1
 
 
 # disable binary constraint mode for synth run checkpoints
