@@ -60,7 +60,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 start_step init_design
 set ACTIVE_STEP init_design
@@ -74,7 +73,9 @@ set rc [catch {
   set_property parent.project_path D:/CPU/CPU_project/CPU.xpr [current_project]
   set_property ip_output_repo D:/CPU/CPU_project/CPU.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
   add_files -quiet D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.dcp
+  read_ip -quiet d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
   read_xdc D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc
   link_design -top riscv_top -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb
@@ -155,6 +156,7 @@ start_step write_bitstream
 set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
   catch { write_mem_info -force riscv_top.mmi }
   write_bitstream -force riscv_top.bit 
   catch {write_debug_probes -quiet -force riscv_top}

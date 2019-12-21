@@ -36,12 +36,11 @@ module if_(
 reg[4:0] 		state;
 reg[31:0] 		inst;
 reg[`InstBus] 	pc;
-reg[`InstBus] 	pc_tmp;
 reg 			stalled; // has been stalled, so the address is lost
 
-assign pc_o = pc_tmp;
+assign pc_o = pc - 32'h4;
 
-reg[3:0] avoid_data_hazard;
+// reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
@@ -49,12 +48,11 @@ always @(posedge clk) begin
 			if_request 	<= 0;
 			if_addr 	<= 0;
 			pc  		<= 0;
-			pc_tmp 		<= 0;
 			if_inst 	<= 0;
 			inst 		<= 0;
 			state 		<= 0;
 			we_o 		<= 0;
-			avoid_data_hazard <= 0;
+			// avoid_data_hazard <= 0;
 		// end else if(stall_sign[0]) begin
 		// 	STALL
 		end else if(branch_enable_i) begin
@@ -62,11 +60,9 @@ always @(posedge clk) begin
 				if_request 	<= 0;
 				if_addr 	<= 0;
 				pc 			<= branch_addr_i;
-				pc_tmp 		<= branch_addr_i;
 				if_inst 	<= 0;
 				inst 		<= 0;
 				state 		<= 5'b00000;
-				avoid_data_hazard  	<= 4'ha;
 			end
 		end	else begin 
 
@@ -74,41 +70,33 @@ always @(posedge clk) begin
 
 			case(state)
 				5'b00000: begin // send the 1st address
-
 					if(!stall_sign[1])  begin
+						// if(avoid_data_hazard == 0) begin
+							if_request <= 1'b1;
+							if_addr <= pc;
+							if_inst <= 0;
 
-						if_request <= 1'b1;
-						if_addr <= pc;
-						if_inst <= 0;
-
-						if(avoid_data_hazard == 0) begin
 							if(stall_sign[0]) begin
 								state <= 5'b10000;
 							end else begin
 								state <= 5'b00001;
 							end
 
+							// avoid_data_hazard <= 4'ha; // !!!
+
 							raddr_o <= pc;
 							we_o <= 0;
-
-							// avoid_data_hazard  	<= 4'ha;
-						end else begin
-							avoid_data_hazard = avoid_data_hazard - 1;
-						end
+						// end else begin
+						// 	avoid_data_hazard <= avoid_data_hazard - 1;
+						// 	if_inst <= 0;
+						// end
 					end
 				end
 				5'b00001: begin // the 1st byte is being prepared, send the 2nd request
 					if(hit_i) begin
 						state <= 5'b00000;
 						if_inst <= inst_i;
-
-						if(inst_i[6:0] == 7'b1101111) begin // JAL
-							pc <= pc + {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
-						end else begin
-							pc <= pc + 31'h4;
-						end
-						pc_tmp <= pc;
-
+						pc <= pc + 31'h4;
 					end else if(stall_sign[0]) begin
 						state <= 5'b10000;
 					end else begin
@@ -151,14 +139,7 @@ always @(posedge clk) begin
 					end else begin
 						inst[31:24] <= mem_ctrl_data;
 						if_inst <= {mem_ctrl_data, inst[23:0]};
-
-						if(inst[6:0] == 7'b1101111) begin // JAL
-							pc <= pc + {{12{mem_ctrl_data[7]}}, inst[19:12], inst[20], mem_ctrl_data[6:0], inst[23:21], 1'b0};
-						end else begin
-							pc <= pc + 31'h4;
-						end
-						pc_tmp <= pc;
-
+						pc <= pc + 31'h4;
 						if_addr <= pc + 31'h4;
 
 						state <= 5'b00000;
@@ -176,14 +157,7 @@ always @(posedge clk) begin
 					if(hit_i) begin
 						state <= 5'b00000;
 						if_inst <= inst_i;
-
-						if(inst_i[6:0] == 7'b1101111) begin // JAL
-							pc <= pc + {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
-						end else begin
-							pc <= pc + 31'h4;
-						end
-						pc_tmp <= pc;
-
+						pc <= pc + 31'h4;
 					end else if(!stall_sign[0]) begin
 						state <= 5'b10001;
 						if_addr <= pc;
@@ -268,13 +242,7 @@ always @(posedge clk) begin
 
 					inst[31:24] <= mem_ctrl_data;
 					if_inst <= {mem_ctrl_data, inst[23:0]};
-					
-					if(inst[6:0] == 7'b1101111) begin // JAL
-						pc <= pc + {{12{mem_ctrl_data[7]}}, inst[19:12], inst[20], mem_ctrl_data[6:0], inst[23:21], 1'b0};
-					end else begin
-						pc <= pc + 31'h4;
-					end
-					pc_tmp <= pc;
+					pc <= pc + 31'h4;
 
 					we_o <= 1;
 					waddr_o <= pc;

@@ -2,8 +2,8 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Sat Dec 14 14:12:12 2019
-# Process ID: 20252
+# Start of session at: Sun Dec 22 00:30:55 2019
+# Process ID: 972
 # Current directory: D:/CPU/CPU_project/CPU.runs/synth_1
 # Command line: vivado.exe -log riscv_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source riscv_top.tcl
 # Log file: D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.vds
@@ -15,44 +15,46 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 7612 
+INFO: Helper process launched with PID 7420 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 357.305 ; gain = 100.492
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 385.996 ; gain = 98.629
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'riscv_top' [D:/CPU/CPU_code/riscv_top.v:4]
 	Parameter SIM bound to: 0 - type: integer 
 	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
 	Parameter UART_BAUD_RATE bound to: 115200 - type: integer 
 	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-972-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-972-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
 INFO: [Synth 8-6157] synthesizing module 'ram' [D:/CPU/CPU_code/common/ram.v:3]
 	Parameter ADDR_WIDTH bound to: 17 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'single_port_ram_sync' [D:/CPU/CPU_code/block_ram.v:62]
 	Parameter ADDR_WIDTH bound to: 17 - type: integer 
 	Parameter DATA_WIDTH bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'single_port_ram_sync' (1#1) [D:/CPU/CPU_code/block_ram.v:62]
-INFO: [Synth 8-6155] done synthesizing module 'ram' (2#1) [D:/CPU/CPU_code/common/ram.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'single_port_ram_sync' (2#1) [D:/CPU/CPU_code/block_ram.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'ram' (3#1) [D:/CPU/CPU_code/common/ram.v:3]
 INFO: [Synth 8-6157] synthesizing module 'cpu' [D:/CPU/CPU_code/cpu.v:6]
 INFO: [Synth 8-6157] synthesizing module 'icache' [D:/CPU/CPU_code/inst_cache.v:1]
 INFO: [Synth 8-5534] Detected attribute (* ram_style = "registers" *) [D:/CPU/CPU_code/inst_cache.v:25]
 INFO: [Synth 8-5534] Detected attribute (* ram_style = "registers" *) [D:/CPU/CPU_code/inst_cache.v:26]
 INFO: [Synth 8-5534] Detected attribute (* ram_style = "registers" *) [D:/CPU/CPU_code/inst_cache.v:27]
-INFO: [Synth 8-6155] done synthesizing module 'icache' (3#1) [D:/CPU/CPU_code/inst_cache.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'icache' (4#1) [D:/CPU/CPU_code/inst_cache.v:1]
 INFO: [Synth 8-6157] synthesizing module 'if_' [D:/CPU/CPU_code/if.v:1]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/if.v:71]
-INFO: [Synth 8-6155] done synthesizing module 'if_' (4#1) [D:/CPU/CPU_code/if.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'if_' (5#1) [D:/CPU/CPU_code/if.v:1]
 INFO: [Synth 8-6157] synthesizing module 'if_id' [D:/CPU/CPU_code/if_id.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'if_id' (5#1) [D:/CPU/CPU_code/if_id.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'if_id' (6#1) [D:/CPU/CPU_code/if_id.v:1]
 INFO: [Synth 8-6157] synthesizing module 'regfile' [D:/CPU/CPU_code/regfile.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'regfile' (6#1) [D:/CPU/CPU_code/regfile.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (7#1) [D:/CPU/CPU_code/regfile.v:1]
 INFO: [Synth 8-6157] synthesizing module 'id' [D:/CPU/CPU_code/id.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'id' (7#1) [D:/CPU/CPU_code/id.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'id' (8#1) [D:/CPU/CPU_code/id.v:1]
 INFO: [Synth 8-6157] synthesizing module 'id_ex' [D:/CPU/CPU_code/id_ex.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'id_ex' (8#1) [D:/CPU/CPU_code/id_ex.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'id_ex' (9#1) [D:/CPU/CPU_code/id_ex.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ex' [D:/CPU/CPU_code/ex.v:1]
 INFO: [Synth 8-226] default block is never used [D:/CPU/CPU_code/ex.v:77]
-INFO: [Synth 8-6155] done synthesizing module 'ex' (9#1) [D:/CPU/CPU_code/ex.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'ex' (10#1) [D:/CPU/CPU_code/ex.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ex_mem' [D:/CPU/CPU_code/ex_mem.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'ex_mem' (10#1) [D:/CPU/CPU_code/ex_mem.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'ex_mem' (11#1) [D:/CPU/CPU_code/ex_mem.v:1]
 INFO: [Synth 8-6157] synthesizing module 'mem' [D:/CPU/CPU_code/mem.v:1]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/mem.v:97]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/mem.v:107]
@@ -64,14 +66,14 @@ INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_co
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/mem.v:208]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/mem.v:220]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/mem.v:82]
-INFO: [Synth 8-6155] done synthesizing module 'mem' (11#1) [D:/CPU/CPU_code/mem.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem' (12#1) [D:/CPU/CPU_code/mem.v:1]
 INFO: [Synth 8-6157] synthesizing module 'mem_wb' [D:/CPU/CPU_code/mem_wb.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mem_wb' (12#1) [D:/CPU/CPU_code/mem_wb.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem_wb' (13#1) [D:/CPU/CPU_code/mem_wb.v:1]
 INFO: [Synth 8-6157] synthesizing module 'mem_ctrl' [D:/CPU/CPU_code/mem_ctrl.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mem_ctrl' (13#1) [D:/CPU/CPU_code/mem_ctrl.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mem_ctrl' (14#1) [D:/CPU/CPU_code/mem_ctrl.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ctrl' [D:/CPU/CPU_code/ctrl.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'ctrl' (14#1) [D:/CPU/CPU_code/ctrl.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'cpu' (15#1) [D:/CPU/CPU_code/cpu.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ctrl' (15#1) [D:/CPU/CPU_code/ctrl.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'cpu' (16#1) [D:/CPU/CPU_code/cpu.v:6]
 INFO: [Synth 8-6157] synthesizing module 'hci' [D:/CPU/CPU_code/common/hci.v:30]
 	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
 	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
@@ -107,7 +109,7 @@ INFO: [Synth 8-6157] synthesizing module 'hci' [D:/CPU/CPU_code/common/hci.v:30]
 INFO: [Synth 8-6157] synthesizing module 'fifo' [D:/CPU/CPU_code/common/fifo.v:27]
 	Parameter DATA_BITS bound to: 8 - type: integer 
 	Parameter ADDR_BITS bound to: 10 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'fifo' (16#1) [D:/CPU/CPU_code/common/fifo.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'fifo' (17#1) [D:/CPU/CPU_code/common/fifo.v:27]
 INFO: [Synth 8-6157] synthesizing module 'uart' [D:/CPU/CPU_code/common/uart.v:28]
 	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
 	Parameter BAUD_RATE bound to: 115200 - type: integer 
@@ -120,7 +122,7 @@ INFO: [Synth 8-6157] synthesizing module 'uart_baud_clk' [D:/CPU/CPU_code/common
 	Parameter BAUD bound to: 115200 - type: integer 
 	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
 	Parameter CLKS_PER_OVERSAMPLE_TICK bound to: 16'b0000000000110110 
-INFO: [Synth 8-6155] done synthesizing module 'uart_baud_clk' (17#1) [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
+INFO: [Synth 8-6155] done synthesizing module 'uart_baud_clk' (18#1) [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
 INFO: [Synth 8-6157] synthesizing module 'uart_rx' [D:/CPU/CPU_code/common/uart_rx.v:28]
 	Parameter DATA_BITS bound to: 8 - type: integer 
 	Parameter STOP_BITS bound to: 1 - type: integer 
@@ -133,7 +135,7 @@ INFO: [Synth 8-6157] synthesizing module 'uart_rx' [D:/CPU/CPU_code/common/uart_
 	Parameter S_PARITY bound to: 5'b01000 
 	Parameter S_STOP bound to: 5'b10000 
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/uart_rx.v:101]
-INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (18#1) [D:/CPU/CPU_code/common/uart_rx.v:28]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (19#1) [D:/CPU/CPU_code/common/uart_rx.v:28]
 INFO: [Synth 8-6157] synthesizing module 'uart_tx' [D:/CPU/CPU_code/common/uart_tx.v:28]
 	Parameter DATA_BITS bound to: 8 - type: integer 
 	Parameter STOP_BITS bound to: 1 - type: integer 
@@ -146,18 +148,18 @@ INFO: [Synth 8-6157] synthesizing module 'uart_tx' [D:/CPU/CPU_code/common/uart_
 	Parameter S_PARITY bound to: 5'b01000 
 	Parameter S_STOP bound to: 5'b10000 
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/uart_tx.v:101]
-INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (19#1) [D:/CPU/CPU_code/common/uart_tx.v:28]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (20#1) [D:/CPU/CPU_code/common/uart_tx.v:28]
 INFO: [Synth 8-6157] synthesizing module 'fifo__parameterized0' [D:/CPU/CPU_code/common/fifo.v:27]
 	Parameter DATA_BITS bound to: 8 - type: integer 
 	Parameter ADDR_BITS bound to: 3 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'fifo__parameterized0' (19#1) [D:/CPU/CPU_code/common/fifo.v:27]
-INFO: [Synth 8-6155] done synthesizing module 'uart' (20#1) [D:/CPU/CPU_code/common/uart.v:28]
+INFO: [Synth 8-6155] done synthesizing module 'fifo__parameterized0' (20#1) [D:/CPU/CPU_code/common/fifo.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'uart' (21#1) [D:/CPU/CPU_code/common/uart.v:28]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:203]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:237]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:255]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/common/hci.v:270]
-INFO: [Synth 8-6155] done synthesizing module 'hci' (21#1) [D:/CPU/CPU_code/common/hci.v:30]
-INFO: [Synth 8-6155] done synthesizing module 'riscv_top' (22#1) [D:/CPU/CPU_code/riscv_top.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'hci' (22#1) [D:/CPU/CPU_code/common/hci.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'riscv_top' (23#1) [D:/CPU/CPU_code/riscv_top.v:4]
 WARNING: [Synth 8-3331] design ctrl has unconnected port clk
 WARNING: [Synth 8-3331] design mem_wb has unconnected port stall_sign[6]
 WARNING: [Synth 8-3331] design mem_wb has unconnected port stall_sign[5]
@@ -227,7 +229,7 @@ WARNING: [Synth 8-3331] design if_ has unconnected port stall_sign[4]
 WARNING: [Synth 8-3331] design if_ has unconnected port stall_sign[3]
 WARNING: [Synth 8-3331] design if_ has unconnected port stall_sign[2]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 475.492 ; gain = 218.680
+Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 504.594 ; gain = 217.227
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -240,41 +242,48 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 475.492 ; gain = 218.680
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 504.594 ; gain = 217.227
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 475.492 ; gain = 218.680
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 504.594 ; gain = 217.227
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
+Parsing XDC File [d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_1_in_context.xdc] for cell 'NEW_CLOCK'
+Finished Parsing XDC File [d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_1_in_context.xdc] for cell 'NEW_CLOCK'
 Parsing XDC File [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
 Finished Parsing XDC File [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/riscv_top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/riscv_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [D:/CPU/CPU_project/CPU.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [D:/CPU/CPU_project/CPU.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 821.859 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 851.563 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished Constraint Validation : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for EXCLK. (constraint file  d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_1_in_context.xdc, line 3).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for EXCLK. (constraint file  d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_1_in_context.xdc, line 4).
+Applied set_property DONT_TOUCH = true for NEW_CLOCK. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "cache_tag_reg[127]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "cache_tag_reg[126]" won't be mapped to RAM because it is too sparse
@@ -458,8 +467,8 @@ WARNING: [Synth 8-327] inferring latch for variable 'reg2_o_reg' [D:/CPU/CPU_cod
                  iSTATE4 |                              101 |                             1111
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'mem'
-INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm1D834D64F700'
-INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm1D834D5EC700'
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm1D4D2848B900'
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm1D4D28412900'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -480,7 +489,7 @@ INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'q_state_reg' using encoding 'sequential' in module 'hci'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:00:35 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -967,7 +976,7 @@ WARNING: [Synth 8-3332] Sequential element (ex_mem0/mem_mem_addr_reg[19]) is unu
 WARNING: [Synth 8-3332] Sequential element (ex_mem0/mem_mem_addr_reg[18]) is unused and will be removed from module cpu.
 WARNING: [Synth 8-3332] Sequential element (ex_mem0/mem_opcode_o_reg[10]) is unused and will be removed from module cpu.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:00:54 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:56 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1021,14 +1030,16 @@ Report RTL Partitions:
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-5578] Moved timing constraint from pin 'NEW_CLOCK/clk_out1' to pin 'NEW_CLOCK/bbstub_clk_out1/O'
+INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:58 ; elapsed = 00:01:03 . Memory (MB): peak = 822.016 ; gain = 565.203
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:54 ; elapsed = 00:01:05 . Memory (MB): peak = 851.563 ; gain = 564.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:05 ; elapsed = 00:01:10 . Memory (MB): peak = 869.582 ; gain = 612.770
+Finished Timing Optimization : Time (s): cpu = 00:01:00 ; elapsed = 00:01:11 . Memory (MB): peak = 892.168 ; gain = 604.801
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1103,7 +1114,7 @@ INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_5 (impl
 INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_6 (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_7 (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:10 ; elapsed = 00:01:15 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Technology Mapping : Time (s): cpu = 00:01:05 ; elapsed = 00:01:16 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1131,7 +1142,7 @@ INFO: [Synth 8-6064] Net n_0_4280 is driving 32 big block pins (URAM, BRAM and D
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:11 ; elapsed = 00:01:16 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished IO Insertion : Time (s): cpu = 00:01:07 ; elapsed = 00:01:18 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1144,7 +1155,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:12 ; elapsed = 00:01:17 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:07 ; elapsed = 00:01:18 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1156,62 +1167,64 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
 ---------------------------------------------------------------------------------
 
 Report BlackBoxes: 
-+-+--------------+----------+
-| |BlackBox name |Instances |
-+-+--------------+----------+
-+-+--------------+----------+
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |clk_wiz_0     |         1|
++------+--------------+----------+
 
 Report Cell Usage: 
 +------+-----------+------+
 |      |Cell       |Count |
 +------+-----------+------+
-|1     |BUFG       |     2|
-|2     |CARRY4     |   135|
-|3     |LUT1       |    64|
-|4     |LUT2       |   328|
-|5     |LUT3       |   226|
-|6     |LUT4       |   200|
-|7     |LUT5       |   336|
-|8     |LUT6       |  2721|
-|9     |MUXF7      |   733|
-|10    |MUXF8      |   352|
-|11    |RAM32M     |    14|
-|12    |RAM64M     |    64|
-|13    |RAM64X1D   |    64|
-|14    |RAMB36E1   |    16|
-|15    |RAMB36E1_1 |    16|
-|16    |FDCE       |    59|
-|17    |FDPE       |     6|
-|18    |FDRE       |  6262|
-|19    |FDSE       |     3|
-|20    |LDC        |    64|
-|21    |IBUF       |     3|
-|22    |OBUF       |     2|
+|1     |clk_wiz_0  |     1|
+|2     |BUFG       |     1|
+|3     |CARRY4     |   135|
+|4     |LUT1       |    64|
+|5     |LUT2       |   328|
+|6     |LUT3       |   226|
+|7     |LUT4       |   200|
+|8     |LUT5       |   336|
+|9     |LUT6       |  2721|
+|10    |MUXF7      |   733|
+|11    |MUXF8      |   352|
+|12    |RAM32M     |    14|
+|13    |RAM64M     |    64|
+|14    |RAM64X1D   |    64|
+|15    |RAMB36E1   |    16|
+|16    |RAMB36E1_1 |    16|
+|17    |FDCE       |    59|
+|18    |FDPE       |     6|
+|19    |FDRE       |  6262|
+|20    |FDSE       |     3|
+|21    |LDC        |    64|
+|22    |IBUF       |     2|
+|23    |OBUF       |     2|
 +------+-----------+------+
 
 Report Instance Areas: 
@@ -1242,14 +1255,14 @@ Report Instance Areas:
 |22    |    ram_bram            |single_port_ram_sync |    49|
 +------+------------------------+---------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 109 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:51 ; elapsed = 00:01:09 . Memory (MB): peak = 935.316 ; gain = 331.980
-Synthesis Optimization Complete : Time (s): cpu = 00:01:13 ; elapsed = 00:01:18 . Memory (MB): peak = 935.316 ; gain = 678.504
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:01:07 . Memory (MB): peak = 960.254 ; gain = 325.918
+Synthesis Optimization Complete : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 960.254 ; gain = 672.887
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 1461 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Netlist 29-17] Analyzing 1460 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
@@ -1260,11 +1273,12 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM64X1D => RAM64X1D (RAMD64E, RAMD64E): 64 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-307 Infos, 167 Warnings, 0 Critical Warnings and 0 Errors encountered.
+311 Infos, 167 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:18 ; elapsed = 00:01:23 . Memory (MB): peak = 935.316 ; gain = 691.328
+synth_design: Time (s): cpu = 00:01:12 ; elapsed = 00:01:25 . Memory (MB): peak = 960.254 ; gain = 684.359
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint 'D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 960.254 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file riscv_top_utilization_synth.rpt -pb riscv_top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.131 . Memory (MB): peak = 935.316 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Sat Dec 14 14:13:40 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.611 . Memory (MB): peak = 960.254 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Sun Dec 22 00:32:47 2019...

@@ -106,14 +106,12 @@ module ex(
 					mem_addr = 0;
 				end
 				7'b1101111: begin 		//JAL
-					// branch_enable_o = 1'b1;
-					branch_enable_o = 0;
+					branch_enable_o = 1'b1;
 					wdata_o = reg2_i;
 					mem_addr = 0;
 				end
 				7'b1100111: begin 		//JALR
 					branch_enable_o = 1'b1;
-					// branch_enable_o = 0;
 					wdata_o = reg2_i;
 					mem_addr = 0;
 				end

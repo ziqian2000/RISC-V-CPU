@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1576303929">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1576945851">
   <File Type="PA-TCL" Name="riscv_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="riscv_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="riscv_top_reports.tcl"/>
   <File Type="RDS-RDS" Name="riscv_top.vds"/>
   <File Type="RDS-UTIL" Name="riscv_top_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="riscv_top_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="riscv_top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="riscv_top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="riscv_top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../CPU_code/defines.v">
@@ -164,6 +167,13 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../CPU_code/inst_cache.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/clk_wiz_0/clk_wiz_0.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
