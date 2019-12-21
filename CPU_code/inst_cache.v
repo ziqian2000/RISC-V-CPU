@@ -49,6 +49,7 @@ end
 
 // read
 always @(*) begin
+	// hit_o = 0;
 	if(rst || !rdy)begin
 		hit_o = 0;
 		inst_o = 0;

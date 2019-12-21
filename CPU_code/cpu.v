@@ -21,8 +21,6 @@ module cpu(
 wire[`InstAddrBus]	if_pc;
 wire[`InstBus]		if_inst;
 
-assign dbgreg_dout = if_pc;
-
 // if/id --- id
 
 wire[`InstAddrBus] 	id_pc_i;
@@ -119,7 +117,27 @@ wire 				ifc_we;
 wire[`InstAddrBus] 	ifc_waddr;
 wire[31:0]		 	ifc_wdata;
 
+// if, ex --- predictor
+// (if)
+wire[`InstAddrBus] 	pre_raddr;
+wire 				pre_result;
+// (ex)
+wire 				pre_we;
+wire[`InstAddrBus] 	pre_waddr;
+wire 				pre_taken;
+
+
 // **************************** instantiation **************************** 
+
+// predictor
+
+predictor predictor0(
+	.clk(clk_in), 	.rst(rst_in), 	.rdy(rdy_in),
+	// read
+	.raddr_i(pre_raddr), 	.pre_o(pre_result),
+	// write
+	.we_i(pre_we), 	.waddr_i(pre_waddr), 	.taken_i(pre_taken)
+);
 
 // icache
 
@@ -194,6 +212,9 @@ id id0(
 	.ex_mem_opcode_i(mem_opcode),
 
 	.mem_wreg_i(mem_wreg_o), .mem_wdata_i(mem_wdata_o), .mem_wd_i(mem_wd_o),
+
+	.wb_wreg_i(wb_wreg_i), .wb_wdata_i(wb_wdata_i), .wb_wd_i(wb_wd_i),
+
 	.id_stall_request(id_stall_request),
 	// from ctrl
 	.stall_sign(stall_sign)

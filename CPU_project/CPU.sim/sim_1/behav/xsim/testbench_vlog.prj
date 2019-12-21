@@ -23,6 +23,7 @@ verilog xil_defaultlib "D:/CPU/CPU_code/defines.v" --include "../../../../../CPU
 "../../../../../CPU_code/common/uart_tx.v" \
 "../../../../../CPU_code/riscv_top.v" \
 "../../../../../CPU_code/inst_cache.v" \
+"../../../../../CPU_code/predictor.v" \
 "../../../../../CPU_code/testbench/testbench.v" \
 
 # compile glbl module

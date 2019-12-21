@@ -1,24 +1,40 @@
 #include "io.h"
+int a[4][11];
+int i;
+int j;
 
-int N;
-int h = 99;
-int i = 100;
-int j = 101;
-int k = 102;
-int total = 0;
+struct rec {
+    int num;
+    int c;
+}b[5];
 
+void printNum(int num) {
+    outlln(num);
+}
 int main() {
-  	int a;
-    int b;
-	int c;
-	// N=inl();
-	N = 20;
-	for ( a=1; a<=N; a++ )
-	for ( b=1; b<=N; b++ )
-	for ( c=1; c<=N; c++ )
-		total += a * h + b * i + c * j;
-	
-	outlln(total);
-	// printf("%d\n",total);
-	return 0;
+
+
+    for (i = 0; i < 4; i ++) {
+        for (j = 0; j < 10; j ++)
+            a[i][j] = 888;
+    }
+    for (i = 0; i < 5; i ++) {
+        b[i].num = -1;
+    }
+
+    printNum(a[3][9]);
+    for (i = 0; i <= 3; i ++)
+        for (j = 0; j <= 9; j ++)
+            a[i][j] = i * 10 + j;
+
+    for (i = 0; i <= 3; i ++)
+        for (j = 0; j <= 9; j ++)
+            printNum(a[i][j]);
+    a[2][10]=0;
+    printNum(a[2][10]);
+    b[0].num = -2;
+    b[a[2][10]].num = -10;
+    printNum(b[0].num);
+    printNum(b[1].num);
+    return 0;
 }

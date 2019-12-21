@@ -38,7 +38,11 @@ module id(
 	input	wire 					mem_wreg_i,
 	input	wire[`RegBus]			mem_wdata_i,
 	input	wire[`RegAddrBus]		mem_wd_i,
-	// (4) to mem_ctrl
+	// (4) mem_wb
+	input	wire 					wb_wreg_i,
+	input	wire[`RegBus]			wb_wdata_i,
+	input	wire[`RegAddrBus]		wb_wd_i,
+	// (5) to mem_ctrl
 	output 	reg 	 				id_stall_request,
 
 	// from ctrl
@@ -199,6 +203,8 @@ always @(*) begin
 				reg1_o = ex_mem_wdata_i;
 			end else if((mem_wreg_i == 1'b1) && (mem_wd_i == reg1_addr_o)) begin
 				reg1_o = mem_wdata_i;
+			end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg1_addr_o)) begin
+				reg1_o = wb_wdata_i;
 			end else begin
 				reg1_o = reg1_data_i;
 			end
@@ -223,6 +229,8 @@ always @(*) begin
 				reg2_o = ex_mem_wdata_i;
 			end else if((mem_wreg_i == 1'b1) && (mem_wd_i == reg2_addr_o)) begin
 				reg2_o = mem_wdata_i;
+			end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg2_addr_o)) begin
+				reg2_o = wb_wdata_i;
 			end else begin
 				reg2_o = reg2_data_i;
 			end
