@@ -64,9 +64,7 @@ always @(posedge clk) begin
 				inst 		<= 0;
 				state 		<= 5'b00000;
 			end
-		end	else begin 
-
-			// $display("%x",pc);
+		end	else begin
 
 			case(state)
 				5'b00000: begin // send the 1st address
@@ -75,6 +73,9 @@ always @(posedge clk) begin
 							if_request <= 1'b1;
 							if_addr <= pc;
 							if_inst <= 0;
+							
+							raddr_o <= pc;
+							we_o <= 0;
 
 							if(stall_sign[0]) begin
 								state <= 5'b10000;
@@ -84,8 +85,6 @@ always @(posedge clk) begin
 
 							// avoid_data_hazard <= 4'ha; // !!!
 
-							raddr_o <= pc;
-							we_o <= 0;
 						// end else begin
 						// 	avoid_data_hazard <= avoid_data_hazard - 1;
 						// 	if_inst <= 0;
@@ -109,9 +108,10 @@ always @(posedge clk) begin
 					inst[7:0] <= mem_ctrl_data;
 					state <= 5'b00011;
 					if_addr <= pc + 31'h2;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				5'b00011: begin // the 3rd byte is being prepared, send the 4th request
 					if(stall_sign[0] || stalled) begin
@@ -137,10 +137,10 @@ always @(posedge clk) begin
 						stalled <= 0;
 						state <= 5'b11000;
 					end else begin
-						inst[31:24] <= mem_ctrl_data;
+						// inst[31:24] <= mem_ctrl_data;
 						if_inst <= {mem_ctrl_data, inst[23:0]};
 						pc <= pc + 31'h4;
-						if_addr <= pc + 31'h4;
+						// if_addr <= pc + 31'h4;
 
 						state <= 5'b00000;
 
@@ -167,17 +167,19 @@ always @(posedge clk) begin
 				5'b10001: begin
 					state <= 5'b10010;
 					if_addr <= pc + 31'h1;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				5'b10010: begin
 					state <= 5'b00011;
 					if_addr <= pc + 31'h2;
 					inst[7:0] <= mem_ctrl_data;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				///
 				5'b10011: begin
@@ -189,17 +191,19 @@ always @(posedge clk) begin
 				5'b10100: begin
 					state <= 5'b10101;
 					if_addr <= pc + 31'h2;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				5'b10101: begin
 					state <= 5'b00100;
 					if_addr <= pc + 31'h3;
 					inst[15:8] <= mem_ctrl_data;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				///
 				5'b10110: begin
@@ -211,17 +215,19 @@ always @(posedge clk) begin
 				5'b10111: begin
 					state <= 5'b11000;
 					if_addr <= pc + 31'h3;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				5'b11000: begin
 					state <= 5'b00101;
 					if_addr <= pc + 31'h4;
 					inst[23:16] <= mem_ctrl_data;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				///
 				5'b11001: begin
@@ -232,15 +238,16 @@ always @(posedge clk) begin
 				end
 				5'b11010: begin
 					state <= 5'b11011;
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				5'b11011: begin
 					state <= 5'b00000;
 
 
-					inst[31:24] <= mem_ctrl_data;
+					// inst[31:24] <= mem_ctrl_data;
 					if_inst <= {mem_ctrl_data, inst[23:0]};
 					pc <= pc + 31'h4;
 
@@ -249,9 +256,10 @@ always @(posedge clk) begin
 					wdata_o <= {mem_ctrl_data, inst[23:0]};
 
 
-					if(stall_sign[0]) begin
-						stalled <= 1;
-					end
+					// if(stall_sign[0]) begin
+					// 	stalled <= 1;
+					// end
+					stalled <= stall_sign[0];
 				end
 				///
 

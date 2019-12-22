@@ -75,7 +75,7 @@ set rc [catch {
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES XPM_CDC [current_project]
   add_files -quiet D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.dcp
-  read_ip -quiet d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+  read_ip -quiet D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
   read_xdc D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc
   link_design -top riscv_top -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb

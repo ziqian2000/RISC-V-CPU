@@ -1,31 +1,44 @@
 #include "io.h"
-int f[2801];
-int main() {
-	int a = 10000;
-	int b = 0;
-	int c = 2800;
-	int d = 0;
-	int e = 0;
-	int g = 0;
+// Target: qsort
+// Possible optimization: Dead code elimination, common expression, strength reduction
+// REMARKS: nothing.
+//
+//
 
-	for (;b-c!=0;) 
-		f[b++] = a/5;
-	for (;; e = d%a){
-		d = 0;
-		g = c*2;
-		if (g==0) break;
-		
-		for (b=c;;d=d*b){
-			d=d+f[b]*a;
-			f[b] = d%--g;
-			d=d/g--;
-			if (--b==0) break;
-		}
-		
-		c = c-14;
-		outl(e+d/a);
-	}
-	
-  print("\n");
-  return 0;
+//int a[10100];
+int a[10100];
+int n = 10000;
+
+int qsrt(int l, int r) {
+    int i = l;
+    int j = r;
+    int x = a[(l + r) / 2];
+    while (i <= j) {
+        while (a[i] < x) i++;
+        while (a[j] > x) j--;
+        if (i <= j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    if (l < j) qsrt(l, j);
+    if (i < r) qsrt(i, r);
+    return 0;
+}
+
+int main() {
+    int i;
+    for (i = 1; i <= n; i++)
+        a[i] = n + 1 - i;
+    qsrt(1, n);
+    for (i = 1; i <= n; i++) {
+        outl(a[i]);
+        print(" ");
+        sleep(1); // to prevent UART buffer from overflowing
+    }
+    print("\n");
+    return 0;
 }

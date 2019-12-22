@@ -52,15 +52,27 @@ always @(*) begin
 	if(rst || !rdy)begin
 		hit_o = 0;
 		inst_o = 0;
-	end else if(we_i && raddr_i == waddr_i) begin
-		hit_o = 1;
-		inst_o = winst_i;
-	end else if(cache_tag[raddr_idx] == raddr_tag && cache_valid[raddr_idx]) begin
-		hit_o = 1;
-		inst_o = cache_data[raddr_idx];
+	// end else if(we_i && raddr_i == waddr_i) begin
+	// 	hit_o = 1;
+	// 	inst_o = winst_i;
 	end else begin
-		hit_o = 0;
-		inst_o = 0;
+		hit_o = cache_tag[raddr_idx] == raddr_tag && cache_valid[raddr_idx];
+		inst_o = cache_data[raddr_idx];
 	end
 end
+// always @(*) begin
+// 	if(rst || !rdy)begin
+// 		hit_o = 0;
+// 		inst_o = 0;
+// 	end else if(we_i && raddr_i == waddr_i) begin
+// 		hit_o = 1;
+// 		inst_o = winst_i;
+// 	end else if(cache_tag[raddr_idx] == raddr_tag && cache_valid[raddr_idx]) begin
+// 		hit_o = 1;
+// 		inst_o = cache_data[raddr_idx];
+// 	end else begin
+// 		hit_o = 0;
+// 		inst_o = 0;
+// 	end
+// end
 endmodule
