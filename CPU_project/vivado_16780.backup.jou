@@ -1,0 +1,130 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Sun Dec 22 23:49:44 2019
+# Process ID: 16780
+# Current directory: D:/CPU/CPU_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16520 D:\CPU\CPU_project\CPU.xpr
+# Log file: D:/CPU/CPU_project/vivado.log
+# Journal file: D:/CPU/CPU_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/CPU/CPU_project/CPU.xpr
+set_property -dict [list CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {100} CONFIG.MMCM_DIVCLK_DIVIDE {1} CONFIG.MMCM_CLKOUT0_DIVIDE_F {9} CONFIG.CLKOUT1_JITTER {137.681}] [get_ips clk_wiz_0]
+generate_target all [get_files  D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+catch { config_ip_cache -export [get_ips -all clk_wiz_0] }
+export_ip_user_files -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+export_simulation -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -directory D:/CPU/CPU_project/CPU.ip_user_files/sim_scripts -ip_user_files_dir D:/CPU/CPU_project/CPU.ip_user_files -ipstatic_source_dir D:/CPU/CPU_project/CPU.ip_user_files/ipstatic -lib_map_path [list {modelsim=D:/CPU/CPU_project/CPU.cache/compile_simlib/modelsim} {questa=D:/CPU/CPU_project/CPU.cache/compile_simlib/questa} {riviera=D:/CPU/CPU_project/CPU.cache/compile_simlib/riviera} {activehdl=D:/CPU/CPU_project/CPU.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+close_hw
+set_property -dict [list CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {200} CONFIG.MMCM_DIVCLK_DIVIDE {1} CONFIG.MMCM_CLKFBOUT_MULT_F {10} CONFIG.MMCM_CLKOUT0_DIVIDE_F {5} CONFIG.CLKOUT1_JITTER {114.829} CONFIG.CLKOUT1_PHASE_ERROR {98.575}] [get_ips clk_wiz_0]
+generate_target all [get_files  D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+catch { config_ip_cache -export [get_ips -all clk_wiz_0] }
+export_ip_user_files -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+export_simulation -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -directory D:/CPU/CPU_project/CPU.ip_user_files/sim_scripts -ip_user_files_dir D:/CPU/CPU_project/CPU.ip_user_files -ipstatic_source_dir D:/CPU/CPU_project/CPU.ip_user_files/ipstatic -lib_map_path [list {modelsim=D:/CPU/CPU_project/CPU.cache/compile_simlib/modelsim} {questa=D:/CPU/CPU_project/CPU.cache/compile_simlib/questa} {riviera=D:/CPU/CPU_project/CPU.cache/compile_simlib/riviera} {activehdl=D:/CPU/CPU_project/CPU.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+close_hw
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+close_hw
+set_property -dict [list CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {150} CONFIG.MMCM_DIVCLK_DIVIDE {1} CONFIG.MMCM_CLKFBOUT_MULT_F {9} CONFIG.MMCM_CLKOUT0_DIVIDE_F {6} CONFIG.CLKOUT1_JITTER {127.220} CONFIG.CLKOUT1_PHASE_ERROR {105.461}] [get_ips clk_wiz_0]
+generate_target all [get_files  D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+catch { config_ip_cache -export [get_ips -all clk_wiz_0] }
+export_ip_user_files -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
+export_simulation -of_objects [get_files D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci] -directory D:/CPU/CPU_project/CPU.ip_user_files/sim_scripts -ip_user_files_dir D:/CPU/CPU_project/CPU.ip_user_files -ipstatic_source_dir D:/CPU/CPU_project/CPU.ip_user_files/ipstatic -lib_map_path [list {modelsim=D:/CPU/CPU_project/CPU.cache/compile_simlib/modelsim} {questa=D:/CPU/CPU_project/CPU.cache/compile_simlib/questa} {riviera=D:/CPU/CPU_project/CPU.cache/compile_simlib/riviera} {activehdl=D:/CPU/CPU_project/CPU.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+open_run impl_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+close_hw
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+close_hw
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {D:/CPU/CPU_project/CPU.runs/impl_1/riscv_top.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]

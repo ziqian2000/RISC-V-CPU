@@ -1,44 +1,19 @@
 #include "io.h"
-// Target: qsort
-// Possible optimization: Dead code elimination, common expression, strength reduction
-// REMARKS: nothing.
-//
-//
-
-//int a[10100];
-int a[10100];
-int n = 10000;
-
-int qsrt(int l, int r) {
-    int i = l;
-    int j = r;
-    int x = a[(l + r) / 2];
-    while (i <= j) {
-        while (a[i] < x) i++;
-        while (a[j] > x) j--;
-        if (i <= j) {
-            int temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
-            i++;
-            j--;
-        }
-    }
-    if (l < j) qsrt(l, j);
-    if (i < r) qsrt(i, r);
-    return 0;
+int tak(int x, int y, int z) {
+	if ( y < x ) return 1 + tak( tak(x-1, y, z), tak(y-1, z, x), tak(z-1, x, y) );
+	else return z;
 }
 
-int main() {
-    int i;
-    for (i = 1; i <= n; i++)
-        a[i] = n + 1 - i;
-    qsrt(1, n);
-    for (i = 1; i <= n; i++) {
-        outl(a[i]);
-        print(" ");
-        sleep(1); // to prevent UART buffer from overflowing
-    }
-    print("\n");
-    return 0;
+int main(){
+	int a;
+	int b;
+	int c;
+	// a=inl();
+	// b=inl();
+	// c=inl();
+	a = 18;
+	b = 12;
+	c = 6;
+	outlln(tak(a,b,c));
+	return 0;
 }

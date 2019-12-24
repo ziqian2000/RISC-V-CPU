@@ -165,25 +165,25 @@ end
 
 // data hazard caused by LOAD
 
-// always @(*) begin
-// 	if (rst) begin
-// 		id_stall_request = 0;
-// 	end	else if ((ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o || ex_wd_i == reg2_addr_o)) begin // nearset in EX
-// 		if(ex_opcode_i[6:0] == 7'b0000011) begin
-// 			id_stall_request = 1;
-// 		end else begin
-// 			id_stall_request = 0;
-// 		end
-// 	end else if((ex_mem_wreg_i == 1'b1) && (ex_mem_wd_i == reg1_addr_o || ex_mem_wd_i == reg2_addr_o)) begin // nearest in EX/MEM
-// 		if(ex_mem_opcode_i[6:0] == 7'b0000011) begin
-// 			id_stall_request = 1;
-// 		end else begin
-// 			id_stall_request = 0;
-// 		end
-// 	end else begin
-// 		id_stall_request = 0;
-// 	end
-// end
+always @(*) begin
+	if (rst) begin
+		id_stall_request = 0;
+	end	else if ((ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o || ex_wd_i == reg2_addr_o)) begin // nearset in EX
+		if(ex_opcode_i[6:0] == 7'b0000011) begin
+			id_stall_request = 1;
+		end else begin
+			id_stall_request = 0;
+		end
+	end else if((ex_mem_wreg_i == 1'b1) && (ex_mem_wd_i == reg1_addr_o || ex_mem_wd_i == reg2_addr_o)) begin // nearest in EX/MEM
+		if(ex_mem_opcode_i[6:0] == 7'b0000011) begin
+			id_stall_request = 1;
+		end else begin
+			id_stall_request = 0;
+		end
+	end else begin
+		id_stall_request = 0;
+	end
+end
 
 // operand 1
 
