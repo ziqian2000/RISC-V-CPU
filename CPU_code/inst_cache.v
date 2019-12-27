@@ -6,7 +6,7 @@ module icache(
 	// read
 	input 	wire[`InstAddrBus]		raddr_i,
 	output 	reg 					hit_o,
-	output 	reg[31:0] 				inst_o,
+	output 	wire[31:0] 				inst_o,
 
 	// write
 	input 	wire 					we_i,
@@ -22,9 +22,9 @@ wire[16:7] 		raddr_tag;
 wire[6:0] 		waddr_idx;
 wire[16:7] 		waddr_tag;
 
-(* ram_style = "registers" *) reg 			cache_valid[`BlockNum-1:0];
-(* ram_style = "registers" *) reg[9:0]		cache_tag[`BlockNum-1:0];
-(* ram_style = "registers" *) reg[31:0] 	cache_data[`BlockNum-1:0];
+reg 			cache_valid[`BlockNum-1:0];
+reg[9:0]		cache_tag[`BlockNum-1:0];
+reg[31:0] 		cache_data[`BlockNum-1:0];
 
 assign raddr_idx = raddr_i[6:0];
 assign raddr_tag = raddr_i[16:7];
@@ -47,17 +47,19 @@ always @(posedge clk) begin
 	end
 end
 
+assign inst_o = cache_data[raddr_idx];
+
 // read
 always @(*) begin
 	if(rst || !rdy)begin
 		hit_o = 0;
-		inst_o = 0;
+		// inst_o = 0;
 	// end else if(we_i && raddr_i == waddr_i) begin
 	// 	hit_o = 1;
 	// 	inst_o = winst_i;
 	end else begin
 		hit_o = cache_tag[raddr_idx] == raddr_tag && cache_valid[raddr_idx];
-		inst_o = cache_data[raddr_idx];
+		// inst_o = cache_data[raddr_idx];
 	end
 end
 // always @(*) begin

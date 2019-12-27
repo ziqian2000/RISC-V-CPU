@@ -34,7 +34,7 @@ module if_(
 );
 
 reg[3:0] 		state;
-reg[31:0] 		inst;
+reg[23:0] 		inst;
 reg[`InstBus] 	pc;
 
 integer i; // cycle counter
@@ -43,13 +43,13 @@ integer i; // cycle counter
 
 assign pc_o = pc - 32'h4;
 
-reg[3:0] avoid_data_hazard;
+// reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
 
 	// $display(i);
-	i <= i+1;
+	// i <= i+1;
 
 	if (rst == `RstEnable) begin
 		if_request 	<= 0;
@@ -59,7 +59,7 @@ always @(posedge clk) begin
 		inst 		<= 0;
 		state 		<= 0;
 		we_o 		<= 0;
-		avoid_data_hazard <= 0;
+		// avoid_data_hazard <= 0;
 		i 			<= 0;
 	// end else if(stall_sign[0]) begin
 	// 	STALL
