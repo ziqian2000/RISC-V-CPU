@@ -14,7 +14,7 @@ A RISC-V CPU project.
 
 Take `pi.c` for example:
 
-- 100 Hz: 3.406250 s
+- 100 Hz: 2.734375 s
 - 150 Hz: failed.
 - 200 Hz: failed.
 

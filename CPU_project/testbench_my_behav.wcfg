@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1497450000fs"></ZoomStartTime>
-      <ZoomEndTime time="1511310001fs"></ZoomEndTime>
-      <Cursor1Time time="1509000000fs"></Cursor1Time>
+      <ZoomStartTime time="8290396667fs"></ZoomStartTime>
+      <ZoomEndTime time="8306016668fs"></ZoomEndTime>
+      <Cursor1Time time="8293000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="138"></NameColumnWidth>
-      <ValueColumnWidth column_width="83"></ValueColumnWidth>
+      <ValueColumnWidth column_width="79"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="39" />
+   <WVObjectSize size="38" />
    <wvobject fp_name="/testbench/top/hci0/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -28,13 +28,20 @@
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
+   <wvobject fp_name="/testbench/top/cpu0/ctrl0/stall_sign" type="array">
+      <obj_property name="ElementShortName">stall_sign[7:0]</obj_property>
+      <obj_property name="ObjectShortName">stall_sign[7:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/if0/pc" type="array">
       <obj_property name="ElementShortName">pc[31:0]</obj_property>
       <obj_property name="ObjectShortName">pc[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/if0/inst" type="array">
-      <obj_property name="ElementShortName">inst[31:0]</obj_property>
-      <obj_property name="ObjectShortName">inst[31:0]</obj_property>
+      <obj_property name="ElementShortName">inst[23:0]</obj_property>
+      <obj_property name="ObjectShortName">inst[23:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/if0/if_inst" type="array">
       <obj_property name="ElementShortName">if_inst[31:0]</obj_property>
@@ -51,8 +58,9 @@
       <obj_property name="ObjectShortName">we_i</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/if0/state" type="array">
-      <obj_property name="ElementShortName">state[4:0]</obj_property>
-      <obj_property name="ObjectShortName">state[4:0]</obj_property>
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/icache0/waddr_i" type="array">
       <obj_property name="ElementShortName">waddr_i[31:0]</obj_property>
@@ -144,10 +152,6 @@
       <obj_property name="ElementShortName">we</obj_property>
       <obj_property name="ObjectShortName">we</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/top/cpu0/mem0/hold" type="logic">
-      <obj_property name="ElementShortName">hold</obj_property>
-      <obj_property name="ObjectShortName">hold</obj_property>
-   </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/mem0/opcode_i" type="array">
       <obj_property name="ElementShortName">opcode_i[10:0]</obj_property>
       <obj_property name="ObjectShortName">opcode_i[10:0]</obj_property>
@@ -187,9 +191,5 @@
    <wvobject fp_name="/testbench/top/cpu0/regfile0/regs" type="array">
       <obj_property name="ElementShortName">regs[0:31][31:0]</obj_property>
       <obj_property name="ObjectShortName">regs[0:31][31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/top/cpu0/ctrl0/stall_sign" type="array">
-      <obj_property name="ElementShortName">stall_sign[7:0]</obj_property>
-      <obj_property name="ObjectShortName">stall_sign[7:0]</obj_property>
    </wvobject>
 </wave_config>

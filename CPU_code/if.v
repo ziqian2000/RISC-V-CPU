@@ -38,8 +38,8 @@ reg[23:0] 		inst;
 reg[`InstBus] 	pc;
 
 integer i; // cycle counter
-// 12302 for simpleloop
-// 26856 for multiarray
+// 13030 for simpleloop -> 9700
+// 34320 for multiarray -> 32550
 
 assign pc_o = pc - 32'h4;
 
@@ -48,8 +48,8 @@ assign pc_o = pc - 32'h4;
 
 always @(posedge clk) begin
 
-	// $display(i);
 	// i <= i+1;
+	// if(i % 10 == 0) $display(i);
 
 	if (rst == `RstEnable) begin
 		if_request 	<= 0;
@@ -62,7 +62,7 @@ always @(posedge clk) begin
 		// avoid_data_hazard <= 0;
 		i 			<= 0;
 	// end else if(stall_sign[0]) begin
-	// 	STALL
+		// STALL
 	end else if(branch_enable_i) begin
 		if(!stall_sign[0]) begin
 			if_request 	<= 0;
@@ -74,11 +74,16 @@ always @(posedge clk) begin
 		end
 	end	else begin
 
+		// $display("%x", pc);
+
+		if_request <= 1'b1;
+
 		case(state)
 			4'b0000: begin // send the 1st address
-				if(!stall_sign[1])  begin
+				if(stall_sign[0]) begin
+					// STALL
+				end else if(!stall_sign[1])  begin
 					// if(avoid_data_hazard == 0) begin
-						if_request <= 1'b1;
 						if_addr <= pc;
 						if_inst <= 0;
 						
@@ -100,17 +105,26 @@ always @(posedge clk) begin
 				end
 			end
 			4'b0001: begin // the 1st byte is being prepared, send the 2nd request
-				if(hit_i) begin
-					state <= 4'b0000;
-					if_inst <= inst_i;
-					pc <= pc + 31'h4;
-				end else if(stall_sign[0]) begin
-					state <= 4'b1000;
+				if(!stall_sign[0]) begin
+					if(hit_i) begin
+						// state <= 4'b0000;
+						// if_inst <= inst_i;
+						// pc <= pc + 31'h4;
+
+						if_inst <= inst_i;
+						pc <= pc + 31'h4;
+						if_addr <= pc + 31'h4;
+						raddr_o <= pc + 31'h4;
+						we_o <= 0;
+
+					end else begin
+						state <= 4'b0010;
+						if_addr <= pc + 31'h1;
+						if_inst <= 0;
+					end
 				end else begin
-					state <= 4'b0010;
-					if_addr <= pc + 31'h1;
-					if_inst <= 0;
-				end
+					state <= 4'b1000;
+				end 
 			end
 			4'b0010: begin // the 2nd byte is being prepared, send the 3rd request
 				if(!stall_sign[0]) begin
@@ -162,6 +176,7 @@ always @(posedge clk) begin
 				if(!stall_sign[0]) begin
 					state <= 4'b1001;
 					if_addr <= pc;
+					if_inst <= 0;
 				end
 			end
 			4'b1001: begin
