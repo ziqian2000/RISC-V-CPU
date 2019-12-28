@@ -38,6 +38,7 @@ Compiling module xil_defaultlib.clk_wiz_0_clk_wiz
 Compiling module xil_defaultlib.clk_wiz_0
 Compiling module xil_defaultlib.single_port_ram_sync(ADDR_WIDTH=...
 Compiling module xil_defaultlib.ram
+Compiling module xil_defaultlib.predictor
 Compiling module xil_defaultlib.BTB
 Compiling module xil_defaultlib.icache
 Compiling module xil_defaultlib.if_

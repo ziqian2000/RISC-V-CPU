@@ -35,7 +35,7 @@ integer i;
 
 // write
 always @(posedge clk) begin
-	if (rst) begin
+	if (rst || !rdy) begin
 		for(i = 0; i < `BTBBlockNum; i = i + 1)
 			BTB_valid[i] <= 0;
 	end	else begin

@@ -132,13 +132,23 @@ wire 				idb_we;
 wire[`InstAddrBus] 	idb_waddr;
 wire[31:0]		 	idb_wtarget;
 
+// if, ex --- predictor
+
+wire[`InstAddrBus] 	ifp_raddr;
+wire 				ifp_pre_taken;
+wire 				exp_we;
+wire[`InstAddrBus] 	exp_addr;
+wire 				exp_res_taken;
+
 // **************************** instantiation **************************** 
 
 // predictor
 
-// predictor predictor0(
-// 	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
-// )
+predictor predictor0(
+	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
+	.raddr_i(ifp_raddr), .pre_taken(ifp_pre_taken),
+	.we_i(exp_we), 	.waddr_i(exp_addr), .res_taken(exp_res_taken)
+);
 
 // BTB
 
@@ -179,13 +189,15 @@ if_ if0(
 	.c_raddr_o(ifc_raddr), .c_hit_i(ifc_hit), 	.c_inst_i(ifc_inst),
 	.c_we_o(ifc_we), 	.c_waddr_o(ifc_waddr), .c_wdata_o(ifc_wdata),
 	// to & from BTB
-	.b_raddr_o(ifb_raddr), .b_hit_i(ifb_hit), 	.b_target_i(ifb_target)
+	.b_raddr_o(ifb_raddr), .b_hit_i(ifb_hit), 	.b_target_i(ifb_target),
+	// from predictor
+	.p_raddr_o(ifp_raddr), .pre_taken(ifp_pre_taken)
 );
 
 // if/id
 
 if_id if_id0(
-	.clk(clk_in),		.rst(rst_in),	
+	.clk(clk_in),		.rst(rst_in),	.rdy(rdy_in),
 	.if_pc(if_pc),		.if_inst(if_inst),
 	.if_taken(if_taken),
 	.id_pc(id_pc_i),	.id_inst(id_inst_i),
@@ -246,7 +258,7 @@ id id0(
 // id/ex
 
 id_ex id_ex0(
-	.clk(clk_in),				.rst(rst_in),
+	.clk(clk_in),		.rst(rst_in),	.rdy(rdy_in),
 	// from id
 	.id_opcode(id_opcode),
 	.id_reg1(id_reg1_o),		.id_reg2(id_reg2_o),
@@ -270,7 +282,7 @@ id_ex id_ex0(
 // ex
 
 ex ex0(
-	.rst(rst_in),
+	.rst(rst_in), 	.rdy(rdy_in),
 	// from id/ex
 	.opcode_i(ex_opcode),
 	.reg1_i(ex_reg1_i),			.reg2_i(ex_reg2_i),
@@ -287,7 +299,9 @@ ex ex0(
 	.wdata_o(ex_wdata_o),
 	.mem_addr(ex_mem_addr), 	.opcode_o(ex_mem_opcode),
 	// from ctrl
-	.stall_sign(stall_sign)
+	.stall_sign(stall_sign),
+	// to predictor
+	.p_we(exp_we), 	.p_addr(exp_addr), 	.p_res_taken(exp_res_taken)
 );
 
 // ex/mem
@@ -331,7 +345,7 @@ mem mem0(
 // mem/wb
 
 mem_wb mem_wb0(
-	.clk(clk_in),			.rst(rst_in),
+	.clk(clk_in),		.rst(rst_in),	.rdy(rdy_in),
 	// from mem
 	.mem_wd(mem_wd_o),		.mem_wreg(mem_wreg_o),		.mem_wdata(mem_wdata_o),
 	// to wb

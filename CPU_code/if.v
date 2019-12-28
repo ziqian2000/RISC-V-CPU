@@ -36,9 +36,11 @@ module if_(
 	// (read)
 	output 	reg[`InstAddrBus] 		b_raddr_o,
 	input 	wire 					b_hit_i,
-	input 	wire[31:0]				b_target_i
+	input 	wire[31:0]				b_target_i,
 
-
+	// from predictor(BHT)
+	output 	reg[`InstAddrBus] 		p_raddr_o,
+	input 	wire 					pre_taken
 );
 
 reg[3:0] 		state;
@@ -46,16 +48,16 @@ reg[23:0] 		inst;
 reg[`InstBus] 	pc;
 
 integer i; // cycle counter
-// simpleloop: 13030	-> 9700		-> 8830
-// multiarray: 34320 	-> 32550	-> 24420
+// simpleloop: 13030	-> 9700		-> 8830		-> 8790 	-> 6100
+// multiarray: 34320 	-> 32550	-> 24420	-> 23490 	-> 23370
 
-// reg[3:0] avoid_data_hazard;
+reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
 
-	// i <= i+1;
-	// if(i % 10 == 0) $display(i);
+	i <= i+1;
+	if(i % 10 == 0) $display(i);
 
 	if (rst == `RstEnable || !rdy) begin
 		if_request 	<= 0;
@@ -69,20 +71,22 @@ always @(posedge clk) begin
 		c_wdata_o 	<= 0;
 		c_raddr_o 	<= 0;
 		b_raddr_o 	<= 0;
+		p_raddr_o 	<= 0;
 		i 			<= 0;
 		if_taken  	<= 0;
+		pc_o  		<= 0;
 		// avoid_data_hazard <= 0;
 	// end else if(stall_sign[0]) begin
 		// STALL
 	end else if(branch_enable_i) begin
-		if(!stall_sign[0]) begin
+		// if(!stall_sign[0]) begin
 			if_request 	<= 0;
 			if_addr 	<= 0;
 			pc 			<= branch_addr_i;
 			if_inst 	<= 0;
 			inst 		<= 0;
 			state 		<= 0;
-		end
+		// end
 	end	else begin
 
 		// $display("[%x]", pc);
@@ -101,6 +105,7 @@ always @(posedge clk) begin
 
 						b_raddr_o <= pc;
 						c_raddr_o <= pc;
+						p_raddr_o <= pc;
 
 						c_we_o <= 0;
 
@@ -110,7 +115,7 @@ always @(posedge clk) begin
 							state <= 4'b0001;
 						end
 
-					// 	avoid_data_hazard <= 4'h0; // !!!
+						// avoid_data_hazard <= 4'h0; // !!!
 
 					// end else begin
 					// 	avoid_data_hazard <= avoid_data_hazard - 1;
@@ -119,6 +124,7 @@ always @(posedge clk) begin
 				end
 			end
 			4'b0001: begin // the 1st byte is being prepared, send the 2nd request
+			// if(!avoid_data_hazard) begin
 				if(!stall_sign[0]) begin
 					if(c_hit_i) begin
 						// state <= 4'b0000;
@@ -127,12 +133,22 @@ always @(posedge clk) begin
 						if_inst <= c_inst_i;
 						pc_o <= pc;
 						c_we_o <= 0;
-						if(b_hit_i) begin
+
+						// if(pc == 31'h104c || pc == 31'h1090) begin
+							// state <= 0; //////////////////////////////////////////////
+						// end
+						// if(pc == 31'h1040) begin
+							// state <= 0; //////////////////////////////////////////////
+							// avoid_data_hazard = 31'h2;
+						// end
+
+						if(b_hit_i && pre_taken) begin
 							// $display("%x hit1\n", pc);
 							pc 			<= b_target_i;
 							if_addr 	<= b_target_i;
 							b_raddr_o 	<= b_target_i;
 							c_raddr_o 	<= b_target_i;
+							p_raddr_o 	<= b_target_i;
 							if_taken 	<= 1'b1;
 
 						end else begin
@@ -140,6 +156,7 @@ always @(posedge clk) begin
 							if_addr 	<= pc + 31'h4;
 							b_raddr_o 	<= pc + 31'h4;
 							c_raddr_o 	<= pc + 31'h4;
+							p_raddr_o 	<= pc + 31'h4;
 							if_taken	<= 0;
 						end
 
@@ -151,6 +168,9 @@ always @(posedge clk) begin
 				end else begin
 					state <= 4'b1000;
 				end 
+			// end else begin
+			// 	avoid_data_hazard = avoid_data_hazard - 1'b1;
+			// end
 			end
 			4'b0010: begin // the 2nd byte is being prepared, send the 3rd request
 				if(!stall_sign[0]) begin
@@ -190,7 +210,7 @@ always @(posedge clk) begin
 					c_waddr_o <= pc;
 					c_wdata_o <= {mem_ctrl_data, inst[23:0]};
 
-					if(b_hit_i) begin
+					if(b_hit_i && pre_taken) begin
 						// $display("%x hit2\n", pc);
 						pc <= b_target_i;
 						if_taken <= 1'b1;
@@ -212,6 +232,7 @@ always @(posedge clk) begin
 					state <= 4'b1001;
 					if_addr <= pc;
 					if_inst <= 0;
+					c_we_o <= 0;
 				end
 			end
 			4'b1001: begin

@@ -1,6 +1,7 @@
 module id_ex(
 	input	wire 				clk,
 	input	wire 				rst,
+	input 	wire 				rdy,
 
 	// from id
 	input 	wire[`OpcodeBus]	id_opcode,
@@ -29,7 +30,7 @@ module id_ex(
 );
 
 always @(posedge clk) begin
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 
 		ex_opcode <= 0;
 		ex_reg1 <= `ZeroWord;

@@ -1,5 +1,6 @@
 module ex(
 	input	wire 				rst,
+	input 	wire 				rdy,
 
 	// from id_ex
 	input	wire[`OpcodeBus]	opcode_i,
@@ -24,8 +25,15 @@ module ex(
 	output 	wire[`OpcodeBus] 	opcode_o,
 
 	// from ctrl
-	input 	wire[`StallBus] 		stall_sign
+	input 	wire[`StallBus] 	stall_sign,
+
+	// to predictor(BHT)
+	output 	reg 				p_we,
+	output  reg[`InstAddrBus] 	p_addr,
+	output 	reg 				p_res_taken
 );
+
+	wire[`InstAddrBus]	pc;
 
 	wire 				reg1_eq_reg2;
 	wire 				reg1_lt_reg2_u;
@@ -33,6 +41,8 @@ module ex(
 	wire 				reg1_mux;
 	wire 				reg2_mux;
 	wire 				reg1_lt_reg2; 		// reg1 < reg2
+
+	assign pc = branch_addr_i_n - 31'h4;
 
 	assign opcode_o = opcode_i;
 
@@ -48,15 +58,19 @@ module ex(
 
 	// execute
 	always @ (*) begin
-		if(rst == `RstEnable) begin
+		if(rst == `RstEnable || !rdy) begin
 			wdata_o = 0;
 			branch_enable_o = 0;
 			mem_addr = 0;
+			p_we  			= 0;
+			p_addr 			= 0;
+			p_res_taken 	= 0;
 		end else begin
-
+// $display("%x", pc);
 			case(opcode_i[6:0])
 
 				7'b0110011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
+// $display("ADD");
 					case(opcode_i[10:7])
 						4'b0000: wdata_o = (reg1_i + reg2_i); 								// ADD
 						4'b1000: wdata_o = (reg1_i - reg2_i); 								// SUB
@@ -73,9 +87,11 @@ module ex(
 					endcase
 					branch_enable_o = 0;
 					mem_addr = 0;
+					p_we = 0;
 				end
 
 				7'b0010011: begin 	//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI    almost the same as above
+// $display("ADDI");
 					case(opcode_i[9:7])
 						3'b000: wdata_o = (reg1_i + reg2_i); 								// ADDI
 						3'b001: wdata_o = (reg1_i << reg2_i[4:0]); 							// SLLI
@@ -95,25 +111,34 @@ module ex(
 					endcase
 					branch_enable_o = 0;
 					mem_addr = 0;
+					p_we = 0;
 				end
 
 				7'b0110111: begin 		//LUI
 					branch_enable_o = 0;
 					wdata_o = reg1_i;
 					mem_addr = 0;
+					p_we = 0;
 				end
 				7'b0010111: begin 		//AUIPC
 					branch_enable_o = 0;
 					wdata_o = reg1_i;
 					mem_addr = 0;
+					p_we = 0;
 				end
 				7'b1101111: begin 		//JAL
+// $display("JAL");
 					if(!taken_i) begin
 						branch_enable_o = 1'b1;
 						branch_addr_o  	= branch_addr_i_t;
 					end else begin
 						branch_enable_o = 0;
 					end
+
+					p_we = 1'b1;
+					p_addr = pc;
+					p_res_taken = 1'b1;
+
 					wdata_o = reg2_i;
 					mem_addr = 0;
 				end
@@ -122,8 +147,10 @@ module ex(
 					branch_addr_o  	= branch_addr_i_t;
 					wdata_o = reg2_i;
 					mem_addr = 0;
+					p_we = 0;
 				end
 				7'b1100011: begin	 	//BEQ,BNE,BLT,BGE,BLTU,BGEU	
+// $display("B");
 					case(opcode_i[9:7])
 						3'b000: begin // BEQ
 							if(reg1_i == reg2_i && !taken_i) begin
@@ -135,6 +162,9 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							p_addr = pc;
+							p_res_taken = reg1_i == reg2_i;
 						end
 						3'b001: begin // BNE
 							if(reg1_i != reg2_i && !taken_i) begin
@@ -146,6 +176,10 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							// p_we = 0; //////////////////
+							p_addr = pc;
+							p_res_taken = reg1_i != reg2_i;
 						end
 						3'b100: begin // BLT
 							if(reg1_lt_reg2 && !taken_i) begin
@@ -157,6 +191,9 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							p_addr = pc;
+							p_res_taken = reg1_lt_reg2;
 						end
 						3'b101: begin // BGE
 							if(!reg1_lt_reg2 && !taken_i) begin
@@ -168,6 +205,9 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							p_addr = pc;
+							p_res_taken = !reg1_lt_reg2;
 						end
 						3'b110: begin // BLTU
 							if(reg1_i < reg2_i && !taken_i) begin
@@ -179,6 +219,9 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							p_addr = pc;
+							p_res_taken = reg1_i < reg2_i;
 						end
 						3'b111: begin // BGEU
 							if(reg1_i >= reg2_i && !taken_i) begin
@@ -190,28 +233,37 @@ module ex(
 							end else begin
 								branch_enable_o = 0;
 							end
+							p_we = 1'b1;
+							p_addr = pc;
+							p_res_taken = reg1_i >= reg2_i;
 						end
 						default: begin
 							branch_enable_o = 0;
+							p_we = 0;
 						end	
 					endcase
 					mem_addr = 0;
 					wdata_o = 0;
 				end
 				7'b0000011: begin  		//LOAD
+// $display("LOAD");
 					branch_enable_o = 0;
 					mem_addr = reg1_i + imm_i;
 					wdata_o = 0;
+					p_we = 0;
 				end
 				7'b0100011: begin  		//STORE
+// $display("STORE");
 					branch_enable_o = 0;
 					mem_addr = reg1_i + imm_i;
 					wdata_o = reg2_i;
+					p_we = 0;
 				end
 				default: begin 			// something strange
 					branch_enable_o = 0;
 					wdata_o = 0;
 					mem_addr = 0;
+					p_we = 0;
 				end
 
 			endcase

@@ -68,7 +68,7 @@ assign pc_plus_4 = pc_i + 31'h4;
 // decoding
 
 always @(*) begin
-	if(rst == `RstEnable) begin
+	if(rst == `RstEnable || !rdy) begin
 		opcode_o 	= 0;
 		wd_o 		= `NOPRegAddr;
 		wreg_o		= `WriteDisable;
@@ -79,6 +79,9 @@ always @(*) begin
 		imm			= 32'h0;
 		branch_addr_o_t = 0;
 		branch_addr_o_n = 0;
+		b_we_o 		= 0;
+		b_waddr_o 	= 0;
+		b_wtarget_o = 0;
 		// id_stall_request = 0;
 		
 	end else begin
@@ -168,6 +171,11 @@ always @(*) begin
 				branch_addr_o_t = imm + pc_i;
 				branch_addr_o_n = pc_plus_4;
 				b_we_o 		= 0;
+				// write to BTB
+				b_we_o 			= 1'b1;
+				b_waddr_o 		= pc_i;
+				b_wtarget_o 	= imm + pc_i;
+			
 			end
 			7'b0000011: begin  		//LOAD
 				opcode_o		= {inst_i[30], inst_i[14:12], inst_i[6:0]};
@@ -204,17 +212,13 @@ always @(*) begin
 	end
 end
 
-// data hazard caused by LOAD
+// data hazard
 
 always @(*) begin
 	if (rst) begin
 		id_stall_request = 0;
-	end	else if ((id_ex_wreg_i == 1'b1) && (id_ex_wd_i == reg1_addr_o || id_ex_wd_i == reg2_addr_o)) begin // nearset in ID/EX
-		if(id_ex_opcode_i[6:0] == 7'b0000011) begin
-			id_stall_request = 1;
-		end else begin
-			id_stall_request = 0;
-		end
+	// end	else if ((id_ex_wreg_i == 1'b1) && (id_ex_wd_i == reg1_addr_o || id_ex_wd_i == reg2_addr_o)) begin // nearset in ID/EX
+	// 	id_stall_request = 1;
 	end	else if ((ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o || ex_wd_i == reg2_addr_o)) begin // nearset in EX
 		if(ex_opcode_i[6:0] == 7'b0000011) begin
 			id_stall_request = 1;

@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="3133991667fs"></ZoomStartTime>
-      <ZoomEndTime time="3179041668fs"></ZoomEndTime>
-      <Cursor1Time time="3159000000fs"></Cursor1Time>
+      <ZoomStartTime time="282693334fs"></ZoomStartTime>
+      <ZoomEndTime time="296533335fs"></ZoomEndTime>
+      <Cursor1Time time="287000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="138"></NameColumnWidth>
-      <ValueColumnWidth column_width="71"></ValueColumnWidth>
+      <ValueColumnWidth column_width="67"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="38" />
+   <WVObjectSize size="41" />
    <wvobject fp_name="/testbench/top/hci0/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -73,6 +73,18 @@
    <wvobject fp_name="/testbench/top/cpu0/icache0/winst_i" type="array">
       <obj_property name="ElementShortName">winst_i[31:0]</obj_property>
       <obj_property name="ObjectShortName">winst_i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/cpu0/ex0/taken_i" type="logic">
+      <obj_property name="ElementShortName">taken_i</obj_property>
+      <obj_property name="ObjectShortName">taken_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/cpu0/ex0/branch_enable_o" type="logic">
+      <obj_property name="ElementShortName">branch_enable_o</obj_property>
+      <obj_property name="ObjectShortName">branch_enable_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/top/cpu0/ex0/branch_addr_o" type="array">
+      <obj_property name="ElementShortName">branch_addr_o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">branch_addr_o[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/top/cpu0/mem0/mem_ctrl_data_o" type="array">
       <obj_property name="ElementShortName">mem_ctrl_data_o[7:0]</obj_property>

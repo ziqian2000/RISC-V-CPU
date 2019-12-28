@@ -17,6 +17,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_param xicom.use_bs_reader 1
 set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -56,6 +57,7 @@ read_verilog -library xil_defaultlib {
   D:/CPU/CPU_code/riscv_top.v
   D:/CPU/CPU_code/inst_cache.v
   D:/CPU/CPU_code/BTB.v
+  D:/CPU/CPU_code/predictor.v
 }
 read_ip -quiet D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
 set_property used_in_implementation false [get_files -all d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]

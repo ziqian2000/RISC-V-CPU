@@ -17,7 +17,7 @@ module predictor(
 wire[`PreBlockNumLog2-1:0] 		raddr_idx;
 wire[`PreBlockNumLog2-1:0] 		waddr_idx;
 
-reg[2:0]						branch_history[`PreBlockNum-1:0];
+reg[1:0]						branch_history[`PreBlockNum-1:0];
 
 assign raddr_idx = raddr_i[`PreBlockNumLog2+1:2];
 assign waddr_idx = waddr_i[`PreBlockNumLog2+1:2];
@@ -31,13 +31,15 @@ always @(posedge clk) begin
 			branch_history[i] <= 2'b01;
 	end	else begin
 		if(we_i) begin
-			if(res_taken) 	branch_history[waddr_idx] <= branch_history[waddr_idx] == 2'b11 ? 2'b11 : branch_history[waddr_idx] + 2'b01;
-			else 			branch_history[waddr_idx] <= branch_history[waddr_idx] == 2'b00 ? 2'b00 : branch_history[waddr_idx] - 2'b01;
+			// $display("write on %x\n", waddr_i);
+			if(res_taken)branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b11 ? 2'b11 : branch_history[waddr_idx] + 2'b01);
+			else 		 branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b00 ? 2'b00 : branch_history[waddr_idx] - 2'b01);
 		end
 	end
 end
 
 // read
 assign pre_taken = branch_history[raddr_idx][1];
+// assign pre_taken = 0;
 
 endmodule
