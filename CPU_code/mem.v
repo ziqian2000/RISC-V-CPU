@@ -1,6 +1,7 @@
 module mem(
 	input 	wire 					clk,
 	input 	wire 					rst,
+	input 	wire 					rdy,
 
 	// from ex_mem
 	input	wire[`RegAddrBus]		wd_i,
@@ -54,7 +55,7 @@ always @(*) begin
 end
 
 always @(posedge clk) begin
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 		wd_o <= `NOPRegAddr;
 		wreg_o <= `WriteDisable;
 		wdata_o <= `ZeroWord;

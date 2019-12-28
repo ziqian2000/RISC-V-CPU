@@ -1,6 +1,7 @@
 module if_(
 	input	wire					clk,
 	input 	wire 					rst,
+	input 	wire 					rdy,
 
 	// to & from mem_ctrl
 	output	reg 					if_request, 	//	0 : no request 			
@@ -10,8 +11,9 @@ module if_(
 	input	wire[1:0]				if_or_mem_i,	// 01 : if 		10 : mem
 
 	// to IF/ID
-	output	wire[`InstAddrBus]		pc_o, 			// the true pc value by substract 4 from pc
+	output	reg[`InstAddrBus]		pc_o, 			// the true pc value
 	output	reg[`InstBus]			if_inst,
+	output 	reg 					if_taken,
 
 	// branch
 	input 	wire 					branch_enable_i,
@@ -22,13 +24,19 @@ module if_(
 
 	// to & from icache
 	// (read)
-	output 	reg[`InstAddrBus] 		raddr_o,
-	input 	wire 					hit_i,
-	input 	wire[31:0]				inst_i,
+	output 	reg[`InstAddrBus] 		c_raddr_o,
+	input 	wire 					c_hit_i,
+	input 	wire[31:0]				c_inst_i,
 	// (write)
-	output 	reg 					we_o,
-	output 	reg[`InstAddrBus] 		waddr_o,
-	output 	reg[31:0] 				wdata_o
+	output 	reg 					c_we_o,
+	output 	reg[`InstAddrBus] 		c_waddr_o,
+	output 	reg[31:0] 				c_wdata_o,
+
+	// to & from BTB
+	// (read)
+	output 	reg[`InstAddrBus] 		b_raddr_o,
+	input 	wire 					b_hit_i,
+	input 	wire[31:0]				b_target_i
 
 
 );
@@ -40,8 +48,6 @@ reg[`InstBus] 	pc;
 integer i; // cycle counter
 // simpleloop: 13030	-> 9700		-> 8830
 // multiarray: 34320 	-> 32550	-> 24420
-
-assign pc_o = pc - 32'h4;
 
 // reg[3:0] avoid_data_hazard;
 
@@ -58,11 +64,13 @@ always @(posedge clk) begin
 		if_inst 	<= 0;
 		inst 		<= 0;
 		state 		<= 0;
-		we_o 		<= 0;
-		waddr_o 	<= 0;
-		wdata_o 	<= 0;
-		raddr_o 	<= 0;
+		c_we_o 		<= 0;
+		c_waddr_o 	<= 0;
+		c_wdata_o 	<= 0;
+		c_raddr_o 	<= 0;
+		b_raddr_o 	<= 0;
 		i 			<= 0;
+		if_taken  	<= 0;
 		// avoid_data_hazard <= 0;
 	// end else if(stall_sign[0]) begin
 		// STALL
@@ -77,7 +85,7 @@ always @(posedge clk) begin
 		end
 	end	else begin
 
-		// $display("%x", pc);
+		// $display("[%x]", pc);
 
 		if_request <= 1'b1;
 
@@ -87,11 +95,14 @@ always @(posedge clk) begin
 					// STALL
 				end else if(!stall_sign[1])  begin
 					// if(avoid_data_hazard == 0) begin
+
 						if_addr <= pc;
 						if_inst <= 0;
-						
-						raddr_o <= pc;
-						we_o <= 0;
+
+						b_raddr_o <= pc;
+						c_raddr_o <= pc;
+
+						c_we_o <= 0;
 
 						if(stall_sign[0]) begin
 							state <= 4'b0000;
@@ -99,7 +110,7 @@ always @(posedge clk) begin
 							state <= 4'b0001;
 						end
 
-						// avoid_data_hazard <= 4'ha; // !!!
+					// 	avoid_data_hazard <= 4'h0; // !!!
 
 					// end else begin
 					// 	avoid_data_hazard <= avoid_data_hazard - 1;
@@ -109,15 +120,28 @@ always @(posedge clk) begin
 			end
 			4'b0001: begin // the 1st byte is being prepared, send the 2nd request
 				if(!stall_sign[0]) begin
-					if(hit_i) begin
+					if(c_hit_i) begin
 						// state <= 4'b0000;
-						// if_inst <= inst_i;
+						// if_inst <= c_inst_i;
 						// pc <= pc + 31'h4;
-						if_inst <= inst_i;
-						pc <= pc + 31'h4;
-						if_addr <= pc + 31'h4;
-						raddr_o <= pc + 31'h4;
-						we_o <= 0;
+						if_inst <= c_inst_i;
+						pc_o <= pc;
+						c_we_o <= 0;
+						if(b_hit_i) begin
+							// $display("%x hit1\n", pc);
+							pc 			<= b_target_i;
+							if_addr 	<= b_target_i;
+							b_raddr_o 	<= b_target_i;
+							c_raddr_o 	<= b_target_i;
+							if_taken 	<= 1'b1;
+
+						end else begin
+							pc 			<= pc + 31'h4;
+							if_addr 	<= pc + 31'h4;
+							b_raddr_o 	<= pc + 31'h4;
+							c_raddr_o 	<= pc + 31'h4;
+							if_taken	<= 0;
+						end
 
 					end else begin
 						state <= 4'b0010;
@@ -156,16 +180,25 @@ always @(posedge clk) begin
 			end
 			4'b0101: begin // form the whole instr, send the next request
 				if(!stall_sign[0]) begin
-					// inst[31:24] <= mem_ctrl_data;
+
 					if_inst <= {mem_ctrl_data, inst[23:0]};
-					pc <= pc + 31'h4;
-					// if_addr <= pc + 31'h4;
+					pc_o <= pc;
 
 					state <= 4'b0000;
 
-					we_o <= 1;
-					waddr_o <= pc;
-					wdata_o <= {mem_ctrl_data, inst[23:0]};
+					c_we_o <= 1;
+					c_waddr_o <= pc;
+					c_wdata_o <= {mem_ctrl_data, inst[23:0]};
+
+					if(b_hit_i) begin
+						// $display("%x hit2\n", pc);
+						pc <= b_target_i;
+						if_taken <= 1'b1;
+					end else begin
+						pc <= pc + 31'h4;
+						if_taken <= 0;
+					end
+
 				end else begin
 					state <= 4'b1110;
 				end

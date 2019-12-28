@@ -5,8 +5,8 @@ INFO: [VRFC 10-311] analyzing module dual_port_ram_sync
 INFO: [VRFC 10-311] analyzing module single_port_ram_sync
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/cpu.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module cpu
-INFO: [VRFC 10-2458] undeclared symbol id_stall_request, assumed default net type wire [D:/CPU/CPU_code/cpu.v:197]
-INFO: [VRFC 10-2458] undeclared symbol mem_stall_request, assumed default net type wire [D:/CPU/CPU_code/cpu.v:276]
+INFO: [VRFC 10-2458] undeclared symbol id_stall_request, assumed default net type wire [D:/CPU/CPU_code/cpu.v:239]
+INFO: [VRFC 10-2458] undeclared symbol mem_stall_request, assumed default net type wire [D:/CPU/CPU_code/cpu.v:326]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/ctrl.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ctrl
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/ex.v" into library xil_defaultlib
@@ -52,6 +52,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_project/CPU.srcs/sources
 INFO: [VRFC 10-311] analyzing module clk_wiz_0_clk_wiz
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module clk_wiz_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/BTB.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module BTB
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_code/testbench/testbench.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module testbench
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/CPU/CPU_project/CPU.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib

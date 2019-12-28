@@ -1,31 +1,50 @@
 #include "io.h"
-int f[2801];
-int main() {
-	int a = 10000;
-	int b = 0;
-	int c = 2800;
-	int d = 0;
-	int e = 0;
-	int g = 0;
+//考察点：section 8 语句，包括if,while,for,break,continue,return等
+//算法：线性筛法求欧拉函数
+//样例输入：10
+//样例输出：
+//1
+//2
+//2
+//4
+//2
+//6
+//4
+//6
+//4
 
-	for (;b-c!=0;) 
-		f[b++] = a/5;
-	for (;; e = d%a){
-		d = 0;
-		g = c*2;
-		if (g==0) break;
-		
-		for (b=c;;d=d*b){
-			d=d+f[b]*a;
-			f[b] = d%--g;
-			d=d/g--;
-			if (--b==0) break;
+int N;
+int M = 0;
+int check[20];
+
+int main() {
+    N = inl();
+	int i = 0;
+	while ( i <= N ) check[i++] = 1;
+	int phi[15];
+	int P[15];
+	phi[1] = 1;
+	for (i = 2; ; ++i ) {
+		if ( i > N ) break;
+		if ( check[i] ) {
+			P[++M] = i;
+			phi[i] = i - 1;
 		}
-		
-		c = c-14;
-		outl(e+d/a);
+		int k = i;
+		int i;
+		for (i = 1; i <= M && (k * P[i] <= N); i++) {
+			int tmp = k * P[i];
+			if ( tmp > N ) continue;
+			check[tmp] = 0;
+			if ( k % P[i] == 0) {
+				phi[tmp] = phi[k] * P[i];
+				break;
+			}
+			else {
+				phi[k * P[i]] = phi[k] * (P[i] - 1);
+			}
+		}
+		outlln(phi[k]);
 	}
-	
-  print("\n");
-  return 0;
+    return 0;
 }

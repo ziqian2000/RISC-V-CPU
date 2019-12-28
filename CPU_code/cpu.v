@@ -20,13 +20,13 @@ module cpu(
 
 wire[`InstAddrBus]	if_pc;
 wire[`InstBus]		if_inst;
-
-assign dbgreg_dout = if_pc;
+wire 				if_taken;
 
 // if/id --- id
 
 wire[`InstAddrBus] 	id_pc_i;
 wire[`InstBus]		id_inst_i;
+wire 				if_id_taken;
 
 // id --- id/ex
 
@@ -36,7 +36,9 @@ wire[`RegBus]		id_reg2_o;
 wire 				id_wreg_o;
 wire[`RegAddrBus]	id_wd_o;
 wire[31:0] 			id_imm;
-wire[`InstAddrBus] 	id_branch_addr;
+wire[`InstAddrBus] 	id_branch_addr_t;
+wire[`InstAddrBus] 	id_branch_addr_n;
+wire 				id_taken;
 
 // id/ex --- ex
 
@@ -46,7 +48,9 @@ wire[`RegBus]		ex_reg2_i;
 wire 				ex_wreg_i;
 wire[`RegAddrBus]	ex_wd_i;
 wire[31:0] 			ex_imm;
-wire[`InstAddrBus] 	ex_branch_addr;
+wire[`InstAddrBus] 	ex_branch_addr_t;
+wire[`InstAddrBus] 	ex_branch_addr_n;
+wire 				ex_taken;
 
 // ex --- ex/mem
 
@@ -119,7 +123,32 @@ wire 				ifc_we;
 wire[`InstAddrBus] 	ifc_waddr;
 wire[31:0]		 	ifc_wdata;
 
+// if, id --- BTB
+
+wire[`InstAddrBus] 	ifb_raddr;
+wire 				ifb_hit;
+wire[31:0] 			ifb_target;
+wire 				idb_we;
+wire[`InstAddrBus] 	idb_waddr;
+wire[31:0]		 	idb_wtarget;
+
 // **************************** instantiation **************************** 
+
+// predictor
+
+// predictor predictor0(
+// 	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
+// )
+
+// BTB
+
+BTB BTB0(
+	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
+	// read
+	.raddr_i(ifb_raddr), .hit_o(ifb_hit), .target_o(ifb_target),
+	// write
+	.we_i(idb_we), .waddr_i(idb_waddr), .wtarget_i(idb_wtarget)
+);
 
 // icache
 
@@ -134,21 +163,23 @@ icache icache0(
 // if
 
 if_ if0(
-	.clk(clk_in),				.rst(rst_in),	
+	.clk(clk_in),	.rst(rst_in),	.rdy(rdy_in),
 	// mem_ctrl
 	.if_request(if_request), 	.if_addr(if_addr),
 	.mem_ctrl_data(cpu_data_o),
 	.if_or_mem_i(if_or_mem_o),
 	// to if/id
-	.pc_o(if_pc),					.if_inst(if_inst),
+	.pc_o(if_pc),	.if_inst(if_inst), 	.if_taken(if_taken),
 	// from ID
 	.branch_enable_i(branch_enable),
 	.branch_addr_i(branch_addr),
 	// from ctrl
 	.stall_sign(stall_sign),
 	// to & from icache
-	.raddr_o(ifc_raddr), .hit_i(ifc_hit), 	.inst_i(ifc_inst),
-	.we_o(ifc_we), 	.waddr_o(ifc_waddr), .wdata_o(ifc_wdata)
+	.c_raddr_o(ifc_raddr), .c_hit_i(ifc_hit), 	.c_inst_i(ifc_inst),
+	.c_we_o(ifc_we), 	.c_waddr_o(ifc_waddr), .c_wdata_o(ifc_wdata),
+	// to & from BTB
+	.b_raddr_o(ifb_raddr), .b_hit_i(ifb_hit), 	.b_target_i(ifb_target)
 );
 
 // if/id
@@ -156,7 +187,9 @@ if_ if0(
 if_id if_id0(
 	.clk(clk_in),		.rst(rst_in),	
 	.if_pc(if_pc),		.if_inst(if_inst),
+	.if_taken(if_taken),
 	.id_pc(id_pc_i),	.id_inst(id_inst_i),
+	.id_taken(if_id_taken),
 	// from ctrl
 	.stall_sign(stall_sign)
 );
@@ -174,7 +207,8 @@ regfile regfile0(
 
 id id0(
 	.rst(rst_in), 		.rdy(rdy_in),
-	.pc_i(id_pc_i),		.inst_i(id_inst_i),
+	.pc_i(id_pc_i),		.inst_i(id_inst_i), 	
+	.taken_i(if_id_taken),
 	// from regfile
 	.reg1_data_i(reg1_data),	.reg2_data_i(reg2_data),
 	// to regfile
@@ -185,8 +219,13 @@ id id0(
 	.reg1_o(id_reg1_o),			.reg2_o(id_reg2_o),
 	.wd_o(id_wd_o),				.wreg_o(id_wreg_o),
 	.imm(id_imm),
-	.branch_addr_o(id_branch_addr),
+	.branch_addr_o_t(id_branch_addr_t),
+	.branch_addr_o_n(id_branch_addr_n),
+	.taken_o(id_taken),
 	// data hazard
+	.id_ex_wreg_i(ex_wreg_i), .id_ex_wd_i(ex_wd_i),
+	.id_ex_opcode_i(ex_opcode),
+
 	.ex_wreg_i(ex_wreg_o), .ex_wdata_i(ex_wdata_o), .ex_wd_i(ex_wd_o),
 	.ex_opcode_i(ex_mem_opcode),
 
@@ -194,9 +233,14 @@ id id0(
 	.ex_mem_opcode_i(mem_opcode),
 
 	.mem_wreg_i(mem_wreg_o), .mem_wdata_i(mem_wdata_o), .mem_wd_i(mem_wd_o),
+
+	.wb_wreg_i(wb_wreg_i), .wb_wdata_i(wb_wdata_i), .wb_wd_i(wb_wd_i),
+
 	.id_stall_request(id_stall_request),
 	// from ctrl
-	.stall_sign(stall_sign)
+	.stall_sign(stall_sign),
+	// to BTB
+	.b_we_o(idb_we), 	.b_waddr_o(idb_waddr), 	.b_wtarget_o(idb_wtarget)
 );
 
 // id/ex
@@ -208,13 +252,17 @@ id_ex id_ex0(
 	.id_reg1(id_reg1_o),		.id_reg2(id_reg2_o),
 	.id_wd(id_wd_o),			.id_wreg(id_wreg_o),
 	.id_imm(id_imm),
-	.id_branch_addr(id_branch_addr),
+	.id_branch_addr_t(id_branch_addr_t),
+	.id_branch_addr_n(id_branch_addr_n),
+	.id_taken(id_taken),
 	// to ex
 	.ex_opcode(ex_opcode),
 	.ex_reg1(ex_reg1_i),		.ex_reg2(ex_reg2_i),
 	.ex_wd(ex_wd_i),			.ex_wreg(ex_wreg_i),
 	.ex_imm(ex_imm),
-	.ex_branch_addr(ex_branch_addr),
+	.ex_branch_addr_t(ex_branch_addr_t),
+	.ex_branch_addr_n(ex_branch_addr_n),
+	.ex_taken(ex_taken),
 	// from ctrl
 	.stall_sign(stall_sign)
 );
@@ -228,7 +276,9 @@ ex ex0(
 	.reg1_i(ex_reg1_i),			.reg2_i(ex_reg2_i),
 	.wd_i(ex_wd_i),				.wreg_i(ex_wreg_i),
 	.imm_i(ex_imm),
-	.branch_addr_i(ex_branch_addr),
+	.branch_addr_i_t(ex_branch_addr_t),
+	.branch_addr_i_n(ex_branch_addr_n),
+	.taken_i(ex_taken),
 	// to IF
 	.branch_enable_o(branch_enable),
 	.branch_addr_o(branch_addr),
@@ -243,7 +293,7 @@ ex ex0(
 // ex/mem
 
 ex_mem ex_mem0(
-	.clk(clk_in),				.rst(rst_in),
+	.clk(clk_in),	.rst(rst_in), 		.rdy(rdy_in),
 	// from ex
 	.ex_wd(ex_wd_o),			.ex_wreg(ex_wreg_o),
 	.ex_wdata(ex_wdata_o),
@@ -259,7 +309,7 @@ ex_mem ex_mem0(
 // mem
 
 mem mem0(
-	.clk(clk_in),				.rst(rst_in),
+	.clk(clk_in),	.rst(rst_in), 		.rdy(rdy_in),
 	// from ex/mem
 	.wd_i(mem_wd_i),			.wreg_i(mem_wreg_i), 		
 	.wdata_i(mem_wdata_i),	

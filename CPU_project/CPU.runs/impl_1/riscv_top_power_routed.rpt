@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Sat Dec 28 12:07:45 2019
+| Date             : Sat Dec 28 20:27:28 2019
 | Host             : ZIQIAN running 64-bit major release  (build 9200)
 | Command          : report_power -file riscv_top_power_routed.rpt -pb riscv_top_power_summary_routed.pb -rpx riscv_top_power_routed.rpx
 | Design           : riscv_top
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.214        |
+| Total On-Chip Power (W)  | 0.215        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.141        |
@@ -52,21 +52,21 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.007 |        8 |       --- |             --- |
-| Slice Logic              |     0.002 |     4052 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     2005 |     20800 |            9.64 |
-|   CARRY4                 |    <0.001 |      131 |      8150 |            1.61 |
-|   LUT as Distributed RAM |    <0.001 |      552 |      9600 |            5.75 |
-|   Register               |    <0.001 |      955 |     41600 |            2.30 |
-|   F7/F8 Muxes            |    <0.001 |       68 |     32600 |            0.21 |
-|   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |       34 |       --- |             --- |
-| Signals                  |     0.003 |     3307 |       --- |             --- |
-| Block RAM                |     0.025 |       32 |        50 |           64.00 |
+| Clocks                   |     0.006 |        8 |       --- |             --- |
+| Slice Logic              |     0.002 |     4613 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     2270 |     20800 |           10.91 |
+|   CARRY4                 |    <0.001 |      132 |      8150 |            1.62 |
+|   LUT as Distributed RAM |    <0.001 |      608 |      9600 |            6.33 |
+|   Register               |    <0.001 |     1167 |     41600 |            2.81 |
+|   F7/F8 Muxes            |    <0.001 |       77 |     32600 |            0.24 |
+|   BUFG                   |    <0.001 |        4 |        32 |           12.50 |
+|   Others                 |     0.000 |       39 |       --- |             --- |
+| Signals                  |     0.003 |     3730 |       --- |             --- |
+| Block RAM                |     0.026 |       32 |        50 |           64.00 |
 | PLL                      |     0.103 |        1 |         5 |           20.00 |
 | I/O                      |    <0.001 |        5 |       106 |            4.72 |
 | Static Power             |     0.073 |          |           |                 |
-| Total                    |     0.214 |          |           |                 |
+| Total                    |     0.215 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -95,17 +95,17 @@ Table of Contents
 1.3 Confidence Level
 --------------------
 
-+-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
-| User Input Data             | Confidence | Details                                               | Action                                                                                                     |
-+-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
-| Design implementation state | High       | Design is routed                                      |                                                                                                            |
-| Clock nodes activity        | High       | User specified more than 95% of clocks                |                                                                                                            |
-| I/O nodes activity          | Medium     | More than 5% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view   |
-| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes        | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
-| Device models               | High       | Device models are Production                          |                                                                                                            |
-|                             |            |                                                       |                                                                                                            |
-| Overall confidence level    | Medium     |                                                       |                                                                                                            |
-+-----------------------------+------------+-------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
++-----------------------------+------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                               | Action                                                                                                             |
++-----------------------------+------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                                      |                                                                                                                    |
+| Clock nodes activity        | Medium     | More than 5% of clocks are missing user specification | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| I/O nodes activity          | Medium     | More than 5% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes        | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
+| Device models               | High       | Device models are Production                          |                                                                                                                    |
+|                             |            |                                                       |                                                                                                                    |
+| Overall confidence level    | Medium     |                                                       |                                                                                                                    |
++-----------------------------+------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 
 2. Settings
@@ -154,9 +154,25 @@ Table of Contents
 |   NEW_CLOCK                           |     0.104 |
 |     inst                              |     0.104 |
 |   cpu0                                |     0.007 |
+|     BTB0                              |     0.001 |
+|       BTB_data_reg_0_63_0_2           |    <0.001 |
+|       BTB_data_reg_0_63_12_14         |    <0.001 |
+|       BTB_data_reg_0_63_15_17         |    <0.001 |
+|       BTB_data_reg_0_63_18_20         |    <0.001 |
+|       BTB_data_reg_0_63_21_23         |    <0.001 |
+|       BTB_data_reg_0_63_24_26         |    <0.001 |
+|       BTB_data_reg_0_63_27_29         |    <0.001 |
+|       BTB_data_reg_0_63_30_31         |    <0.001 |
+|       BTB_data_reg_0_63_3_5           |    <0.001 |
+|       BTB_data_reg_0_63_6_8           |    <0.001 |
+|       BTB_data_reg_0_63_9_11          |    <0.001 |
+|       BTB_tag_reg_0_63_0_2            |    <0.001 |
+|       BTB_tag_reg_0_63_3_5            |    <0.001 |
+|       BTB_tag_reg_0_63_6_8            |    <0.001 |
 |     ctrl0                             |    <0.001 |
+|     ex0                               |    <0.001 |
 |     ex_mem0                           |    <0.001 |
-|     icache0                           |     0.001 |
+|     icache0                           |    <0.001 |
 |       cache_data_reg_0_63_0_2         |    <0.001 |
 |       cache_data_reg_0_63_12_14       |    <0.001 |
 |       cache_data_reg_0_63_15_17       |    <0.001 |
@@ -191,7 +207,7 @@ Table of Contents
 |       cache_tag_reg_64_127_7_7        |    <0.001 |
 |     id0                               |    <0.001 |
 |     id_ex0                            |     0.001 |
-|     if0                               |     0.002 |
+|     if0                               |     0.001 |
 |     if_id0                            |     0.001 |
 |     mem0                              |    <0.001 |
 |     mem_wb0                           |    <0.001 |
@@ -281,7 +297,7 @@ Table of Contents
 |         q_data_array_reg_0_7_0_5      |    <0.001 |
 |         q_data_array_reg_0_7_6_7      |    <0.001 |
 |       uart_tx_blk                     |    <0.001 |
-|       uart_tx_fifo                    |     0.001 |
+|       uart_tx_fifo                    |    <0.001 |
 |         q_data_array_reg_0_63_0_2     |    <0.001 |
 |         q_data_array_reg_0_63_3_5     |    <0.001 |
 |         q_data_array_reg_0_63_6_6     |    <0.001 |

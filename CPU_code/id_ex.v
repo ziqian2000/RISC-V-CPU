@@ -9,7 +9,9 @@ module id_ex(
 	input	wire[`RegAddrBus]	id_wd,
 	input	wire				id_wreg,
 	input 	wire[31:0] 			id_imm,
-	input 	wire[`InstAddrBus]	id_branch_addr,
+	input 	wire[`InstAddrBus]	id_branch_addr_t,
+	input 	wire[`InstAddrBus]	id_branch_addr_n,
+	input 	wire 				id_taken,
 
 	// to ex
 	output	reg[`OpcodeBus]		ex_opcode,
@@ -18,10 +20,12 @@ module id_ex(
 	output	reg[`RegAddrBus]	ex_wd,
 	output	reg 				ex_wreg,
 	output  reg[31:0] 			ex_imm,
-	output 	reg[`InstAddrBus]	ex_branch_addr,
+	output 	reg[`InstAddrBus]	ex_branch_addr_t,
+	output 	reg[`InstAddrBus]	ex_branch_addr_n,
+	output 	reg 				ex_taken,
 
 	// from ctrl
-	input 	wire[`StallBus] 		stall_sign
+	input 	wire[`StallBus] 	stall_sign
 );
 
 always @(posedge clk) begin
@@ -33,7 +37,9 @@ always @(posedge clk) begin
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
 		ex_imm <= 0;
-		ex_branch_addr <= 0;
+		ex_branch_addr_t <= 0;
+		ex_branch_addr_n <= 0;
+		ex_taken 		<= 0;
 
 	end else if(stall_sign[2] && !stall_sign[3]) begin
 
@@ -43,7 +49,9 @@ always @(posedge clk) begin
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
 		ex_imm <= 0;
-		ex_branch_addr <= 0;
+		ex_branch_addr_t <= 0;
+		ex_branch_addr_n <= 0;
+		ex_taken 		<= 0;
 
 	end else if(stall_sign[3] && !stall_sign[4]) begin
 
@@ -53,7 +61,9 @@ always @(posedge clk) begin
 		ex_wd <= `NOPRegAddr;
 		ex_wreg <= `WriteDisable;
 		ex_imm <= 0;
-		ex_branch_addr <= 0;
+		ex_branch_addr_t <= 0;
+		ex_branch_addr_n <= 0;
+		ex_taken 		<= 0;
 		
 	end else if(stall_sign[3]) begin
 		// STALL
@@ -65,7 +75,9 @@ always @(posedge clk) begin
 		ex_wd <= id_wd;
 		ex_wreg <= id_wreg;
 		ex_imm <= id_imm;
-		ex_branch_addr <= id_branch_addr;
+		ex_branch_addr_t <= id_branch_addr_t;
+		ex_branch_addr_n <= id_branch_addr_n;
+		ex_taken 		 <= id_taken;
 	end
 end
 

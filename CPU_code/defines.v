@@ -50,3 +50,6 @@
 
 `define PreBlockNum 				64
 `define PreBlockNumLog2 			6
+
+`define BTBBlockNum 				64
+`define BTBBlockNumLog2 			6

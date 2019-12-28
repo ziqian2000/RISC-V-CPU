@@ -8,11 +8,13 @@ module ex(
 	input	wire[`RegAddrBus]	wd_i,
 	input	wire				wreg_i,
 	input 	wire[31:0] 			imm_i,
-	input 	wire[`InstAddrBus] 	branch_addr_i,
+	input 	wire[`InstAddrBus] 	branch_addr_i_t,
+	input 	wire[`InstAddrBus] 	branch_addr_i_n,
+	input 	wire 				taken_i,
 
 	// to if
 	output 	reg					branch_enable_o,
-	output 	wire[`InstAddrBus]	branch_addr_o,
+	output 	reg[`InstAddrBus]	branch_addr_o,
 
 	// to ex_mem
 	output 	reg[`RegAddrBus] 	wd_o,
@@ -33,7 +35,6 @@ module ex(
 	wire 				reg1_lt_reg2; 		// reg1 < reg2
 
 	assign opcode_o = opcode_i;
-	assign branch_addr_o = branch_addr_i;
 
 	assign reg1_eq_reg2 = (reg1_i == reg2_i);
 	assign reg1_lt_reg2_u = reg1_i < reg2_i;
@@ -52,6 +53,7 @@ module ex(
 			branch_enable_o = 0;
 			mem_addr = 0;
 		end else begin
+
 			case(opcode_i[6:0])
 
 				7'b0110011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
@@ -106,46 +108,88 @@ module ex(
 					mem_addr = 0;
 				end
 				7'b1101111: begin 		//JAL
-					branch_enable_o = 1'b1;
+					if(!taken_i) begin
+						branch_enable_o = 1'b1;
+						branch_addr_o  	= branch_addr_i_t;
+					end else begin
+						branch_enable_o = 0;
+					end
 					wdata_o = reg2_i;
 					mem_addr = 0;
 				end
 				7'b1100111: begin 		//JALR
 					branch_enable_o = 1'b1;
+					branch_addr_o  	= branch_addr_i_t;
 					wdata_o = reg2_i;
 					mem_addr = 0;
 				end
 				7'b1100011: begin	 	//BEQ,BNE,BLT,BGE,BLTU,BGEU	
 					case(opcode_i[9:7])
 						3'b000: begin // BEQ
-							if(reg1_i == reg2_i) begin
+							if(reg1_i == reg2_i && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(reg1_i != reg2_i && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						3'b001: begin // BNE
-							if(reg1_i != reg2_i) begin
+							if(reg1_i != reg2_i && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(reg1_i == reg2_i && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						3'b100: begin // BLT
-							if(reg1_lt_reg2) begin
+							if(reg1_lt_reg2 && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(!reg1_lt_reg2 && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						3'b101: begin // BGE
-							if(!reg1_lt_reg2) begin
+							if(!reg1_lt_reg2 && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(reg1_lt_reg2 && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						3'b110: begin // BLTU
-							if(reg1_i < reg2_i) begin
+							if(reg1_i < reg2_i && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(reg1_i >= reg2_i && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						3'b111: begin // BGEU
-							if(reg1_i >= reg2_i) begin
+							if(reg1_i >= reg2_i && !taken_i) begin
 								branch_enable_o	= 1'b1;
-							end else branch_enable_o = 0;
+								branch_addr_o  	= branch_addr_i_t;	
+							end else if(reg1_i < reg2_i && taken_i) begin
+								branch_enable_o = 1'b1;
+								branch_addr_o  	= branch_addr_i_n;	
+							end else begin
+								branch_enable_o = 0;
+							end
 						end
 						default: begin
 							branch_enable_o = 0;

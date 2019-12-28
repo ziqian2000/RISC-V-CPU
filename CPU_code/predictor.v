@@ -26,7 +26,7 @@ integer i;
 
 // write
 always @(posedge clk) begin
-	if (rst) begin
+	if (rst || !rdy) begin
 		for(i = 0; i < `PreBlockNum; i = i + 1)
 			branch_history[i] <= 2'b01;
 	end	else begin

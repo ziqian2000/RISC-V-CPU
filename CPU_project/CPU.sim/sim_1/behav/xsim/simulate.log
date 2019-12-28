@@ -1,6 +1,8 @@
 Vivado Simulator 2018.2
 Time resolution is 1 ps
 Warning : input CLKIN1 period and attribute CLKIN1_PERIOD on PLLE2_ADV instance testbench.top.NEW_CLOCK.inst.plle2_adv_inst are not same.
-2255220000000000
+11
 
-$finish called at time : 19561 ns : File "D:/CPU/CPU_code/common/hci.v" Line 251
+22GG
+
+$finish called at time : 2455 ns : File "D:/CPU/CPU_code/common/hci.v" Line 251
