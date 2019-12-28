@@ -15,28 +15,26 @@ module icache(
 
 );
 
-// tag : [16:7]	  	index : [6:0]
+wire[`CacheBlockNumLog2+1:2] 		raddr_idx;
+wire[16:`CacheBlockNumLog2+2] 		raddr_tag;
+wire[`CacheBlockNumLog2+1:2] 		waddr_idx;
+wire[16:`CacheBlockNumLog2+2] 		waddr_tag;
 
-wire[6:0] 		raddr_idx;
-wire[16:7] 		raddr_tag;
-wire[6:0] 		waddr_idx;
-wire[16:7] 		waddr_tag;
+reg 								cache_valid[`CacheBlockNum-1:0];
+reg[14-`CacheBlockNumLog2:0]		cache_tag[`CacheBlockNum-1:0];
+reg[31:0] 							cache_data[`CacheBlockNum-1:0];
 
-reg 			cache_valid[`BlockNum-1:0];
-reg[9:0]		cache_tag[`BlockNum-1:0];
-reg[31:0] 		cache_data[`BlockNum-1:0];
-
-assign raddr_idx = raddr_i[6:0];
-assign raddr_tag = raddr_i[16:7];
-assign waddr_idx = waddr_i[6:0];
-assign waddr_tag = waddr_i[16:7];
+assign raddr_idx = raddr_i[`CacheBlockNumLog2+1:2];
+assign raddr_tag = raddr_i[16:`CacheBlockNumLog2+2];
+assign waddr_idx = waddr_i[`CacheBlockNumLog2+1:2];
+assign waddr_tag = waddr_i[16:`CacheBlockNumLog2+2];
 
 integer i;
 
 // write
 always @(posedge clk) begin
 	if (rst) begin
-		for(i = 0; i < `BlockNum; i = i + 1)
+		for(i = 0; i < `CacheBlockNum; i = i + 1)
 			cache_valid[i] <= 0;
 	end	else begin
 		if(we_i) begin

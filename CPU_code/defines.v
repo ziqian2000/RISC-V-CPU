@@ -45,4 +45,8 @@
 
 // **************************** cache **************************** 
 
-`define BlockNum 			128 // 2 ^ 7
+`define CacheBlockNum 				128
+`define CacheBlockNumLog2 			7
+
+`define PreBlockNum 				64
+`define PreBlockNumLog2 			6

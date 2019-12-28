@@ -38,8 +38,8 @@ reg[23:0] 		inst;
 reg[`InstBus] 	pc;
 
 integer i; // cycle counter
-// 13030 for simpleloop -> 9700
-// 34320 for multiarray -> 32550
+// simpleloop: 13030	-> 9700		-> 8830
+// multiarray: 34320 	-> 32550	-> 24420
 
 assign pc_o = pc - 32'h4;
 
@@ -51,7 +51,7 @@ always @(posedge clk) begin
 	// i <= i+1;
 	// if(i % 10 == 0) $display(i);
 
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 		if_request 	<= 0;
 		if_addr 	<= 0;
 		pc  		<= 0;
@@ -59,8 +59,11 @@ always @(posedge clk) begin
 		inst 		<= 0;
 		state 		<= 0;
 		we_o 		<= 0;
-		// avoid_data_hazard <= 0;
+		waddr_o 	<= 0;
+		wdata_o 	<= 0;
+		raddr_o 	<= 0;
 		i 			<= 0;
+		// avoid_data_hazard <= 0;
 	// end else if(stall_sign[0]) begin
 		// STALL
 	end else if(branch_enable_i) begin
@@ -110,7 +113,6 @@ always @(posedge clk) begin
 						// state <= 4'b0000;
 						// if_inst <= inst_i;
 						// pc <= pc + 31'h4;
-
 						if_inst <= inst_i;
 						pc <= pc + 31'h4;
 						if_addr <= pc + 31'h4;

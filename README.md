@@ -14,7 +14,7 @@ A RISC-V CPU project.
 
 Take `pi.c` for example:
 
-- 100 Hz: 2.734375 s
+- 100 Hz: 2.171875 s
 - 150 Hz: failed.
 - 200 Hz: failed.
 
@@ -27,5 +27,9 @@ Take `pi.c` for example:
 - better structure for IF stage
 
 - cache optimization like victim cache
+
+- eliminate inferring latch
+
+- take higher order bit for cache index
 
   
