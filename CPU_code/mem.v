@@ -25,6 +25,18 @@ module mem(
 	// to ctrl
 	output 	reg 					mem_stall_request,
 
+	// to & from dcache
+	// (read)
+	output 	reg[`InstAddrBus] 		c_raddr_o,
+	output 	reg[1:0] 				c_rbyte_o,
+	input 	wire 					c_hit_i,
+	input 	wire[31:0]				c_data_i,
+	// (write)
+	output 	reg 					c_we_o,
+	output 	reg[1:0] 				c_wbyte_o,
+	output 	reg[`InstAddrBus] 		c_waddr_o,
+	output 	reg[31:0] 				c_wdata_o,
+
 	// from ctrl
 	input 	wire[`StallBus] 		stall_sign
 );
@@ -35,10 +47,9 @@ reg 		mem_done;
 // when applying combinational logic 
 // use "=" instead of "<=" to avoid a endless loop caused by the change of state
 
-
 // stall observer
 always @(*) begin
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 		mem_stall_request = 0;
 	end else begin
 		if(mem_done) begin
@@ -64,6 +75,12 @@ always @(posedge clk) begin
 		mem_request <= 0;
 		mem_addr <= 0;
 		mem_done <= 0;
+		c_we_o 	<= 0;
+		c_raddr_o <= 0;
+		c_rbyte_o <= 0;
+		c_wbyte_o <= 0;
+		c_waddr_o <= 0;
+		c_wdata_o <= 0;
 
 	end else if(stall_sign[6]) begin
 	// 	STALL
@@ -85,25 +102,80 @@ always @(posedge clk) begin
 							state <= 4'b0001;
 							
 							if(opcode_i[6:0] == 7'b0000011) begin 			// LOAD
-								mem_addr <= mem_addr_i;
+								mem_addr 	<= mem_addr_i;
 								mem_request <= 2'b01;
+								c_raddr_o 	<= mem_addr_i;
+								c_we_o 		<= 0;
+								case(opcode_i[9:7])
+									`LB, `LBU: begin
+										c_rbyte_o <= 2'b00;
+									end
+									`LH, `LHU: begin
+										c_rbyte_o <= 2'b01;
+									end
+									`LW: begin
+										c_rbyte_o <= 2'b10;
+									end
+								endcase
 							end else begin 			
 								mem_addr <= mem_addr_i;						// STORE
 								mem_request <= 2'b10;
 								mem_ctrl_data_o <= wdata_i[7:0];
+
+								c_we_o <= 1;
+								c_wdata_o <= wdata_i;
+								c_waddr_o <= mem_addr_i;
+								case(opcode_i[9:7])
+									`SB: begin
+										c_wbyte_o <= 2'b00;
+									end
+									`SH: begin
+										c_wbyte_o <= 2'b01;
+									end
+									`SW: begin
+										c_wbyte_o <= 2'b10;
+									end
+								endcase
+
 							end
 						end
 						4'b0001: begin // the 1st byte is being loaded/stored, send the 2nd request
 							if(opcode_i[6:0] == 7'b0000011) begin 			// LOAD
-								case(opcode_i[9:7])
-									`LB, `LBU: begin
-										state <= 4'b0010;
-									end
-									`LH, `LHU, `LW: begin
-										mem_addr <= mem_addr_i + 1;
-										state <= 4'b0010;
-									end
-								endcase
+								if(c_hit_i) begin
+									// $display("dcache hit");
+									case(opcode_i[9:7])
+										`LB: begin
+											wdata_o 	<= {{24{c_data_i[7]}}, c_data_i[7:0]};
+										end
+										`LBU: begin
+											wdata_o 	<= {24'b0, c_data_i[7:0]};
+										end
+										`LH: begin
+											wdata_o 	<= {{16{c_data_i[15]}}, c_data_i[15:0]};
+										end
+										`LHU: begin
+											wdata_o 	<= {16'b0, c_data_i[15:0]};
+										end
+										`LW: begin
+											wdata_o 	<= c_data_i;
+										end
+									endcase
+									mem_request <= 0;
+									mem_done <= 1;
+									state <= 4'b0000;
+
+								end else begin
+									c_we_o <= 0;
+									case(opcode_i[9:7])
+										`LB, `LBU: begin
+											state <= 4'b0010;
+										end
+										`LH, `LHU, `LW: begin
+											mem_addr <= mem_addr_i + 1;
+											state <= 4'b0010;
+										end
+									endcase
+								end
 							end else begin 									// STORE
 								case(opcode_i[9:7])
 									`SB: begin
@@ -129,6 +201,11 @@ always @(posedge clk) begin
 										mem_request <= 0;
 										
 										mem_done <= 1;
+
+										c_we_o <= 1;
+										c_waddr_o <= mem_addr_i;
+										c_wdata_o <= {{24{mem_ctrl_data_i[7]}}, mem_ctrl_data_i};
+										c_wbyte_o <= 2'b00;
 									end
 									`LBU: begin
 										wdata_o <= {24'b0, mem_ctrl_data_i};
@@ -136,6 +213,11 @@ always @(posedge clk) begin
 										mem_request <= 0;
 										
 										mem_done <= 1;
+
+										c_we_o <= 1;
+										c_waddr_o <= mem_addr_i;
+										c_wdata_o <= {24'b0, mem_ctrl_data_i};
+										c_wbyte_o <= 2'b00;
 									end
 									`LH, `LHU: begin
 										wdata_o[7:0] <= mem_ctrl_data_i;
@@ -173,6 +255,11 @@ always @(posedge clk) begin
 										mem_request <= 0;
 										
 										mem_done <= 1;
+
+										c_we_o <= 1;
+										c_waddr_o <= mem_addr_i;
+										c_wdata_o <= {{16{mem_ctrl_data_i[7]}}, mem_ctrl_data_i, wdata_o[7:0]};
+										c_wbyte_o <= 2'b01;
 									end
 									`LHU: begin
 										wdata_o[31:8] <= {16'b0, mem_ctrl_data_i};
@@ -180,6 +267,11 @@ always @(posedge clk) begin
 										mem_request <= 0;
 										
 										mem_done <= 1;
+
+										c_we_o <= 1;
+										c_waddr_o <= mem_addr_i;
+										c_wdata_o <= {16'b0, mem_ctrl_data_i, wdata_o[7:0]};
+										c_wbyte_o <= 2'b01;
 									end
 									`LW: begin
 										wdata_o[15:8] <= mem_ctrl_data_i;
@@ -225,6 +317,11 @@ always @(posedge clk) begin
 										mem_request <= 0;
 										
 										mem_done <= 1;
+
+										c_we_o <= 1;
+										c_waddr_o <= mem_addr_i;
+										c_wdata_o <= {mem_ctrl_data_i, wdata_o[23:0]};
+										c_wbyte_o <= 2'b10;
 									end
 								endcase
 							end else begin 									// STORE

@@ -82,7 +82,7 @@ always @(*) begin
 		b_we_o 		= 0;
 		b_waddr_o 	= 0;
 		b_wtarget_o = 0;
-		// id_stall_request = 0;
+		taken_o		= 0;
 		
 	end else begin
 
@@ -233,7 +233,7 @@ end
 // operand 1
 
 always @(*) begin
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 		reg1_o = `ZeroWord;
 	end else if(rdy) begin
 		if(reg1_read_o == 1'b1) begin
@@ -261,7 +261,7 @@ end
 // operand 2
 
 always @(*) begin
-	if (rst == `RstEnable) begin
+	if (rst == `RstEnable || !rdy) begin
 		reg2_o = `ZeroWord;
 	end else if(rdy) begin
 		if(reg2_read_o == 1'b1) begin

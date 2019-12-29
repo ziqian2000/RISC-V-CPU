@@ -49,14 +49,14 @@ reg[`InstBus] 	pc;
 
 integer i; // cycle counter
 // simpleloop: 13030	-> 9700		-> 8830		-> 8790 	-> 6100
-// multiarray: 34320 	-> 32550	-> 24420	-> 23490 	-> 23370
+// multiarray: 34320 	-> 32550	-> 24420	-> 23490 	-> 23370 	-> 22920
 
 // reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
 
-	// i <= i+1;  if(i % 10 == 0) $display(i);
+	// i <= i+1;  if(i % 100 == 0) $display(i);
 
 	if (rst == `RstEnable || !rdy) begin
 		if_request 	<= 0;

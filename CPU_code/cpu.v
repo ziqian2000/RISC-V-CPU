@@ -140,7 +140,20 @@ wire 				exp_we;
 wire[`InstAddrBus] 	exp_addr;
 wire 				exp_res_taken;
 
+// mem --- dcache
+
+wire[`InstAddrBus] 	memc_raddr;
+wire[1:0] 			memc_rbyte;
+wire 				memc_hit;
+wire[31:0] 			memc_data;
+wire 				memc_we;
+wire[1:0] 			memc_wbyte;
+wire[`InstAddrBus] 	memc_waddr;
+wire[31:0]		 	memc_wdata;
+
 // **************************** instantiation **************************** 
+
+assign dbgreg_dout = if_pc;
 
 // predictor
 
@@ -168,6 +181,18 @@ icache icache0(
 	.raddr_i(ifc_raddr), .hit_o(ifc_hit), .inst_o(ifc_inst),
 	// write
 	.we_i(ifc_we), .waddr_i(ifc_waddr), .winst_i(ifc_wdata)
+);
+
+// dcache
+
+dcache dcache0(
+	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
+	// read
+	.raddr_i(memc_raddr), .rbyte_i(memc_rbyte),
+	.hit_o(memc_hit), .data_o(memc_data),
+	// write
+	.we_i(memc_we), .wbyte_i(memc_wbyte),
+	.waddr_i(memc_waddr), .wdata_i(memc_wdata)
 );
 
 // if
@@ -323,7 +348,7 @@ ex_mem ex_mem0(
 // mem
 
 mem mem0(
-	.clk(clk_in),	.rst(rst_in), 		.rdy(rdy_in),
+	.clk(clk_in),				.rst(rst_in), 		.rdy(rdy_in),
 	// from ex/mem
 	.wd_i(mem_wd_i),			.wreg_i(mem_wreg_i), 		
 	.wdata_i(mem_wdata_i),	
@@ -338,6 +363,11 @@ mem mem0(
 	.mem_request(mem_request), 		.mem_addr(mem_addr),
 	// to ctrl
 	.mem_stall_request(mem_stall_request),
+	// dcache
+	.c_raddr_o(memc_raddr), 	.c_rbyte_o(memc_rbyte),
+	.c_hit_i(memc_we),			.c_data_i(memc_data),
+	.c_we_o(memc_we),			.c_wbyte_o(memc_wbyte),
+	.c_waddr_o(memc_waddr),		.c_wdata_o(memc_wdata),
 	// from ctrl
 	.stall_sign(stall_sign)
 );

@@ -45,11 +45,16 @@
 
 // **************************** cache **************************** 
 
-`define CacheBlockNum 				128
-`define CacheBlockNumLog2 			7
+`define CacheBlockNum 				256
+`define CacheBlockNumLog2 			8
 
-`define PreBlockNum 				64
-`define PreBlockNumLog2 			6
+`define VictimCacheNum	 			1
 
-`define BTBBlockNum 				64
-`define BTBBlockNumLog2 			6
+`define Cache2BlockNum 				64
+`define Cache2BlockNumLog2 			6
+
+`define PreBlockNum 				32
+`define PreBlockNumLog2 			5
+
+`define BTBBlockNum 				32
+`define BTBBlockNumLog2 			5

@@ -24,7 +24,9 @@ reg[`RegBus] regs[0:`RegNum-1];
 // write
 
 always @(posedge clk) begin
-	if(!rst && rdy) begin
+	if(rst || !rdy) begin
+	
+	end else begin
 		if((we == `WriteEnable) && (waddr != `RegNumLog2'h0)) begin
 			regs[waddr] <= wdata;
 		end

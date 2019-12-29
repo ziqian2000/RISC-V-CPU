@@ -58,6 +58,7 @@ read_verilog -library xil_defaultlib {
   D:/CPU/CPU_code/inst_cache.v
   D:/CPU/CPU_code/BTB.v
   D:/CPU/CPU_code/predictor.v
+  D:/CPU/CPU_code/data_cache.v
 }
 read_ip -quiet D:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
 set_property used_in_implementation false [get_files -all d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
@@ -75,8 +76,6 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc
 set_property used_in_implementation false [get_files D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
 
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
