@@ -28,10 +28,10 @@ always @(*) begin
 	end else begin
 		if(mem_stall_request) begin
 			stall_sign = 8'b00111111;
-		end else if(id_stall_request) begin
-			stall_sign = 8'b00000111;
 		end else if(branch_stall_request) begin
 			stall_sign = 8'b00001010;
+		end else if(id_stall_request) begin
+			stall_sign = 8'b00000111;
 		end else begin
 			stall_sign = 8'b00000000;
 		end

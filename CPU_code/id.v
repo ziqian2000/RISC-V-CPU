@@ -219,18 +219,12 @@ always @(*) begin
 		id_stall_request = 0;
 	// end	else if ((id_ex_wreg_i == 1'b1) && (id_ex_wd_i == reg1_addr_o || id_ex_wd_i == reg2_addr_o)) begin // nearset in ID/EX
 	// 	id_stall_request = 1;
-	end	else if ((ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o || ex_wd_i == reg2_addr_o)) begin // nearset in EX
-		if(ex_opcode_i[6:0] == 7'b0000011) begin
-			id_stall_request = 1;
-		end else begin
-			id_stall_request = 0;
-		end
-	end else if((ex_mem_wreg_i == 1'b1) && (ex_mem_wd_i == reg1_addr_o || ex_mem_wd_i == reg2_addr_o)) begin // nearest in EX/MEM
-		if(ex_mem_opcode_i[6:0] == 7'b0000011) begin
-			id_stall_request = 1;
-		end else begin
-			id_stall_request = 0;
-		end
+	end	else if ((ex_wreg_i == 1'b1) && (ex_wd_i == reg1_addr_o || ex_wd_i == reg2_addr_o)
+		&& ex_opcode_i[6:0] == 7'b0000011) begin
+		id_stall_request = 1;
+	end else if((ex_mem_wreg_i == 1'b1) && (ex_mem_wd_i == reg1_addr_o || ex_mem_wd_i == reg2_addr_o)
+		&& ex_mem_opcode_i[6:0] == 7'b0000011) begin
+		id_stall_request = 1;
 	end else begin
 		id_stall_request = 0;
 	end
@@ -251,8 +245,8 @@ always @(*) begin
 				reg1_o = ex_mem_wdata_i;
 			end else if((mem_wreg_i == 1'b1) && (mem_wd_i == reg1_addr_o)) begin
 				reg1_o = mem_wdata_i;
-			end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg1_addr_o)) begin
-				reg1_o = wb_wdata_i;
+			// end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg1_addr_o)) begin
+			// 	reg1_o = wb_wdata_i;
 			end else begin
 				reg1_o = reg1_data_i;
 			end
@@ -279,8 +273,8 @@ always @(*) begin
 				reg2_o = ex_mem_wdata_i;
 			end else if((mem_wreg_i == 1'b1) && (mem_wd_i == reg2_addr_o)) begin
 				reg2_o = mem_wdata_i;
-			end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg2_addr_o)) begin
-				reg2_o = wb_wdata_i;
+			// end else if((wb_wreg_i == 1'b1) && (wb_wd_i == reg2_addr_o)) begin
+			// 	reg2_o = wb_wdata_i;
 			end else begin
 				reg2_o = reg2_data_i;
 			end

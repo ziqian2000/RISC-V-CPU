@@ -51,13 +51,12 @@ integer i; // cycle counter
 // simpleloop: 13030	-> 9700		-> 8830		-> 8790 	-> 6100
 // multiarray: 34320 	-> 32550	-> 24420	-> 23490 	-> 23370
 
-reg[3:0] avoid_data_hazard;
+// reg[3:0] avoid_data_hazard;
 
 
 always @(posedge clk) begin
 
-	i <= i+1;
-	if(i % 10 == 0) $display(i);
+	// i <= i+1;  if(i % 10 == 0) $display(i);
 
 	if (rst == `RstEnable || !rdy) begin
 		if_request 	<= 0;
@@ -86,6 +85,7 @@ always @(posedge clk) begin
 			if_inst 	<= 0;
 			inst 		<= 0;
 			state 		<= 0;
+			c_we_o 		<= 0;
 		// end
 	end	else begin
 
@@ -115,7 +115,7 @@ always @(posedge clk) begin
 							state <= 4'b0001;
 						end
 
-						// avoid_data_hazard <= 4'h0; // !!!
+						// avoid_data_hazard <= 4'ha; // !!!
 
 					// end else begin
 					// 	avoid_data_hazard <= avoid_data_hazard - 1;
@@ -137,10 +137,10 @@ always @(posedge clk) begin
 						// if(pc == 31'h104c || pc == 31'h1090) begin
 							// state <= 0; //////////////////////////////////////////////
 						// end
-						// if(pc == 31'h1040) begin
+						if((pc == 31'h1180)) begin
 							// state <= 0; //////////////////////////////////////////////
-							// avoid_data_hazard = 31'h2;
-						// end
+							// avoid_data_hazard = 31'ha;
+						end
 
 						if(b_hit_i && pre_taken) begin
 							// $display("%x hit1\n", pc);
