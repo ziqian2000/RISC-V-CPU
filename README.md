@@ -34,9 +34,9 @@ The main features of this RISC-V CPU are briefly introduced in the table below. 
 
 ### 2.3 Rub 
 
-- When a RAW data hazard happens, forwarding is never enough. To solve a situation where the source register is to be written by a LOAD instruction in stage EX, we can only stall the pipeline.
+- When an RAW data hazard happens, forwarding is never enough. To solve a situation where the source register is to be written by a LOAD instruction in stage EX, we can only stall the pipeline.
 - The FSM (finite state machine) for both stages IF and MEM is not easy to design. However, I tried several FSM design and finally choose this one.
-- I use a register named "avoid_data_hazard" in stage IF to change the CPU between a 5-stage pipeline and no pipeline by adding 10 cycles after instruction so that I can debug easier.
+- I use a register named "avoid_data_hazard" in stage IF to change the CPU between a 5-stage pipeline and no pipeline by adding 10 cycles after instruction so that I can debug easier. 
 
 # 3. Performance
 
@@ -47,8 +47,8 @@ What about the speed? Take running `pi.c` on FPGA as an example:
 - 100 MHz: 1.406250 s
 - 125 MHz: 1.093750 s
 - 130 MHz: 1.078125 s
-- 140 MHz: 0.984375 s (failed on one test case "bulgarian.c")
-- 150 MHz: failed on pi.c
+- 140 MHz: 0.984375 s (failed on one test case: `bulgarian.c`)
+- 150 MHz: failed on `pi.c`
 
 # References
 
