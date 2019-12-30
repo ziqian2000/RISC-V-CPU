@@ -50,6 +50,10 @@ What about the speed? Take running `pi.c` on FPGA as an example:
 - 140 MHz: 0.984375 s (failed on one test case: `bulgarian.c`)
 - 150 MHz: failed on `pi.c`
 
+# 4. Acknowledgements
+
+I am grateful to teaching assistant Li Jiasen (李嘉森) who provided instructive guidance on this project when I found nowhere to start. And I would like to express my gratitude to teaching assistant Li Zhaoyu (李照宇) for his suggestions on FPGA testing.  I am also thankful for many classmates who had helped me.
+
 # References
 
 [1] 雷思磊. *自己动手写CPU*, 电子工业出版社, 2014.
