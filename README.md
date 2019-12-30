@@ -2,7 +2,7 @@
 
 Wu Runzhe (吴润哲)
 
-This project is a RISC-V CPU with a 5-stage pipeline, implemented in Verilog HDL, which is a course project of Computer Architecture, ACM Class @ SJTU.
+This project is a RISC-V CPU with a 5-stage pipeline, implemented in Verilog HDL, which is [a course project of Computer Architecture, ACM Class @ SJTU](https://acm.sjtu.edu.cn/wiki/System(1)_2019).
 
 # 2. Design
 
