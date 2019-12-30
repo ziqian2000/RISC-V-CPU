@@ -407,33 +407,3 @@ ctrl ctrl0(
 );
 
 endmodule
-
-// implementation goes here
-
-// Specifications:
-// - Pause cpu(freeze pc, registers, etc.) when rdy_in is low
-// - Memory read takes 2 cycles(wait till next cycle), write takes 1 cycle(no need to wait)
-// - Memory is of size 128KB, with valid address ranging from 0x0 to 0x20000
-// - I/O port is mapped to address higher than 0x30000 (mem_a[17:16]==2'b11)
-// - 0x30000 read: read a byte from input
-// - 0x30000 write: write a byte to output (write 0x00 is ignored)
-// - 0x30004 read: read clocks passed since cpu starts (in dword, 4 bytes)
-// - 0x30004 write: indicates program stop (will output '\0' through uart tx)
-
-	/* The following codes may be used when FPGA testing. */
-
-	// always @(posedge clk_in)
-	// begin
-	// 	if (rst_in)
-	// 		begin
-			
-	// 		end
-	// 	else if (!rdy_in)
-	// 		begin
-			
-	// 		end
-	// 	else
-	// 		begin
-			
-	// 		end
-	// end

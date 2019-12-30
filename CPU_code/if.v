@@ -48,11 +48,8 @@ reg[23:0] 		inst;
 reg[`InstBus] 	pc;
 
 integer i; // cycle counter
-// simpleloop: 13030	-> 9700		-> 8830		-> 8790 	-> 6100
-// multiarray: 34320 	-> 32550	-> 24420	-> 23490 	-> 23370 	-> 22920
 
 // reg[3:0] avoid_data_hazard;
-
 
 always @(posedge clk) begin
 
@@ -89,8 +86,6 @@ always @(posedge clk) begin
 		// end
 	end	else begin
 
-		// $display("[%x]", pc);
-
 		if_request <= 1'b1;
 
 		case(state)
@@ -115,7 +110,7 @@ always @(posedge clk) begin
 							state <= 4'b0001;
 						end
 
-						// avoid_data_hazard <= 4'ha; // !!!
+						// avoid_data_hazard <= 4'ha;
 
 					// end else begin
 					// 	avoid_data_hazard <= avoid_data_hazard - 1;
@@ -127,23 +122,12 @@ always @(posedge clk) begin
 			// if(!avoid_data_hazard) begin
 				if(!stall_sign[0]) begin
 					if(c_hit_i) begin
-						// state <= 4'b0000;
-						// if_inst <= c_inst_i;
-						// pc <= pc + 31'h4;
+					
 						if_inst <= c_inst_i;
 						pc_o <= pc;
 						c_we_o <= 0;
 
-						// if(pc == 31'h104c || pc == 31'h1090) begin
-							// state <= 0; //////////////////////////////////////////////
-						// end
-						if((pc == 31'h1180)) begin
-							// state <= 0; //////////////////////////////////////////////
-							// avoid_data_hazard = 31'ha;
-						end
-
 						if(b_hit_i && pre_taken) begin
-							// $display("%x hit1\n", pc);
 							pc 			<= b_target_i;
 							if_addr 	<= b_target_i;
 							b_raddr_o 	<= b_target_i;
@@ -211,7 +195,6 @@ always @(posedge clk) begin
 					c_wdata_o <= {mem_ctrl_data, inst[23:0]};
 
 					if(b_hit_i && pre_taken) begin
-						// $display("%x hit2\n", pc);
 						pc <= b_target_i;
 						if_taken <= 1'b1;
 					end else begin

@@ -40,7 +40,6 @@ always @(posedge clk) begin
 			BTB_valid[i] <= 0;
 	end	else begin
 		if(we_i) begin
-			// $display("write on %x    %x", waddr_i, wtarget_i);
 			BTB_valid[waddr_idx] <= 1'b1;
 			BTB_tag[waddr_idx] <= waddr_tag;
 			BTB_data[waddr_idx] <= wtarget_i;

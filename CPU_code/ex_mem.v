@@ -28,12 +28,6 @@ always @(posedge clk) begin
 		mem_wdata <= `ZeroWord;
 		mem_mem_addr <= 0;
 		mem_opcode_o <= 0;
-	// end else if(stall_sign[5] && !stall_sign[6]) begin
-	// 	mem_wd <= `NOPRegAddr;
-	// 	mem_wreg <= `WriteDisable;
-	// 	mem_wdata <= `ZeroWord;
-	// 	mem_mem_addr <= 0;
-	// 	mem_opcode_o <= 0;
 	end else if(!stall_sign[5]) begin
 		mem_wd <= ex_wd;
 		mem_wreg <= ex_wreg;

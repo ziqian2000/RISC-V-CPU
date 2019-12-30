@@ -18,8 +18,6 @@ module dcache(
 
 );
 
-// tag : [16:`Cache2BlockNumLog2]	  	index : [`Cache2BlockNumLog2-1:0]
-
 wire[`InstAddrBus] 			raddr_i1;
 wire[`InstAddrBus] 			raddr_i2;
 wire[`InstAddrBus] 			raddr_i3;

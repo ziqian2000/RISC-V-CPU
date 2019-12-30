@@ -31,7 +31,6 @@ always @(posedge clk) begin
 			branch_history[i] <= 2'b01;
 	end	else begin
 		if(we_i) begin
-			// $display("write on %x\n", waddr_i);
 			if(res_taken)branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b11 ? 2'b11 : branch_history[waddr_idx] + 2'b01);
 			else 		 branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b00 ? 2'b00 : branch_history[waddr_idx] - 2'b01);
 		end
@@ -40,6 +39,5 @@ end
 
 // read
 assign pre_taken = branch_history[raddr_idx][1];
-// assign pre_taken = 0;
 
 endmodule

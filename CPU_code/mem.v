@@ -44,9 +44,6 @@ module mem(
 reg[3:0] 	state;
 reg 		mem_done;
 
-// when applying combinational logic 
-// use "=" instead of "<=" to avoid a endless loop caused by the change of state
-
 // stall observer
 always @(*) begin
 	if (rst == `RstEnable || !rdy) begin
@@ -142,7 +139,6 @@ always @(posedge clk) begin
 						4'b0001: begin // the 1st byte is being loaded/stored, send the 2nd request
 							if(opcode_i[6:0] == 7'b0000011) begin 			// LOAD
 								if(c_hit_i) begin
-									// $display("dcache hit");
 									case(opcode_i[9:7])
 										`LB: begin
 											wdata_o 	<= {{24{c_data_i[7]}}, c_data_i[7:0]};
@@ -297,7 +293,7 @@ always @(posedge clk) begin
 										state <= 4'b1111;
 									end
 								endcase
-							end else begin 									// STORE							// STORE
+							end else begin 									// STORE
 								case(opcode_i[9:7])
 									`SW: begin
 										state <= 4'b0000;
@@ -327,9 +323,6 @@ always @(posedge clk) begin
 							end else begin 									// STORE
 							end
 						end
-						// default: begin
-						// 	$display("FUCK, unknown opcode occured in stage MEM.");
-						//end
 					endcase
 				end
 			end else begin

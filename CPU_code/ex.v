@@ -67,11 +67,9 @@ module ex(
 			p_addr 			= 0;
 			p_res_taken 	= 0;
 		end else begin
-// $display("%x", pc);
 			case(opcode_i[6:0])
 
 				7'b0110011: begin 	//ADD,SUB,SLL,SLT,SLTU,XOR,SRL,SRA,OR,AND
-// $display("ADD");
 					case(opcode_i[10:7])
 						4'b0000: wdata_o = (reg1_i + reg2_i); 								// ADD
 						4'b1000: wdata_o = (reg1_i - reg2_i); 								// SUB
@@ -92,7 +90,6 @@ module ex(
 				end
 
 				7'b0010011: begin 	//ADDI,SLTI,SLTIU,XORI,ORI,ANDI,SLLI,SRLI,SRAI    almost the same as above
-// $display("ADDI");
 					case(opcode_i[9:7])
 						3'b000: wdata_o = (reg1_i + reg2_i); 								// ADDI
 						3'b001: wdata_o = (reg1_i << reg2_i[4:0]); 							// SLLI
@@ -128,7 +125,6 @@ module ex(
 					p_we = 0;
 				end
 				7'b1101111: begin 		//JAL
-// $display("JAL");
 					if(!taken_i) begin
 						branch_enable_o = 1'b1;
 						branch_addr_o  	= branch_addr_i_t;
@@ -151,7 +147,6 @@ module ex(
 					p_we = 0;
 				end
 				7'b1100011: begin	 	//BEQ,BNE,BLT,BGE,BLTU,BGEU	
-// $display("B");
 					case(opcode_i[9:7])
 						3'b000: begin // BEQ
 							if(reg1_i == reg2_i && !taken_i) begin
@@ -247,14 +242,12 @@ module ex(
 					wdata_o = 0;
 				end
 				7'b0000011: begin  		//LOAD
-// $display("LOAD");
 					branch_enable_o = 0;
 					mem_addr = reg1_i + imm_i;
 					wdata_o = 0;
 					p_we = 0;
 				end
 				7'b0100011: begin  		//STORE
-// $display("STORE");
 					branch_enable_o = 0;
 					mem_addr = reg1_i + imm_i;
 					wdata_o = reg2_i;

@@ -43,7 +43,7 @@
 `define SH  				3'b001
 `define SW  				3'b010
 
-// **************************** cache **************************** 
+// **************************** block **************************** 
 
 `define CacheBlockNum 				256
 `define CacheBlockNumLog2 			8
