@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Sun Dec 29 20:09:47 2019
+| Date         : Mon Dec 30 22:34:23 2019
 | Host         : ZIQIAN running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file riscv_top_control_sets_placed.rpt
 | Design       : riscv_top
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |   341 |
-| Unused register locations in slices containing registers |   620 |
+| Number of unique control sets                            |   382 |
+| Unused register locations in slices containing registers |   762 |
 +----------------------------------------------------------+-------+
 
 
@@ -34,11 +34,14 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      4 |            1 |
-|      8 |            4 |
-|     10 |            2 |
-|     12 |            1 |
-|    16+ |          333 |
+|      2 |            7 |
+|      4 |            7 |
+|      6 |            2 |
+|      8 |            7 |
+|     10 |            6 |
+|     12 |            4 |
+|     14 |            3 |
+|    16+ |          346 |
 +--------+--------------+
 
 
@@ -49,361 +52,402 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              22 |            5 |
-| No           | No                    | Yes                    |              62 |           17 |
-| No           | Yes                   | No                     |            1150 |          176 |
-| Yes          | No                    | No                     |           21086 |         4744 |
-| Yes          | No                    | Yes                    |              68 |           14 |
-| Yes          | Yes                   | No                     |            1880 |          273 |
+| No           | No                    | Yes                    |              84 |           18 |
+| No           | Yes                   | No                     |            1050 |          153 |
+| Yes          | No                    | No                     |           21086 |         4982 |
+| Yes          | No                    | Yes                    |              68 |           12 |
+| Yes          | Yes                   | No                     |            1912 |          288 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+--------------------------+---------------------------------------------------------------------+----------------------------------------------+------------------+----------------+
-|       Clock Signal       |                            Enable Signal                            |               Set/Reset Signal               | Slice Load Count | Bel Load Count |
-+--------------------------+---------------------------------------------------------------------+----------------------------------------------+------------------+----------------+
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | btnC_IBUF                                    |                2 |              4 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_blk/d_baud_clk_tick_cnt                       | rst                                          |                2 |              8 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_blk/d_oversample_tick_cnt                     | rst                                          |                2 |              8 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_fifo/FSM_sequential_q_state_reg[0][0]         | rst                                          |                3 |              8 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/FSM_sequential_state[3]_i_2_n_2                            | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                2 |              8 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_blk/q_state[4]_i_1_n_2                        | rst                                          |                3 |             10 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_blk/q_state[4]_i_1__0_n_2                     | rst                                          |                3 |             10 |
-|  cpu0/id_ex0/E[0]        |                                                                     | hci0/branch_history_reg[1][1]                |                3 |             12 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_addr_reg[15]                           | rst                                          |                3 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_addr_reg[7]                            | rst                                          |                4 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/ex_mem0/E[0]                                                   | hci0/branch_history_reg[1][1]                |                5 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/ex_mem0/mem_ctrl_data_o_reg[7]_1[0]                            | hci0/branch_history_reg[1][1]                |                6 |             16 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | hci0/uart_blk/uart_rx_fifo/SR[0]             |                4 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem0/wdata_o[31]_i_1_n_2                                       | hci0/branch_history_reg[1][1]                |                4 |             16 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | cpu0/mem0/SR[0]                              |                4 |             16 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | cpu0/mem0/q_io_in_wr_data_reg[7][0]          |                1 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem0/wdata_o[7]_i_1_n_2                                        | hci0/branch_history_reg[1][1]                |                6 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_fifo/E[0]                                     | rst                                          |                6 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_blk/d_data                                    | rst                                          |                2 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_blk/d_data                                    | rst                                          |                2 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/inst[7]_i_1_n_2                                            | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                1 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/inst[15]_i_1_n_2                                           | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                5 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/inst[23]_i_1_n_2                                           | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                4 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem0/wdata_o[23]_i_1_n_2                                       | hci0/branch_history_reg[1][1]                |                3 |             16 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_fifo/E[1]                                     | rst                                          |                7 |             18 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/rd_en_prot                                          | rst                                          |                3 |             20 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_blk/rd_en_prot                                | rst                                          |                4 |             20 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/wr_en_prot                                          | rst                                          |                3 |             20 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/wr_en_prot                               | rst                                          |                3 |             20 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     |                                              |                5 |             22 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_576_639_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_704_767_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_768_831_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_704_767_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_768_831_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_960_1023_0_2_i_1__0_n_2 |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_832_895_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_64_127_0_2_i_1_n_2                 |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_640_703_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_128_191_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_256_319_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_128_191_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_384_447_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_192_255_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_512_575_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_320_383_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_448_511_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_0_63_0_2_i_1_n_2                   |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_832_895_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_960_1023_0_2_i_1_n_2               |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/io_in_fifo/q_data_array_reg_896_959_0_2_i_1_n_2                |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_0_63_0_2_i_1__0_n_2     |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_320_383_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_192_255_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_256_319_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_384_447_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_448_511_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_512_575_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_576_639_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_896_959_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_64_127_0_2_i_1__0_n_2   |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_640_703_0_2_i_1__0_n_2  |                                              |                3 |             24 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem0/c_raddr_o[5]_i_1__0_n_2                                   | hci0/branch_history_reg[1][1]                |                6 |             26 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/uart_blk/uart_rx_fifo/q_data_array_reg_0_7_0_5_i_1_n_2         |                                              |                2 |             32 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/ex_mem0/mem_addr_reg[17][0]                                    | hci0/branch_history_reg[1][1]                |                7 |             36 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/if_addr[17]_i_1_n_2                                        | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                3 |             36 |
-|  n_1_13412_BUFG          |                                                                     | hci0/branch_history_reg[1][1]                |               12 |             64 |
-|  data_o_reg[31]_i_2_n_2  |                                                                     | hci0/branch_history_reg[1][1]                |               14 |             64 |
-|  NEW_CLOCK/inst/clk_out1 | hci0/q_cpu_cycle_cnt_reg[0]_0                                       | rst                                          |                8 |             64 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/id_ex0/pc_reg[0][0]                                            | hci0/branch_history_reg[1][1]                |                9 |             64 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/if_inst[31]_i_1_n_2                                        | cpu0/id_ex0/FSM_sequential_state_reg[3]_0[0] |                9 |             64 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/id_ex0/if_taken_reg[0]                                         | hci0/branch_history_reg[1][1]                |                5 |             66 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___184_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___13_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___149_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___150_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___155_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___160_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___163_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___174_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___153_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___158_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___173_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___137_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___154_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___168_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___152_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___172_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___175_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___166_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___148_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___14_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___141_n_2                                            |                                              |               11 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___169_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___177_n_2                                            |                                              |               23 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___140_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___178_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___17_n_2                                             |                                              |               23 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___182_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___183_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___185_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___157_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___186_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___161_n_2                                            |                                              |               23 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___151_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___146_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___139_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___164_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___16_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___171_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___167_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___187_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___188_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___100_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___103_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___101_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___104_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___105_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___107_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___109_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___102_n_2                                            |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___106_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___108_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___10_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___110_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___111_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___0_n_2                                              |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___113_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___112_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___114_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___115_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___116_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___117_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___125_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___127_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___129_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___123_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___126_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___130_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___132_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___134_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___128_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___131_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___120_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___119_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___12_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___135_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___118_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___136_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___11_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___121_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___133_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___124_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___122_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___199_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___247_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___248_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___249_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___250_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___24_n_2                                             |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___251_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___242_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___244_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___201_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___212_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___215_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___21_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___209_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___200_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___203_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___222_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___198_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___19_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___20_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___228_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___233_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___207_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___210_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___208_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___223_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___225_n_2                                            |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___235_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___240_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___218_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___243_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___234_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___246_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___237_n_2                                            |                                              |               11 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___238_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___217_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___219_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___232_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___214_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___202_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___204_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___211_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___229_n_2                                            |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___231_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___23_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___224_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___241_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___196_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___239_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___206_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___197_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___226_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___227_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___213_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___220_n_2                                            |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___195_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___205_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___22_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___221_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___236_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___216_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___230_n_2                                            |                                              |               11 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___245_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___256_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___254_n_2                                            |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___255_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___252_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___253_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___25_n_2                                             |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___26_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___30_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___31_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___28_n_2                                             |                                              |               23 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___32_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___27_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___29_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___2_n_2                                              |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___34_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___38_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___33_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___36_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___35_n_2                                             |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___37_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___42_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___44_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___3_n_2                                              |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___40_n_2                                             |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___41_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___39_n_2                                             |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___43_n_2                                             |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___4_n_2                                              |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___47_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___49_n_2                                             |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___45_n_2                                             |                                              |               25 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___46_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___48_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___56_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___58_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___5_n_2                                              |                                              |               13 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___66_n_2                                             |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___70_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___72_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___53_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___68_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___73_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___59_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___74_n_2                                             |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___64_n_2                                             |                                              |               11 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___75_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___76_n_2                                             |                                              |               23 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___77_n_2                                             |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___78_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___55_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___50_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___61_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___65_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___51_n_2                                             |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___54_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___57_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___60_n_2                                             |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___63_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___67_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___69_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___52_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___62_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___6_n_2                                              |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___86_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___95_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___9_n_2                                              |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___97_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___7_n_2                                              |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___79_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___93_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___83_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___88_n_2                                             |                                              |               20 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___99_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___8_n_2                                              |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___80_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___92_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___84_n_2                                             |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___85_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___98_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___71_n_2                                             |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___96_n_2                                             |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___91_n_2                                             |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___89_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___87_n_2                                             |                                              |               12 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___90_n_2                                             |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___82_n_2                                             |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___94_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___189_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___18_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___190_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___191_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___144_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___162_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___143_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___156_n_2                                            |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___170_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___138_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___181_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___192_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___193_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___15_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___194_n_2                                            |                                              |               21 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___159_n_2                                            |                                              |               14 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___179_n_2                                            |                                              |               18 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___147_n_2                                            |                                              |               16 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___180_n_2                                            |                                              |               22 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___142_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___145_n_2                                            |                                              |               15 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___165_n_2                                            |                                              |               19 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___176_n_2                                            |                                              |               24 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___81_n_2                                             |                                              |               17 |             78 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem0/c_waddr_o[5]_i_1_n_2                                      | hci0/branch_history_reg[1][1]                |               20 |             88 |
-|  n_0_13205_BUFG          |                                                                     | hci0/branch_history_reg[1][1]                |               15 |             94 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/icache0/i___257_n_2                                            |                                              |               40 |             94 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | rst                                          |               27 |             98 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/c_raddr_o[16]_i_1_n_2                                      | hci0/branch_history_reg[1][1]                |               12 |            106 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if_id0/p_0_in0_out                                             |                                              |                8 |            128 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/ex_mem0/mem_wd[4]_i_1_n_2                                      | hci0/branch_history_reg[1][1]                |               29 |            130 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/ctrl0/stall_sign[1]                                            | cpu0/ex_mem0/SR[0]                           |               11 |            130 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/mem_wb0/p_0_in                                                 |                                              |               12 |            192 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/id_ex0/ex_opcode[10]_i_2_n_2                                   | cpu0/ex_mem0/ex_taken_reg_0[0]               |               53 |            330 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/if0/c_waddr_o[16]_i_1_n_2                                      | hci0/branch_history_reg[1][1]                |               29 |            450 |
-|  NEW_CLOCK/inst/clk_out1 |                                                                     | hci0/branch_history_reg[1][1]                |              111 |            828 |
-|  NEW_CLOCK/inst/clk_out1 | cpu0/dcache0/cache_data[1][7]_i_1_n_2                               |                                              |              375 |           1024 |
-+--------------------------+---------------------------------------------------------------------+----------------------------------------------+------------------+----------------+
++-------------------------------------------+---------------------------------------------------------------------+----------------------------------+------------------+----------------+
+|                Clock Signal               |                            Enable Signal                            |         Set/Reset Signal         | Slice Load Count | Bel Load Count |
++-------------------------------------------+---------------------------------------------------------------------+----------------------------------+------------------+----------------+
+|  cpu0/id_ex0/branch_history_reg[23][1][0] |                                                                     | rst_repN                         |                1 |              2 |
+|  n_1_13380_BUFG                           |                                                                     | rst_repN_1                       |                1 |              2 |
+|  n_1_13380_BUFG                           |                                                                     | rst_repN_2                       |                1 |              2 |
+|  data_o_reg[31]_i_2_n_2                   |                                                                     | rst_repN_4                       |                1 |              2 |
+|  n_0_13154_BUFG                           |                                                                     | rst_repN_3                       |                1 |              2 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_fifo/E[0]                                     | rst_repN_3                       |                1 |              2 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][1]                                     | rst_repN_5                       |                1 |              2 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][0]                                     | rst_repN                         |                2 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][0]                                     | rst_repN_5                       |                2 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_raddr_o[16]_i_1_n_2                                      | rst_repN_7                       |                1 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/rd_en_prot                                          | rst_repN_4                       |                2 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_addr_reg[7]                            | rst_repN_3                       |                2 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][1]                                     | rst_repN                         |                1 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][2]                                     | rst_repN_4                       |                2 |              4 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/E[0]                                                    | rst_repN                         |                1 |              6 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/E[0]                                                    | rst_repN_1                       |                1 |              6 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][0]                                     | rst_repN_4                       |                3 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/pc_o_reg[31][0]                                         | rst_repN_5                       |                1 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_fifo/FSM_sequential_q_state_reg[3]_0[0]       | rst_repN_1                       |                1 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/FSM_sequential_state[3]_i_2_n_2                            | cpu0/id_ex0/if_inst_reg[0]       |                1 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_blk/d_baud_clk_tick_cnt                       | rst_repN_2                       |                1 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_4                       |                3 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_blk/d_oversample_tick_cnt                     | rst_repN_2                       |                2 |              8 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][1]                                     | rst_repN_4                       |                2 |             10 |
+|  n_0_13154_BUFG                           |                                                                     | rst_repN_1                       |                3 |             10 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_raddr_o[16]_i_1_n_2                                      | rst_repN_6                       |                2 |             10 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_blk/q_state[4]_i_1_n_2                        | rst_repN_2                       |                3 |             10 |
+|  cpu0/id_ex0/branch_history_reg[23][1][0] |                                                                     | rst                              |                2 |             10 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_blk/q_state[4]_i_1__0_n_2                     | rst_repN_2                       |                2 |             10 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/wdata_o_reg[24][2]                                     | rst_repN                         |                3 |             12 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/p_1_in                                                         | rst_repN                         |                1 |             12 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_3                       |                3 |             12 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_addr_reg[7]                            | rst_repN_4                       |                4 |             12 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/E[0]                                                      | rst_repN_2                       |                3 |             14 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_fifo/E[0]                                     | rst_repN_2                       |                6 |             14 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_raddr_o[16]_i_1_n_2                                      | rst_repN_10                      |                2 |             14 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/p_1_in                                                         | rst_repN_3                       |                6 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | cpu0/mem0/SR[0]                  |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | hci0/uart_blk/uart_rx_fifo/SR[0] |                4 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | cpu0/mem0/q_tx_data_reg[7][0]    |                3 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/wdata_o[15]_i_1_n_2                                       | rst_repN                         |                3 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_blk/d_data                                    | rst_repN_2                       |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN                         |                1 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/rd_en_prot                                          | rst_repN_3                       |                3 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_blk/d_data                                    | rst_repN_2                       |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_addr_reg[15]                           | rst_repN_4                       |                6 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/mem_ctrl_data_o_reg[7]_1[0]                            | rst_repN_4                       |                4 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/mem_addr_reg[17][0]                                    | rst_repN                         |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_waddr_o[16]_i_1_n_2                                      | rst_repN_10                      |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/inst[15]_i_1_n_2                                           | cpu0/id_ex0/if_inst_reg[0]       |                1 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/inst[7]_i_1_n_2                                            | cpu0/id_ex0/if_inst_reg[0]       |                2 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/inst[23]_i_1_n_2                                           | cpu0/id_ex0/if_inst_reg[0]       |                2 |             16 |
+|  n_0_13154_BUFG                           |                                                                     | rst_repN                         |                3 |             16 |
+|  data_o_reg[31]_i_2_n_2                   |                                                                     | rst                              |                5 |             16 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_fifo/E[1]                                     | rst_repN_2                       |                8 |             18 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_blk/rd_en_prot                                | rst_repN_3                       |                4 |             20 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/wr_en_prot                                          | rst_repN_4                       |                5 |             20 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/wr_en_prot                               | rst_repN_3                       |                5 |             20 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/mem_addr_reg[17][0]                                    | rst_repN_4                       |                3 |             20 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     |                                  |                5 |             22 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_5                       |                2 |             22 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_raddr_o[16]_i_1_n_2                                      | rst_repN_2                       |                4 |             22 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_384_447_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_128_191_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_0_63_0_2_i_1_n_2                   |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_0_63_0_2_i_1__0_n_2     |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_576_639_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_768_831_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_128_191_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_832_895_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_256_319_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_192_255_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_64_127_0_2_i_1_n_2                 |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/E[0]                                                      | rst_repN                         |                4 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_512_575_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_704_767_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_448_511_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_960_1023_0_2_i_1_n_2               |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_320_383_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_640_703_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_896_959_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_768_831_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_640_703_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_704_767_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_960_1023_0_2_i_1__0_n_2 |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_832_895_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_64_127_0_2_i_1__0_n_2   |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_192_255_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_384_447_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_512_575_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_256_319_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_320_383_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_576_639_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_tx_fifo/q_data_array_reg_448_511_0_2_i_1__0_n_2  |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/io_in_fifo/q_data_array_reg_896_959_0_2_i_1_n_2                |                                  |                3 |             24 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | btnC_IBUF                        |                4 |             26 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/c_waddr_o_reg[0]                                       | rst_repN_4                       |                7 |             26 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/c_raddr_o_reg[0]_0                                        | rst_repN_5                       |                7 |             26 |
+|  n_1_13380_BUFG                           |                                                                     | rst                              |                5 |             28 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/c_waddr_o_reg[0]                                       | rst_repN_5                       |                8 |             28 |
+|  n_1_13380_BUFG                           |                                                                     | rst_repN                         |                7 |             32 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/uart_blk/uart_rx_fifo/q_data_array_reg_0_7_0_5_i_1_n_2         |                                  |                2 |             32 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ex_mem0/c_waddr_o_reg[0]                                       | rst_repN                         |                5 |             32 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/if_addr[17]_i_1_n_2                                        | cpu0/id_ex0/if_inst_reg[0]       |                5 |             36 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/E[0]                                                      | rst_repN_3                       |                9 |             40 |
+|  data_o_reg[31]_i_2_n_2                   |                                                                     | rst_repN_5                       |               12 |             46 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem0/E[0]                                                      | rst_repN_4                       |                9 |             52 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/E[0]                                                    | rst_repN_6                       |                6 |             52 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/pc_o_reg[31][0]                                         | rst_repN                         |                4 |             58 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/if_inst[31]_i_1_n_2                                        | cpu0/id_ex0/if_inst_reg[0]       |               12 |             64 |
+|  n_0_13154_BUFG                           |                                                                     | rst                              |                9 |             66 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_waddr_o[16]_i_1_n_2                                      | rst_repN_7                       |                5 |             68 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_1                       |               10 |             74 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[13][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[209][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_2                       |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[184][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[1][0][0]                                     |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[89][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[0][0][0]                                     |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[104][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[105][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[106][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[107][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[108][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[109][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[103][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[10][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[100][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[101][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[102][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[113][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[133][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[134][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[138][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[131][0]_0[0]                                 |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[139][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[115][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[125][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[158][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[143][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[144][0][0]                                   |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[130][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[145][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[110][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[146][0][0]                                   |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[117][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[147][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[153][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[127][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[11][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[114][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[137][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[118][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[124][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[140][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[126][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[142][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[148][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[120][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[132][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[129][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[149][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[151][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[152][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[123][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[150][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[156][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[155][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[135][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[112][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[141][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[157][0]_0[0]                                 |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[159][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[136][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[121][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[154][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[122][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[12][0][0]                                    |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[14][0]_0[0]                                  |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[15][0][0]                                    |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[160][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[116][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[111][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[128][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[119][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[204][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[183][0][0]                                   |                                  |               24 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[189][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[185][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[205][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[192][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[217][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[239][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[240][0][0]                                   |                                  |               12 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[24][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[251][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[249][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[228][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[231][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[212][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[233][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[234][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[225][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[222][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[23][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[245][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[247][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[216][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[252][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[253][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[25][0]_0[0]                                  |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[26][0][0]                                    |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[221][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[2][0][0]                                     |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[255][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[220][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[224][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[32][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[219][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[29][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[33][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[242][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[229][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[35][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[27][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[211][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[241][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[218][0][0]                                   |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[223][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[246][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[36][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[244][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[37][0][0]                                    |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[236][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[250][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[227][0][0]                                   |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[213][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[214][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[22][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[85][0][0]                                    |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[52][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[58][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[50][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[54][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[46][0][0]                                    |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[66][0][0]                                    |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[39][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[42][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[45][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[53][0][0]                                    |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[59][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[78][0][0]                                    |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[79][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[7][0][0]                                     |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[55][0][0]                                    |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[67][0]_0[0]                                  |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[80][0][0]                                    |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[69][0][0]                                    |                                  |               24 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[60][0]_0[0]                                  |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[47][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[41][0]_0[0]                                  |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[40][0][0]                                    |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[4][0]_0[0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[3][0][0]                                     |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[51][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[57][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[61][0]_0[0]                                  |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[63][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[65][0][0]                                    |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[48][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[77][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[5][0][0]                                     |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[83][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[64][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[71][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[82][0]_0[0]                                  |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[6][0][0]                                     |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[62][0]_0[0]                                  |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[72][0][0]                                    |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[84][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[86][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[87][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[88][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[68][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[74][0][0]                                    |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[76][0]_0[0]                                  |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[28][0]_0[0]                                  |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[49][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[56][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[43][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[70][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[75][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[44][0]_0[0]                                  |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[73][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[81][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[93][0][0]                                    |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[92][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[9][0][0]                                     |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[95][0][0]                                    |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[8][0][0]                                     |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[98][0]_0[0]                                  |                                  |               15 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[96][0][0]                                    |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[99][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[94][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[97][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[91][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[90][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[254][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[30][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[34][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[232][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[226][0][0]                                   |                                  |               13 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[31][0][0]                                    |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[235][0][0]                                   |                                  |               12 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[248][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[243][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[238][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[215][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[230][0][0]                                   |                                  |               12 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[21][0][0]                                    |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[237][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[203][0][0]                                   |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[200][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[19][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[187][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[166][0][0]                                   |                                  |               26 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[176][0][0]                                   |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[169][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[208][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[198][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[190][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[196][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[195][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[38][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[173][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[193][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[181][0]_0[0]                                 |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[178][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[175][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[172][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[170][0][0]                                   |                                  |               24 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[168][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[163][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[207][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[177][0][0]                                   |                                  |               25 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[164][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[18][0][0]                                    |                                  |               17 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[162][0]_0[0]                                 |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[171][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[167][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[199][0][0]                                   |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[17][0][0]                                    |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[197][0][0]                                   |                                  |               23 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[188][0][0]                                   |                                  |               22 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[180][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[16][0][0]                                    |                                  |               16 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[206][0]_0[0]                                 |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[161][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[201][0][0]                                   |                                  |               18 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[194][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[179][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[174][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[202][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[182][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[186][0][0]                                   |                                  |               21 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[191][0][0]                                   |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[210][0][0]                                   |                                  |               14 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[165][0][0]                                   |                                  |               20 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/cache_tag_reg[20][0][0]                                    |                                  |               19 |             78 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/E[0]                                                           |                                  |               40 |             94 |
+|  NEW_CLOCK/inst/clk_out1                  | hci0/p_1_in                                                         | rst_repN_4                       |               19 |            124 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_6                       |               12 |            126 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if_id0/p_0_in0_out                                             |                                  |                8 |            128 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/ctrl0/stall_sign[1]                                            | cpu0/ex_mem0/SR[0]               |               11 |            130 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_waddr_o[16]_i_1_n_2                                      | rst_repN_8                       |               12 |            176 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/mem_wb0/p_0_in                                                 |                                  |               12 |            192 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/if0/c_waddr_o[16]_i_1_n_2                                      | rst_repN_9                       |               13 |            194 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_9                       |               26 |            214 |
+|  NEW_CLOCK/inst/clk_out1                  |                                                                     | rst_repN_10                      |               31 |            276 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/id_ex0/ex_opcode[10]_i_2_n_2                                   | cpu0/ex_mem0/ex_taken_reg_0[0]   |               47 |            328 |
+|  NEW_CLOCK/inst/clk_out1                  | cpu0/dcache0/cache_data[1][7]_i_1_n_2                               |                                  |              346 |           1024 |
++-------------------------------------------+---------------------------------------------------------------------+----------------------------------+------------------+----------------+
 
 

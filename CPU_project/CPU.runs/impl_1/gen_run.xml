@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1577620751">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1577716059">
   <File Type="BITSTR-BMM" Name="riscv_top_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="riscv_top_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="riscv_top_timing_summary_init.rpt"/>
@@ -254,6 +254,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/clk_wiz_0/clk_wiz_0.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
       <Option Name="TopModule" Val="riscv_top"/>
@@ -285,5 +292,4 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="clk_wiz_0"/>
 </GenRun>

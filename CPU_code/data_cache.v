@@ -79,10 +79,10 @@ integer i;
 
 // write
 always @(posedge clk) begin
-	if (rst || !rdy) begin
+	if (rst) begin
 		for(i = 0; i < `Cache2BlockNum; i = i + 1)
 			cache_valid[i] <= 0;
-	end	else begin
+	end	else if(rdy) begin
 		if(we_i) begin
 
 			case(rbyte_i)
@@ -121,7 +121,7 @@ end
 
 // read
 always @(*) begin
-	if(rst || !rdy)begin
+	if(rst)begin
 		hit_o = 0;
 		data_o = 0;
 	end else begin

@@ -30,7 +30,7 @@ module id_ex(
 );
 
 always @(posedge clk) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 
 		ex_opcode <= 0;
 		ex_reg1 <= `ZeroWord;
@@ -41,7 +41,7 @@ always @(posedge clk) begin
 		ex_branch_addr_t <= 0;
 		ex_branch_addr_n <= 0;
 		ex_taken 		<= 0;
-
+		
 	end else if(stall_sign[2] && !stall_sign[3]) begin
 
 		ex_opcode <= 0;

@@ -58,7 +58,7 @@ module ex(
 
 	// execute
 	always @ (*) begin
-		if(rst == `RstEnable || !rdy) begin
+		if(rst == `RstEnable) begin
 			wdata_o 		= 0;
 			branch_enable_o = 0;
 			branch_addr_o 	= 0;
@@ -265,7 +265,7 @@ module ex(
 	end
 
 	always @ (*) begin
-		if(rst == `RstEnable || !rdy) begin
+		if(rst == `RstEnable) begin
 			wd_o = 0;
 			wreg_o = 0;
 		end else begin

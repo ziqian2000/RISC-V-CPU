@@ -25,7 +25,7 @@ module mem_ctrl(
 );
 
 	always @(*) begin
-		if (rst == `RstEnable || !rdy) begin
+		if (rst == `RstEnable) begin
 			if_or_mem_o = 0;
 			ram_data_o = 0;
 			ram_addr_o = 0;

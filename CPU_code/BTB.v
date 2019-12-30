@@ -35,10 +35,10 @@ integer i;
 
 // write
 always @(posedge clk) begin
-	if (rst || !rdy) begin
+	if (rst) begin
 		for(i = 0; i < `BTBBlockNum; i = i + 1)
 			BTB_valid[i] <= 0;
-	end	else begin
+	end	else if(rdy) begin
 		if(we_i) begin
 			BTB_valid[waddr_idx] <= 1'b1;
 			BTB_tag[waddr_idx] <= waddr_tag;

@@ -38,13 +38,13 @@ integer j;
 
 // write
 always @(posedge clk) begin
-	if (rst || !rdy) begin
+	if (rst) begin
 		for(i = 0; i < `CacheBlockNum; i = i + 1)
 			cache_valid[i] 	<= 0;
 		for(i = 0; i < `VictimCacheNum; i = i + 1)
 			victim_valid[i] 	<= 0;
 		j <= 0;
-	end	else begin
+	end	else if(rdy) begin
 		if(we_i) begin
 			cache_valid[waddr_idx] <= 1;
 			cache_tag[waddr_idx] <= waddr_tag;

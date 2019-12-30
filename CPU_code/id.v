@@ -68,7 +68,7 @@ assign pc_plus_4 = pc_i + 31'h4;
 // decoding
 
 always @(*) begin
-	if(rst == `RstEnable || !rdy) begin
+	if(rst == `RstEnable) begin
 		opcode_o 	= 0;
 		wd_o 		= `NOPRegAddr;
 		wreg_o		= `WriteDisable;
@@ -231,9 +231,9 @@ end
 // operand 1
 
 always @(*) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		reg1_o = `ZeroWord;
-	end else if(rdy) begin
+	end else begin
 		if(reg1_read_o == 1'b1) begin
 			if(reg1_addr_o == 0) begin
 				reg1_o = 0;
@@ -257,9 +257,9 @@ end
 // operand 2
 
 always @(*) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		reg2_o = `ZeroWord;
-	end else if(rdy) begin
+	end else begin
 		if(reg2_read_o == 1'b1) begin
 			if(reg2_addr_o == 0) begin
 				reg2_o = 0;

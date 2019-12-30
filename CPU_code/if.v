@@ -55,7 +55,7 @@ always @(posedge clk) begin
 
 	// i <= i+1;  if(i % 100 == 0) $display(i);
 
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		if_request 	<= 0;
 		if_addr 	<= 0;
 		pc  		<= 0;
@@ -72,8 +72,8 @@ always @(posedge clk) begin
 		if_taken  	<= 0;
 		pc_o  		<= 0;
 		// avoid_data_hazard <= 0;
-	// end else if(stall_sign[0]) begin
-		// STALL
+	end else if(!rdy) begin
+		// PAUSE
 	end else if(branch_enable_i) begin
 		// if(!stall_sign[0]) begin
 			if_request 	<= 0;

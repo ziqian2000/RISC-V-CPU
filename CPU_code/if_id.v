@@ -16,7 +16,7 @@ module if_id(
 );
 
 always @(posedge clk) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		id_pc 	<= `ZeroWord;		
 		id_inst <= `ZeroWord;
 		id_taken <= 0;

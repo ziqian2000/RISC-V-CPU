@@ -26,10 +26,10 @@ integer i;
 
 // write
 always @(posedge clk) begin
-	if (rst || !rdy) begin
+	if (rst) begin
 		for(i = 0; i < `PreBlockNum; i = i + 1)
 			branch_history[i] <= 2'b01;
-	end	else begin
+	end	else if(rdy) begin
 		if(we_i) begin
 			if(res_taken)branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b11 ? 2'b11 : branch_history[waddr_idx] + 2'b01);
 			else 		 branch_history[waddr_idx] <= (branch_history[waddr_idx] == 2'b00 ? 2'b00 : branch_history[waddr_idx] - 2'b01);

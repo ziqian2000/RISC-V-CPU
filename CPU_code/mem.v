@@ -46,7 +46,7 @@ reg 		mem_done;
 
 // stall observer
 always @(*) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		mem_stall_request = 0;
 	end else begin
 		if(mem_done) begin
@@ -63,7 +63,7 @@ always @(*) begin
 end
 
 always @(posedge clk) begin
-	if (rst == `RstEnable || !rdy) begin
+	if (rst == `RstEnable) begin
 		wd_o <= `NOPRegAddr;
 		wreg_o <= `WriteDisable;
 		wdata_o <= `ZeroWord;
