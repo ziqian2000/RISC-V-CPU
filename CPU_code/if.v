@@ -53,7 +53,7 @@ integer i; // cycle counter
 
 always @(posedge clk) begin
 
-	i <= i+1;  if(i % 100 == 0) $display(i);
+	// i <= i+1;  if(i % 100 == 0) $display(i);
 
 	if (rst == `RstEnable) begin
 		if_request 	<= 0;
