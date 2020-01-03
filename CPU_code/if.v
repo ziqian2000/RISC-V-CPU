@@ -53,7 +53,7 @@ integer i; // cycle counter
 
 always @(posedge clk) begin
 
-	// i <= i+1;  if(i % 100 == 0) $display(i);
+	i <= i+1;  if(i % 100 == 0) $display(i);
 
 	if (rst == `RstEnable) begin
 		if_request 	<= 0;
@@ -126,6 +126,8 @@ always @(posedge clk) begin
 						if_inst <= c_inst_i;
 						pc_o <= pc;
 						c_we_o <= 0;
+
+						// $display("[%d]", pre_taken);
 
 						if(b_hit_i && pre_taken) begin
 							pc 			<= b_target_i;

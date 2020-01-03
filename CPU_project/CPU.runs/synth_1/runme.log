@@ -14,17 +14,17 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 15740 
+INFO: Helper process launched with PID 7116 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 387.320 ; gain = 99.598
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 386.695 ; gain = 98.883
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'riscv_top' [D:/CPU/CPU_code/riscv_top.v:4]
 	Parameter SIM bound to: 0 - type: integer 
-	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter SYS_CLK_FREQ bound to: 160000000 - type: integer 
 	Parameter UART_BAUD_RATE bound to: 115200 - type: integer 
 	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-8772-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-8772-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-16588-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [D:/CPU/CPU_project/CPU.runs/synth_1/.Xil/Vivado-16588-ZIQIAN/realtime/clk_wiz_0_stub.v:5]
 INFO: [Synth 8-6157] synthesizing module 'ram' [D:/CPU/CPU_code/common/ram.v:3]
 	Parameter ADDR_WIDTH bound to: 17 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'single_port_ram_sync' [D:/CPU/CPU_code/block_ram.v:62]
@@ -63,7 +63,7 @@ RAM "cache_data_reg" dissolved into registers
 INFO: [Synth 8-6155] done synthesizing module 'dcache' (7#1) [D:/CPU/CPU_code/data_cache.v:2]
 INFO: [Synth 8-6157] synthesizing module 'if_' [D:/CPU/CPU_code/if.v:1]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/CPU/CPU_code/if.v:91]
-WARNING: [Synth 8-6014] Unused sequential element i_reg was removed.  [D:/CPU/CPU_code/if.v:71]
+WARNING: [Synth 8-6014] Unused sequential element i_reg was removed.  [D:/CPU/CPU_code/if.v:56]
 INFO: [Synth 8-6155] done synthesizing module 'if_' (8#1) [D:/CPU/CPU_code/if.v:1]
 INFO: [Synth 8-6157] synthesizing module 'if_id' [D:/CPU/CPU_code/if_id.v:1]
 INFO: [Synth 8-6155] done synthesizing module 'if_id' (9#1) [D:/CPU/CPU_code/if_id.v:1]
@@ -74,7 +74,8 @@ INFO: [Synth 8-6155] done synthesizing module 'id' (11#1) [D:/CPU/CPU_code/id.v:
 INFO: [Synth 8-6157] synthesizing module 'id_ex' [D:/CPU/CPU_code/id_ex.v:1]
 INFO: [Synth 8-6155] done synthesizing module 'id_ex' (12#1) [D:/CPU/CPU_code/id_ex.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ex' [D:/CPU/CPU_code/ex.v:1]
-INFO: [Synth 8-226] default block is never used [D:/CPU/CPU_code/ex.v:93]
+INFO: [Synth 8-226] default block is never used [D:/CPU/CPU_code/ex.v:94]
+WARNING: [Synth 8-3848] Net taken_o in module/entity ex does not have driver. [D:/CPU/CPU_code/ex.v:34]
 INFO: [Synth 8-6155] done synthesizing module 'ex' (13#1) [D:/CPU/CPU_code/ex.v:1]
 INFO: [Synth 8-6157] synthesizing module 'ex_mem' [D:/CPU/CPU_code/ex_mem.v:1]
 INFO: [Synth 8-6155] done synthesizing module 'ex_mem' (14#1) [D:/CPU/CPU_code/ex_mem.v:1]
@@ -101,7 +102,7 @@ INFO: [Synth 8-6157] synthesizing module 'ctrl' [D:/CPU/CPU_code/ctrl.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'ctrl' (18#1) [D:/CPU/CPU_code/ctrl.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'cpu' (19#1) [D:/CPU/CPU_code/cpu.v:6]
 INFO: [Synth 8-6157] synthesizing module 'hci' [D:/CPU/CPU_code/common/hci.v:30]
-	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter SYS_CLK_FREQ bound to: 160000000 - type: integer 
 	Parameter RAM_ADDR_WIDTH bound to: 17 - type: integer 
 	Parameter BAUD_RATE bound to: 115200 - type: integer 
 	Parameter OP_ECHO bound to: 8'b00000000 
@@ -137,17 +138,17 @@ INFO: [Synth 8-6157] synthesizing module 'fifo' [D:/CPU/CPU_code/common/fifo.v:2
 	Parameter ADDR_BITS bound to: 10 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'fifo' (20#1) [D:/CPU/CPU_code/common/fifo.v:27]
 INFO: [Synth 8-6157] synthesizing module 'uart' [D:/CPU/CPU_code/common/uart.v:28]
-	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter SYS_CLK_FREQ bound to: 160000000 - type: integer 
 	Parameter BAUD_RATE bound to: 115200 - type: integer 
 	Parameter DATA_BITS bound to: 8 - type: integer 
 	Parameter STOP_BITS bound to: 1 - type: integer 
 	Parameter PARITY_MODE bound to: 1 - type: integer 
 	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'uart_baud_clk' [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
-	Parameter SYS_CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter SYS_CLK_FREQ bound to: 160000000 - type: integer 
 	Parameter BAUD bound to: 115200 - type: integer 
 	Parameter BAUD_CLK_OVERSAMPLE_RATE bound to: 16 - type: integer 
-	Parameter CLKS_PER_OVERSAMPLE_TICK bound to: 16'b0000000000110110 
+	Parameter CLKS_PER_OVERSAMPLE_TICK bound to: 16'b0000000001010110 
 INFO: [Synth 8-6155] done synthesizing module 'uart_baud_clk' (21#1) [D:/CPU/CPU_code/common/uart_baud_clk.v:29]
 INFO: [Synth 8-6157] synthesizing module 'uart_rx' [D:/CPU/CPU_code/common/uart_rx.v:28]
 	Parameter DATA_BITS bound to: 8 - type: integer 
@@ -215,6 +216,7 @@ WARNING: [Synth 8-3331] design ex_mem has unconnected port stall_sign[3]
 WARNING: [Synth 8-3331] design ex_mem has unconnected port stall_sign[2]
 WARNING: [Synth 8-3331] design ex_mem has unconnected port stall_sign[1]
 WARNING: [Synth 8-3331] design ex_mem has unconnected port stall_sign[0]
+WARNING: [Synth 8-3331] design ex has unconnected port taken_o
 WARNING: [Synth 8-3331] design ex has unconnected port rdy
 WARNING: [Synth 8-3331] design ex has unconnected port stall_sign[7]
 WARNING: [Synth 8-3331] design ex has unconnected port stall_sign[6]
@@ -285,10 +287,9 @@ WARNING: [Synth 8-3331] design id has unconnected port wb_wdata_i[7]
 WARNING: [Synth 8-3331] design id has unconnected port wb_wdata_i[6]
 WARNING: [Synth 8-3331] design id has unconnected port wb_wdata_i[5]
 WARNING: [Synth 8-3331] design id has unconnected port wb_wdata_i[4]
-WARNING: [Synth 8-3331] design id has unconnected port wb_wdata_i[3]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 587.266 ; gain = 299.543
+Finished RTL Elaboration : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 716.961 ; gain = 429.148
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -301,10 +302,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 587.266 ; gain = 299.543
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:04 ; elapsed = 00:01:04 . Memory (MB): peak = 716.961 ; gain = 429.148
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 587.266 ; gain = 299.543
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:01:04 ; elapsed = 00:01:04 . Memory (MB): peak = 716.961 ; gain = 429.148
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -317,133 +318,123 @@ Parsing XDC File [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
 Finished Parsing XDC File [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Arch2019_Assignment/riscv/src/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/riscv_top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/riscv_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [D:/CPU/CPU_project/CPU.runs/synth_1/dont_touch.xdc]
-Finished Parsing XDC File [D:/CPU/CPU_project/CPU.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 944.840 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.050 . Memory (MB): peak = 1053.680 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:29 ; elapsed = 00:00:37 . Memory (MB): peak = 944.840 ; gain = 657.117
+Finished Constraint Validation : Time (s): cpu = 00:01:19 ; elapsed = 00:01:21 . Memory (MB): peak = 1053.680 ; gain = 765.867
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-5580] Multithreading enabled for synth_design using a maximum of 2 processes.
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:29 ; elapsed = 00:00:37 . Memory (MB): peak = 944.840 ; gain = 657.117
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:19 ; elapsed = 00:01:21 . Memory (MB): peak = 1053.680 ; gain = 765.867
 ---------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start Applying 'set_property' XDC Constraints
----------------------------------------------------------------------------------
-Applied set_property IO_BUFFER_TYPE = NONE for EXCLK. (constraint file  d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 3).
-Applied set_property CLOCK_BUFFER_TYPE = NONE for EXCLK. (constraint file  d:/CPU/CPU_project/CPU.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 4).
-Applied set_property DONT_TOUCH = true for NEW_CLOCK. (constraint file  auto generated constraint, line ).
----------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:37 . Memory (MB): peak = 944.840 ; gain = 657.117
----------------------------------------------------------------------------------
-INFO: [Synth 8-5546] ROM "branch_history_reg[31]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[30]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[29]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[28]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[27]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[26]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[25]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[24]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[23]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[22]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[21]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[20]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[19]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[18]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[17]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[16]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[15]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[14]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[13]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[12]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[11]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[10]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[9]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[8]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[7]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[6]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[5]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[4]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[3]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[2]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[1]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "branch_history_reg[0]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[31]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[30]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[29]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[28]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[27]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[26]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[25]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[24]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[23]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[22]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[21]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[20]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[19]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[18]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[17]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[16]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[15]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[14]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[13]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[12]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[11]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[10]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[9]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[8]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[7]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[6]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[5]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[4]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[3]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[2]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[1]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "BTB_valid_reg[0]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[255]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[254]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[253]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[252]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[251]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[250]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[249]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[248]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[247]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[246]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[245]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[244]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[243]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[242]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[241]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[240]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[239]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[238]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[237]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[236]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[235]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[234]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[233]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[232]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[231]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[230]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[229]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[228]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[227]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[226]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[225]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[224]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[223]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[222]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[221]" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "cache_tag_reg[220]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[31]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[30]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[29]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[28]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[27]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[26]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[25]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[24]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[23]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[22]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[21]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[20]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[19]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[18]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[17]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[16]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[15]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[14]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[13]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[12]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[11]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[10]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "branch_counter_reg[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1023]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1022]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1021]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1020]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1019]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1018]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1017]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1016]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1015]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1014]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1013]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1012]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1011]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1010]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1009]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1008]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1007]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1006]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1005]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1004]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1003]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1002]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1001]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[1000]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[999]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[998]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[997]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[996]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[995]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[994]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[993]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[992]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[991]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[990]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[989]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[988]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[987]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[986]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[985]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[984]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[983]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[982]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[981]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[980]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[979]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[978]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[977]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[976]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[975]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[974]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[973]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[972]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[971]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[970]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[969]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[968]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[967]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[966]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[965]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[964]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[963]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[962]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[961]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[960]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[959]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[958]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[957]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "global_counter_reg[956]" won't be mapped to RAM because it is too sparse
 INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-5545] ROM "victim_data_reg[0]" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 INFO: [Synth 8-5545] ROM "j0" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
@@ -519,9 +510,9 @@ WARNING: [Synth 8-327] inferring latch for variable 'data_o_reg' [D:/CPU/CPU_cod
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'if_'
 WARNING: [Synth 8-327] inferring latch for variable 'b_waddr_o_reg' [D:/CPU/CPU_code/id.v:83]
 WARNING: [Synth 8-327] inferring latch for variable 'b_wtarget_o_reg' [D:/CPU/CPU_code/id.v:84]
-WARNING: [Synth 8-327] inferring latch for variable 'branch_addr_o_reg' [D:/CPU/CPU_code/ex.v:64]
-WARNING: [Synth 8-327] inferring latch for variable 'p_addr_reg' [D:/CPU/CPU_code/ex.v:67]
-WARNING: [Synth 8-327] inferring latch for variable 'p_res_taken_reg' [D:/CPU/CPU_code/ex.v:68]
+WARNING: [Synth 8-327] inferring latch for variable 'branch_addr_o_reg' [D:/CPU/CPU_code/ex.v:65]
+WARNING: [Synth 8-327] inferring latch for variable 'p_addr_reg' [D:/CPU/CPU_code/ex.v:68]
+WARNING: [Synth 8-327] inferring latch for variable 'p_res_taken_reg' [D:/CPU/CPU_code/ex.v:69]
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -533,8 +524,8 @@ WARNING: [Synth 8-327] inferring latch for variable 'p_res_taken_reg' [D:/CPU/CP
                  iSTATE4 |                              101 |                             1111
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'mem'
-INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm2251A6A79500'
-INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm2250AC389100'
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm13AB14A8A200'
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 'fsm13AB14A17500'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -555,7 +546,7 @@ INFO: [Synth 8-3898] No Re-encoding of one hot register 'q_state_reg' in module 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'q_state_reg' using encoding 'sequential' in module 'hci'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:39 ; elapsed = 00:00:49 . Memory (MB): peak = 944.840 ; gain = 657.117
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:46 ; elapsed = 00:01:54 . Memory (MB): peak = 1053.680 ; gain = 765.867
 ---------------------------------------------------------------------------------
 RAM Pipeline Warning: Read Address Register Found For RAM ram_reg. We will not be able to pipeline it. This may degrade performance. 
 
@@ -563,9 +554,9 @@ Report RTL Partitions:
 +------+---------------+------------+----------+
 |      |RTL Partition  |Replication |Instances |
 +------+---------------+------------+----------+
-|1     |icache         |           1|     35855|
-|2     |cpu__GB1       |           1|     12347|
-|3     |dcache         |           1|     26020|
+|1     |cpu__GB0       |           1|     28676|
+|2     |cpu__GB1       |           1|     28959|
+|3     |icache         |           1|     35855|
 |4     |riscv_top__GC0 |           1|      3224|
 +------+---------------+------------+----------+
 ---------------------------------------------------------------------------------
@@ -582,7 +573,7 @@ Detailed RTL Component Info :
 	   2 Input      4 Bit       Adders := 2     
 	   2 Input      3 Bit       Adders := 5     
 	   3 Input      3 Bit       Adders := 2     
-	   2 Input      2 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 6     
 	   3 Input      2 Bit       Adders := 1     
 	   2 Input      1 Bit       Adders := 2     
 +---XORs : 
@@ -602,7 +593,7 @@ Detailed RTL Component Info :
 	                5 Bit    Registers := 4     
 	                4 Bit    Registers := 2     
 	                3 Bit    Registers := 3     
-	                2 Bit    Registers := 36    
+	                2 Bit    Registers := 1061  
 	                1 Bit    Registers := 382   
 +---RAMs : 
 	            1024K Bit         RAMs := 1     
@@ -614,13 +605,13 @@ Detailed RTL Component Info :
 	   7 Input    704 Bit        Muxes := 1     
 	   7 Input    512 Bit        Muxes := 1     
 	   2 Input     32 Bit        Muxes := 47    
-	   4 Input     32 Bit        Muxes := 4     
+	   3 Input     32 Bit        Muxes := 1     
 	  14 Input     32 Bit        Muxes := 3     
 	   8 Input     32 Bit        Muxes := 1     
 	  10 Input     32 Bit        Muxes := 4     
 	   5 Input     32 Bit        Muxes := 4     
+	   4 Input     32 Bit        Muxes := 4     
 	   6 Input     32 Bit        Muxes := 4     
-	   3 Input     32 Bit        Muxes := 1     
 	   2 Input     24 Bit        Muxes := 1     
 	  14 Input     24 Bit        Muxes := 2     
 	   2 Input     18 Bit        Muxes := 1     
@@ -629,9 +620,9 @@ Detailed RTL Component Info :
 	   5 Input     17 Bit        Muxes := 1     
 	  14 Input     17 Bit        Muxes := 4     
 	   2 Input     16 Bit        Muxes := 5     
+	  10 Input     11 Bit        Muxes := 1     
 	   2 Input     11 Bit        Muxes := 223   
 	   3 Input     11 Bit        Muxes := 26    
-	  10 Input     11 Bit        Muxes := 1     
 	   2 Input      8 Bit        Muxes := 241   
 	   3 Input      8 Bit        Muxes := 28    
 	   6 Input      8 Bit        Muxes := 2     
@@ -641,8 +632,8 @@ Detailed RTL Component Info :
 	  10 Input      5 Bit        Muxes := 1     
 	   2 Input      5 Bit        Muxes := 2     
 	   6 Input      5 Bit        Muxes := 2     
-	   2 Input      4 Bit        Muxes := 14    
 	  14 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 14    
 	   6 Input      4 Bit        Muxes := 2     
 	  13 Input      4 Bit        Muxes := 1     
 	  11 Input      4 Bit        Muxes := 1     
@@ -653,16 +644,16 @@ Detailed RTL Component Info :
 	   5 Input      3 Bit        Muxes := 1     
 	   4 Input      3 Bit        Muxes := 1     
 	  14 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 16    
 	   3 Input      2 Bit        Muxes := 5     
-	   2 Input      2 Bit        Muxes := 8     
 	   6 Input      2 Bit        Muxes := 2     
-	   2 Input      1 Bit        Muxes := 688   
-	   7 Input      1 Bit        Muxes := 2     
-	   4 Input      1 Bit        Muxes := 71    
+	   2 Input      1 Bit        Muxes := 1713  
 	   3 Input      1 Bit        Muxes := 42    
 	  14 Input      1 Bit        Muxes := 16    
 	  10 Input      1 Bit        Muxes := 8     
+	   7 Input      1 Bit        Muxes := 2     
 	   6 Input      1 Bit        Muxes := 26    
+	   4 Input      1 Bit        Muxes := 71    
 	   5 Input      1 Bit        Muxes := 3     
 	  11 Input      1 Bit        Muxes := 3     
 ---------------------------------------------------------------------------------
@@ -692,27 +683,15 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   2 Input     32 Bit        Muxes := 4     
 	   2 Input      1 Bit        Muxes := 258   
-Module dcache 
+Module predictor 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     17 Bit       Adders := 6     
+	   2 Input      2 Bit       Adders := 6     
 +---Registers : 
-	               11 Bit    Registers := 64    
-	                8 Bit    Registers := 64    
-	                1 Bit    Registers := 64    
+	                2 Bit    Registers := 1057  
 +---Muxes : 
-	   7 Input    704 Bit        Muxes := 1     
-	   7 Input    512 Bit        Muxes := 1     
-	   4 Input     32 Bit        Muxes := 1     
-	   2 Input     11 Bit        Muxes := 222   
-	   3 Input     11 Bit        Muxes := 26    
-	   2 Input      8 Bit        Muxes := 222   
-	   3 Input      8 Bit        Muxes := 26    
-	   3 Input      2 Bit        Muxes := 4     
-	   7 Input      1 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 284   
-	   4 Input      1 Bit        Muxes := 66    
-	   3 Input      1 Bit        Muxes := 32    
+	   2 Input      2 Bit        Muxes := 11    
+	   2 Input      1 Bit        Muxes := 1057  
 Module BTB 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -722,21 +701,22 @@ Detailed RTL Component Info :
 	              320 Bit         RAMs := 1     
 +---Muxes : 
 	   2 Input      1 Bit        Muxes := 32    
-Module predictor 
+Module mem_ctrl 
 Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input      2 Bit       Adders := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   3 Input     32 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   3 Input      8 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 1     
+Module mem_wb 
+Detailed RTL Component Info : 
 +---Registers : 
-	                2 Bit    Registers := 32    
-+---Muxes : 
-	   2 Input      2 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 32    
-Module ctrl 
-Detailed RTL Component Info : 
-+---Muxes : 
-	   2 Input      8 Bit        Muxes := 2     
-	   2 Input      6 Bit        Muxes := 1     
-	   2 Input      4 Bit        Muxes := 1     
+	               32 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module if_ 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -845,22 +825,33 @@ Detailed RTL Component Info :
 	   4 Input      1 Bit        Muxes := 5     
 	   3 Input      1 Bit        Muxes := 7     
 	   5 Input      1 Bit        Muxes := 3     
-Module mem_wb 
+Module dcache 
 Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     17 Bit       Adders := 6     
 +---Registers : 
-	               32 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
-	                1 Bit    Registers := 1     
-Module mem_ctrl 
+	               11 Bit    Registers := 64    
+	                8 Bit    Registers := 64    
+	                1 Bit    Registers := 64    
++---Muxes : 
+	   7 Input    704 Bit        Muxes := 1     
+	   7 Input    512 Bit        Muxes := 1     
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     11 Bit        Muxes := 222   
+	   3 Input     11 Bit        Muxes := 26    
+	   2 Input      8 Bit        Muxes := 222   
+	   3 Input      8 Bit        Muxes := 26    
+	   3 Input      2 Bit        Muxes := 4     
+	   7 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 284   
+	   4 Input      1 Bit        Muxes := 66    
+	   3 Input      1 Bit        Muxes := 32    
+Module ctrl 
 Detailed RTL Component Info : 
 +---Muxes : 
-	   2 Input     32 Bit        Muxes := 2     
-	   3 Input     32 Bit        Muxes := 1     
-	   2 Input      8 Bit        Muxes := 1     
-	   3 Input      8 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   3 Input      2 Bit        Muxes := 1     
-	   3 Input      1 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
 Module single_port_ram_sync 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -1003,9 +994,9 @@ INFO: [Synth 8-5545] ROM "victim_data_reg[0]" won't be mapped to RAM because add
 INFO: [Synth 8-5587] ROM size for "reg1_read_o" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-5587] ROM size for "reg2_read_o" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-5587] ROM size for "wreg_o" is below threshold of ROM address width. It will be mapped to LUTs
-INFO: [Synth 8-5544] ROM "wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem0/wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem0/wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem0/wdata_o" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "d_execute_cnt" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "d_execute_cnt" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 RAM Pipeline Warning: Read Address Register Found For RAM ram0/ram_bram/ram_reg. We will not be able to pipeline it. This may degrade performance. 
@@ -1053,6 +1044,63 @@ WARNING: [Synth 8-3332] Sequential element (p_addr_reg[8]) is unused and will be
 WARNING: [Synth 8-3332] Sequential element (p_addr_reg[7]) is unused and will be removed from module ex.
 WARNING: [Synth 8-3332] Sequential element (p_addr_reg[1]) is unused and will be removed from module ex.
 WARNING: [Synth 8-3332] Sequential element (p_addr_reg[0]) is unused and will be removed from module ex.
+WARNING: [Synth 8-3332] Sequential element (hit_o_reg) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][10]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][9]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][8]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][7]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][6]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][5]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][4]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][3]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][2]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][1]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[1][0]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][10]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][9]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][8]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][7]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][6]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][5]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][4]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][3]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][2]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][1]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[2][0]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][10]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][9]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][8]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][7]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][6]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][5]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][4]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][3]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][2]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][1]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[3][0]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][10]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][9]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][8]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][7]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][6]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][5]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][4]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][3]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][2]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][1]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[4][0]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][10]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][9]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][8]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][7]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][6]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][5]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][4]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][3]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][2]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][1]) is unused and will be removed from module dcache.
+WARNING: [Synth 8-3332] Sequential element (cache_tag_reg[5][0]) is unused and will be removed from module dcache.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__0' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__1' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
@@ -1060,65 +1108,8 @@ INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__2'
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__3' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__4' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
 INFO: [Synth 8-3886] merging instance 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__5' (FD) to 'i_0/i_0/ram0/ram_bram/ram_reg_mux_sel__6'
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[31]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[30]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[29]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[28]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[27]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[26]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[25]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[24]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[23]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[22]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[21]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[20]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[19]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (if_addr_reg[18]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[31]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[30]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[29]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[28]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[27]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[26]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[25]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[24]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[23]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[22]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[21]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[20]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[19]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[18]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[17]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[1]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_raddr_o_reg[0]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[31]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[30]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[29]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[28]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[27]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[26]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[25]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[24]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[23]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[22]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[21]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[20]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[19]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[18]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[17]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[1]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (c_waddr_o_reg[0]) is unused and will be removed from module if_.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[31]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[30]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[29]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[28]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[27]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[26]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[25]) is unused and will be removed from module mem.
-WARNING: [Synth 8-3332] Sequential element (mem_addr_reg[24]) is unused and will be removed from module mem.
-INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:27 ; elapsed = 00:01:42 . Memory (MB): peak = 944.840 ; gain = 657.117
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:11 ; elapsed = 00:04:24 . Memory (MB): peak = 1053.680 ; gain = 765.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1170,10 +1161,10 @@ Report RTL Partitions:
 +------+---------------+------------+----------+
 |      |RTL Partition  |Replication |Instances |
 +------+---------------+------------+----------+
-|1     |icache         |           1|     32663|
-|2     |cpu__GB1       |           1|      6578|
-|3     |dcache         |           1|      8407|
-|4     |riscv_top__GC0 |           1|      2190|
+|1     |cpu__GB0       |           1|     12748|
+|2     |cpu__GB1       |           1|      9428|
+|3     |icache         |           1|     32663|
+|4     |riscv_top__GC0 |           1|      2198|
 +------+---------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
@@ -1181,13 +1172,15 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'NEW_CLOCK/clk_out1' to pin 'NEW_CLOCK/bbstub_clk_out1/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:36 ; elapsed = 00:01:57 . Memory (MB): peak = 944.840 ; gain = 657.117
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:20 ; elapsed = 00:04:35 . Memory (MB): peak = 1053.680 ; gain = 765.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
+info: optimization accepted worst group hill climbing move (-1239.0/oG. 149.0ps)
+info: optimization accepted worst group hill climbing move (-1065.0/oG. 11.0ps)
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:45 ; elapsed = 00:02:06 . Memory (MB): peak = 995.004 ; gain = 707.281
+Finished Timing Optimization : Time (s): cpu = 00:04:52 ; elapsed = 00:05:08 . Memory (MB): peak = 1091.383 ; gain = 803.570
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1222,9 +1215,8 @@ Report RTL Partitions:
 |      |RTL Partition  |Replication |Instances |
 +------+---------------+------------+----------+
 |1     |icache         |           1|     32663|
-|2     |cpu__GB1       |           1|      6405|
-|3     |dcache         |           1|      8407|
-|4     |riscv_top__GC0 |           1|      2190|
+|2     |riscv_top__GC0 |           1|      2198|
+|3     |riscv_top_GT0  |           1|     21878|
 +------+---------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Technology Mapping
@@ -1239,8 +1231,8 @@ INFO: [Synth 8-3886] merging instance 'hci0/io_in_fifo/q_rd_ptr_reg_rep[6]' (FDR
 INFO: [Synth 8-3886] merging instance 'hci0/io_in_fifo/q_rd_ptr_reg_rep[7]' (FDRE) to 'hci0/io_in_fifo/q_rd_ptr_reg[7]'
 INFO: [Synth 8-3886] merging instance 'hci0/io_in_fifo/q_rd_ptr_reg_rep[9]' (FDRE) to 'hci0/io_in_fifo/q_rd_ptr_reg[9]'
 INFO: [Synth 8-3886] merging instance 'hci0/io_in_fifo/q_rd_ptr_reg_rep[8]' (FDRE) to 'hci0/io_in_fifo/q_rd_ptr_reg[8]'
-INFO: [Synth 8-3886] merging instance 'cpu0/id_ex0/ex_opcode_reg[0]' (FDRE) to 'cpu0/id_ex0/ex_opcode_reg[1]'
-INFO: [Synth 8-3886] merging instance 'cpu0/ex_mem0/mem_opcode_o_reg[0]' (FDRE) to 'cpu0/ex_mem0/mem_opcode_o_reg[1]'
+INFO: [Synth 8-3886] merging instance 'cpu0/id_ex0/ex_opcode_reg[1]' (FDRE) to 'cpu0/id_ex0/ex_opcode_reg[0]'
+INFO: [Synth 8-3886] merging instance 'cpu0/ex_mem0/mem_opcode_o_reg[1]' (FDRE) to 'cpu0/ex_mem0/mem_opcode_o_reg[0]'
 INFO: [Synth 8-3886] merging instance 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg_rep[5]' (FDRE) to 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg[5]'
 INFO: [Synth 8-3886] merging instance 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg_rep[3]' (FDRE) to 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg[3]'
 INFO: [Synth 8-3886] merging instance 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg_rep[1]' (FDRE) to 'hci0/uart_blk/uart_tx_fifo/q_rd_ptr_reg[1]'
@@ -1268,7 +1260,7 @@ INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_5 (impl
 INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_6 (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 INFO: [Synth 8-4480] The timing for the instance ram0/ram_bram/ram_reg_3_7 (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:55 ; elapsed = 00:02:16 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Technology Mapping : Time (s): cpu = 00:05:06 ; elapsed = 00:05:22 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1288,16 +1280,16 @@ Finished Flattening Before IO Insertion
 ---------------------------------------------------------------------------------
 Start Final Netlist Cleanup
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6064] Net n_0_14535 is driving 64 big block pins (URAM, BRAM and DSP loads). Created 7 replicas of its driver. 
-INFO: [Synth 8-6064] Net n_0_15214 is driving 64 big block pins (URAM, BRAM and DSP loads). Created 7 replicas of its driver. 
-INFO: [Synth 8-6064] Net n_0_14807 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
-INFO: [Synth 8-6064] Net n_0_14808 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
-INFO: [Synth 8-6064] Net n_0_14797 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+INFO: [Synth 8-6064] Net n_0_18159 is driving 64 big block pins (URAM, BRAM and DSP loads). Created 7 replicas of its driver. 
+INFO: [Synth 8-6064] Net n_0_18834 is driving 64 big block pins (URAM, BRAM and DSP loads). Created 7 replicas of its driver. 
+INFO: [Synth 8-6064] Net n_0_18432 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+INFO: [Synth 8-6064] Net n_0_18433 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
+INFO: [Synth 8-6064] Net n_0_18422 is driving 32 big block pins (URAM, BRAM and DSP loads). Created 4 replicas of its driver. 
 ---------------------------------------------------------------------------------
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:58 ; elapsed = 00:02:19 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished IO Insertion : Time (s): cpu = 00:05:10 ; elapsed = 00:05:26 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1310,7 +1302,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:59 ; elapsed = 00:02:19 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Renaming Generated Instances : Time (s): cpu = 00:05:10 ; elapsed = 00:05:26 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1322,25 +1314,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:01 ; elapsed = 00:02:22 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:05:13 ; elapsed = 00:05:29 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:01 ; elapsed = 00:02:22 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Renaming Generated Ports : Time (s): cpu = 00:05:13 ; elapsed = 00:05:30 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:02 ; elapsed = 00:02:23 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Handling Custom Attributes : Time (s): cpu = 00:05:15 ; elapsed = 00:05:32 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:02 ; elapsed = 00:02:23 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Renaming Generated Nets : Time (s): cpu = 00:05:15 ; elapsed = 00:05:32 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -1361,13 +1353,13 @@ Report Cell Usage:
 |2     |BUFG       |     3|
 |3     |CARRY4     |   144|
 |4     |LUT1       |    47|
-|5     |LUT2       |   523|
-|6     |LUT3       |   523|
-|7     |LUT4       |   637|
-|8     |LUT5       |  1025|
-|9     |LUT6       |  8498|
-|10    |MUXF7      |  2990|
-|11    |MUXF8      |  1433|
+|5     |LUT2       |   576|
+|6     |LUT3       |   765|
+|7     |LUT4       |   834|
+|8     |LUT5       |  1033|
+|9     |LUT6       | 11123|
+|10    |MUXF7      |  3209|
+|11    |MUXF8      |  1543|
 |12    |RAM32M     |    22|
 |13    |RAM64M     |    64|
 |14    |RAM64X1D   |    64|
@@ -1375,8 +1367,8 @@ Report Cell Usage:
 |16    |RAMB36E1_1 |    16|
 |17    |FDCE       |    59|
 |18    |FDPE       |     6|
-|19    |FDRE       | 11875|
-|20    |FDSE       |    35|
+|19    |FDRE       | 12964|
+|20    |FDSE       |  1059|
 |21    |LDC        |   117|
 |22    |IBUF       |     2|
 |23    |OBUF       |     2|
@@ -1386,41 +1378,41 @@ Report Instance Areas:
 +------+------------------------+---------------------+------+
 |      |Instance                |Module               |Cells |
 +------+------------------------+---------------------+------+
-|1     |top                     |                     | 28103|
-|2     |  cpu0                  |cpu                  | 26983|
-|3     |    BTB0                |BTB                  |    74|
-|4     |    ctrl0               |ctrl                 |     2|
-|5     |    dcache0             |dcache               |  3266|
-|6     |    ex0                 |ex                   |   111|
-|7     |    ex_mem0             |ex_mem               |   280|
-|8     |    icache0             |icache               | 20090|
-|9     |    id0                 |id                   |    94|
-|10    |    id_ex0              |id_ex                |  1042|
-|11    |    if0                 |if_                  |   989|
-|12    |    if_id0              |if_id                |   594|
-|13    |    mem0                |mem                  |   243|
+|1     |top                     |                     | 33670|
+|2     |  cpu0                  |cpu                  | 32549|
+|3     |    dcache0             |dcache               |  1424|
+|4     |    BTB0                |BTB                  |    59|
+|5     |    ex0                 |ex                   |    97|
+|6     |    ex_mem0             |ex_mem               |   175|
+|7     |    icache0             |icache               | 20058|
+|8     |    id0                 |id                   |    94|
+|9     |    id_ex0              |id_ex                |   961|
+|10    |    if0                 |if_                  |  1066|
+|11    |    if_id0              |if_id                |   630|
+|12    |    mem0                |mem                  |  2168|
+|13    |    mem_ctrl0           |mem_ctrl             |     1|
 |14    |    mem_wb0             |mem_wb               |    40|
-|15    |    predictor0          |predictor            |   146|
+|15    |    predictor0          |predictor            |  5760|
 |16    |    regfile0            |regfile              |    12|
-|17    |  hci0                  |hci                  |  1060|
+|17    |  hci0                  |hci                  |  1053|
 |18    |    io_in_fifo          |fifo                 |   219|
-|19    |    uart_blk            |uart                 |   614|
+|19    |    uart_blk            |uart                 |   611|
 |20    |      uart_baud_clk_blk |uart_baud_clk        |    43|
-|21    |      uart_rx_blk       |uart_rx              |    57|
-|22    |      uart_rx_fifo      |fifo__parameterized0 |   211|
+|21    |      uart_rx_blk       |uart_rx              |    55|
+|22    |      uart_rx_fifo      |fifo__parameterized0 |   208|
 |23    |      uart_tx_blk       |uart_tx              |    57|
-|24    |      uart_tx_fifo      |fifo_0               |   244|
-|25    |  ram0                  |ram                  |    49|
-|26    |    ram_bram            |single_port_ram_sync |    49|
+|24    |      uart_tx_fifo      |fifo_0               |   246|
+|25    |  ram0                  |ram                  |    57|
+|26    |    ram_bram            |single_port_ram_sync |    57|
 +------+------------------------+---------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:02 ; elapsed = 00:02:23 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Finished Writing Synthesis Report : Time (s): cpu = 00:05:16 ; elapsed = 00:05:32 . Memory (MB): peak = 1235.004 ; gain = 947.191
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 970 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:36 ; elapsed = 00:02:09 . Memory (MB): peak = 1041.992 ; gain = 396.695
-Synthesis Optimization Complete : Time (s): cpu = 00:02:02 ; elapsed = 00:02:23 . Memory (MB): peak = 1041.992 ; gain = 754.270
+Synthesis finished with 0 errors, 0 critical warnings and 902 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:04:01 ; elapsed = 00:05:26 . Memory (MB): peak = 1235.004 ; gain = 610.473
+Synthesis Optimization Complete : Time (s): cpu = 00:05:16 ; elapsed = 00:05:38 . Memory (MB): peak = 1235.004 ; gain = 947.191
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 4868 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 5197 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
@@ -1432,12 +1424,11 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM64X1D => RAM64X1D (RAMD64E, RAMD64E): 64 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-330 Infos, 212 Warnings, 0 Critical Warnings and 0 Errors encountered.
+331 Infos, 213 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:09 ; elapsed = 00:02:39 . Memory (MB): peak = 1041.992 ; gain = 765.738
+synth_design: Time (s): cpu = 00:05:23 ; elapsed = 00:05:48 . Memory (MB): peak = 1235.004 ; gain = 958.660
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint 'D:/CPU/CPU_project/CPU.runs/synth_1/riscv_top.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:04 ; elapsed = 00:00:15 . Memory (MB): peak = 1041.992 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file riscv_top_utilization_synth.rpt -pb riscv_top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.363 . Memory (MB): peak = 1041.992 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Mon Dec 30 22:30:41 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.620 . Memory (MB): peak = 1235.004 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Sat Jan  4 01:31:08 2020...

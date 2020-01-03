@@ -55,6 +55,8 @@
 
 `define PreBlockNum 				32
 `define PreBlockNumLog2 			5
+`define GlobalBlockNum 				1024
+`define GlobalBlockNumLog2 			10
 
 `define BTBBlockNum 				32
 `define BTBBlockNumLog2 			5

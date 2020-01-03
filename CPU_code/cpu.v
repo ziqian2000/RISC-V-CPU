@@ -139,6 +139,7 @@ wire 				ifp_pre_taken;
 wire 				exp_we;
 wire[`InstAddrBus] 	exp_addr;
 wire 				exp_res_taken;
+wire 				exp_pre_taken;
 
 // mem --- dcache
 
@@ -160,7 +161,8 @@ assign dbgreg_dout = if_pc;
 predictor predictor0(
 	.clk(clk_in), 	.rst(rst_in),  .rdy(rdy_in),
 	.raddr_i(ifp_raddr), .pre_taken(ifp_pre_taken),
-	.we_i(exp_we), 	.waddr_i(exp_addr), .res_taken(exp_res_taken)
+	.we_i(exp_we), 	.waddr_i(exp_addr), .res_taken(exp_res_taken),
+	.com_taken(exp_pre_taken)
 );
 
 // BTB
@@ -326,7 +328,8 @@ ex ex0(
 	// from ctrl
 	.stall_sign(stall_sign),
 	// to predictor
-	.p_we(exp_we), 	.p_addr(exp_addr), 	.p_res_taken(exp_res_taken)
+	.p_we(exp_we), 	.p_addr(exp_addr), 	.p_res_taken(exp_res_taken),
+	.taken_o(exp_pre_taken)
 );
 
 // ex/mem

@@ -30,7 +30,8 @@ module ex(
 	// to predictor(BHT)
 	output 	reg 				p_we,
 	output  reg[`InstAddrBus] 	p_addr,
-	output 	reg 				p_res_taken
+	output 	reg 				p_res_taken,
+	output 	wire 				taken_o
 );
 
 	wire[`InstAddrBus]	pc;
