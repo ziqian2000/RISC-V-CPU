@@ -48,7 +48,7 @@
 `define CacheBlockNum 				256
 `define CacheBlockNumLog2 			8
 
-`define VictimCacheNum	 			1
+`define VictimCacheNum	 			4
 
 `define Cache2BlockNum 				64
 `define Cache2BlockNumLog2 			6
