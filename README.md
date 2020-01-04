@@ -15,7 +15,7 @@ The main features of this RISC-V CPU are briefly introduced in the table below. 
 | ISA                        | RISC-V (RV32I subset)                                        |
 | Pipelining                 | 5-stage pipeline                                             |
 | Data forwarding            | to resolve data hazard                                       |
-| Cache                      | direct mapping I-cache with victim cache and direct mapping D-cache |
+| Cache                      | a direct mapping I-cache with a victim cache and a direct mapping D-cache |
 | Branch prediction          | tournament predictor using 1 global predictor and 1 local predictor |
 | Branch target buffer (BTB) | to accelerate prediction and reduce stall                    |
 
