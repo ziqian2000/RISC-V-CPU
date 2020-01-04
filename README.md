@@ -38,7 +38,7 @@ The main features of this RISC-V CPU are briefly introduced in the table below. 
 
 # 3. Performance
 
-The biggest frequency it reaches is 130 Hz. When the frequency is not bigger than 130 Hz, all test cases can be passed on FPGA. When bigger than 130 Hz, some test cases fail. However, when the frequency reaches 130 MHz, the WNS (worst negative slack) has been negative.
+The highest frequency it reaches is 130 Hz. When the frequency is not higher than 130 Hz, all test cases can be passed on FPGA. When higher than 130 Hz, some test cases fail. However, when the frequency reaches 130 MHz, the WNS (worst negative slack) has been negative.
 
 What about the speed? Take running `pi.c` on FPGA as an example:
 
