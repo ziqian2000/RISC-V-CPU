@@ -1,7 +1,5 @@
 # 1. About This Project
 
-Wu Runzhe (吴润哲)
-
 This project is a RISC-V CPU with a 5-stage pipeline, implemented in Verilog HDL, which is [a course project of Computer Architecture, ACM Class @ SJTU](https://acm.sjtu.edu.cn/wiki/System(1)_2019).
 
 # 2. Design
@@ -30,17 +28,11 @@ The main features of this RISC-V CPU are briefly introduced in the table below. 
 - The branch prediction is conducted as follows: When stage IF is fetching a new instruction, it will also send the PC to BTB (branch target buffer) to quickly know whether it is a branch instruction, and if so,  what the target address is. At the same time, a predictor implemented by a tournament predictor will also send the prediction (taken or not taken) to stage IF. Then it changes the PC according to the prediction. Stage EX will check whether this prediction is correct and when it is correct, it causes no stall. However, when it is incorrect, it costs 1 cycles to restore. The result and target address are sent in stage EX to update BTB and predictor.
 - To resolve the structure hazard caused by memory access of both stage IF and stage MEM, a memory controller (see mem_ctrl.v) is implemented.
 
-### 2.3 Rub 
-
-- When an RAW data hazard happens, forwarding is never enough. To solve a situation where the source register is to be written by a LOAD instruction in stage EX, we can only stall the pipeline.
-- The FSM (finite state machine) for both stages IF and MEM is not easy to design. However, I tried several FSM design and finally choose this one.
-- I use a register named "avoid_data_hazard" in stage IF to change the CPU between a 5-stage pipeline and no pipeline by adding 10 cycles after instruction so that I can debug easier. 
-
 # 3. Performance
 
 The highest frequency it reaches is 130 MHz. When the frequency is not higher than 130 MHz, all test cases can be passed on FPGA. When higher than 130 MHz, some test cases fail. However, when the frequency reaches 130 MHz, the WNS (worst negative slack) has been negative.
 
-What about the speed? Take running `pi.c` on FPGA as an example:
+What about the performance? Take running `pi.c` on FPGA as an example:
 
 - 100 MHz: 1.406250 s
 - 130 MHz: 0.996875 s

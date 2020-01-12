@@ -368,7 +368,7 @@ mem mem0(
 	.mem_stall_request(mem_stall_request),
 	// dcache
 	.c_raddr_o(memc_raddr), 	.c_rbyte_o(memc_rbyte),
-	.c_hit_i(memc_we),			.c_data_i(memc_data),
+	.c_hit_i(memc_hit),			.c_data_i(memc_data),
 	.c_we_o(memc_we),			.c_wbyte_o(memc_wbyte),
 	.c_waddr_o(memc_waddr),		.c_wdata_o(memc_wdata),
 	// from ctrl
